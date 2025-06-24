@@ -1,6 +1,6 @@
 'use client';
 
-import { AssistantRuntimeProvider } from '@assistant-ui/react';
+import { AssistantRuntimeProvider, CompositeAttachmentAdapter, SimpleImageAttachmentAdapter, SimpleTextAttachmentAdapter } from '@assistant-ui/react';
 import { useChatRuntime } from '@assistant-ui/react-ai-sdk';
 import { Thread } from '@/components/assistant-ui/thread';
 import {
@@ -23,6 +23,12 @@ import { Perplexity } from '@/components/perplexity/Perplexity';
 export const Assistant = () => {
   const runtime = useChatRuntime({
     api: '/api/chat',
+    adapters: {
+      attachments: new CompositeAttachmentAdapter([
+        new SimpleImageAttachmentAdapter(),
+        new SimpleTextAttachmentAdapter(),
+      ]),
+    },
   });
 
   return (

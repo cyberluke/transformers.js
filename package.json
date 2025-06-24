@@ -45,6 +45,7 @@
     "@assistant-ui/react-markdown": "^0.10.3",
     "@assistant-ui/react-syntax-highlighter": "^0.10.6",
     "@assistant-ui/styles": "^0.1.13",
+    "@fingerprintjs/fingerprintjs-pro-react": "^2.7.0",
     "@gensx/core": "^0.4.6",
     "@langchain/anthropic": "^0.3.23",
     "@langchain/core": "^0.3.61",

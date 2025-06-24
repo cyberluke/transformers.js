@@ -85,6 +85,7 @@ const ThreadWelcome: FC = () => {
           </p>
         </div>
         <ComposerPrimitive.Root className="focus-within:ring-border w-full rounded-lg border px-2 shadow-sm outline-none transition-all duration-200 focus-within:ring-1 focus:outline-none">
+          <ComposerAttachments />
           <ComposerPrimitive.Input
             rows={1}
             autoFocus
