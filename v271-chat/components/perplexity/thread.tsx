@@ -37,8 +37,86 @@ export const Thread: FC = () => {
         ["--thread-max-width" as string]: "42rem",
       }}
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900" />
+      {/* Futuristic gradient background with dark blue */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: `
+            linear-gradient(125deg, 
+              #1a2b3c 0%,
+              #2a3b4c 15%,
+              #E9E0D2 30%,
+              #2a3b4c 45%,
+              #1a2b3c 60%,
+              transparent 75%
+            ),
+            linear-gradient(45deg,
+              #1a2b3c 0%,
+              #2a3b4c 20%,
+              #E9E0D2 40%,
+              #2a3b4c 60%,
+              #1a2b3c 80%
+            )
+          `,
+          backgroundBlendMode: 'screen',
+          backgroundSize: '400% 400%, 300% 300%',
+          animation: 'gradient 20s ease infinite'
+        }}
+      />
+      
+      {/* Triangular tech pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-15"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23E9E0D2' stroke-width='1'%3E%3Cpath d='M50,10 L90,80 L10,80 Z' /%3E%3Cpath d='M50,20 L80,70 L20,70 Z' fill='%23E9E0D2' fill-opacity='0.1' /%3E%3Cpath d='M25,40 L45,70 M75,40 L55,70 M30,80 L70,80' /%3E%3Cpath d='M50,10 L50,0 M90,80 L100,90 M10,80 L0,90' stroke-dasharray='2,2' /%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '70px 70px',
+          animation: 'patternMove 30s linear infinite'
+        }}
+      />
+
+      {/* Tech lines overlay */}
+      <div 
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23E9E0D2' stroke-width='1'%3E%3Cpath d='M30,0 L60,50 L0,50 Z' /%3E%3Cpath d='M30,10 L50,45 L10,45 Z' /%3E%3Cpath d='M30,0 L30,10 M0,50 L10,45 M60,50 L50,45' stroke-dasharray='1,1' /%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '40px 40px',
+          animation: 'patternMove 20s linear infinite reverse'
+        }}
+      />
+
+      {/* Dynamic light effect */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: `
+            conic-gradient(from 45deg at 50% 50%,
+              transparent 0deg,
+              rgba(233, 224, 210, 0.05) 90deg,
+              transparent 180deg,
+              rgba(26, 43, 60, 0.1) 270deg,
+              transparent 360deg
+            )
+          `,
+          animation: 'rotate 30s linear infinite',
+          mixBlendMode: 'soft-light'
+        }}
+      />
+
+      <style>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%, 0% 50%; }
+          50% { background-position: 100% 150%, 100% 150%; }
+          100% { background-position: 0% 50%, 0% 50%; }
+        }
+        @keyframes patternMove {
+          0% { background-position: 0 0; }
+          100% { background-position: 140px 140px; }
+        }
+        @keyframes rotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
       
       <ThreadPrimitive.Empty>
         <ThreadWelcome />
