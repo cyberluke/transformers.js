@@ -12,6 +12,7 @@ export const embeddings = pgTable(
       () => resources.id,
       { onDelete: 'cascade' },
     ),
+    userId: varchar('user_id', { length: 191 }).notNull(),
     content: text('content').notNull(),
     embedding: vector('embedding', { dimensions: 1536 }).notNull(),
   },

@@ -9,19 +9,20 @@ import { db } from '@/lib/db';
 import { generateEmbeddings } from '@/lib/ai/embedding';
 import { embeddings as embeddingsTable } from '@/lib/db/schema/embeddings';
 
-export const createResource = async (input: NewResourceParams) => {
+export const createResource = async (input: NewResourceParams & { userId: string }) => {
   try {
-    const { content } = insertResourceSchema.parse(input);
+    const { content, userId } = input;
 
     const [resource] = await db
       .insert(resources)
-      .values({ content })
+      .values({ content, userId })
       .returning();
 
     const embeddings = await generateEmbeddings(content);
     await db.insert(embeddingsTable).values(
       embeddings.map(embedding => ({
         resourceId: resource.id,
+        userId: userId,
         ...embedding,
       })),
     );

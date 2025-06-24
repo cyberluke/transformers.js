@@ -41,14 +41,20 @@ export async function POST(req: Request) {
             .string()
             .describe('the content or resource to add to the knowledge base'),
         }),
-        execute: async ({ content }) => createResource({ content }),
+        execute: async ({ content }) => {
+          if (!userId) throw new Error('User not authenticated');
+          return createResource({ content, userId });
+        },
       }),
       getInformation: tool({
         description: `get information from your knowledge base to answer questions.`,
         parameters: z.object({
           question: z.string().describe('the users question'),
         }),
-        execute: async ({ question }) => findRelevantContent(question),
+        execute: async ({ question }) => {
+          if (!userId) throw new Error('User not authenticated');
+          return findRelevantContent(question, userId);
+        },
       }),
       ...frontendTools(tools),
     },
