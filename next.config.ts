@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   // Enable webpack compiler alongside turbopack
   webpack: (config, { dev, isServer }) => {
@@ -23,6 +24,7 @@ const nextConfig = {
     }
 
     // Add additional webpack configuration here
+    config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': __dirname,
@@ -32,10 +34,14 @@ const nextConfig = {
   },
   // Enable experimental features
   experimental: {
-    turbo: process.env.NEXT_WEBPACK !== 'true',
+    // turbo: process.env.NEXT_WEBPACK !== 'true' ? {} : undefined,
     typedRoutes: true,
-    serverActions: true,
+    serverActions: {
+      allowedOrigins: [],
+    },
   },
-}
 
-module.exports = nextConfig;
+  turbopack: process.env.NEXT_WEBPACK !== 'true' ? {} : undefined,
+};
+
+export default nextConfig;

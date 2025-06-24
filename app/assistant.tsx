@@ -18,6 +18,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Perplexity } from '@/components/perplexity/Perplexity';
 
 export const Assistant = () => {
   const runtime = useChatRuntime({
@@ -31,8 +32,8 @@ export const Assistant = () => {
         <SidebarInset>
           <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
+            {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
+            {/* <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink href="#">
@@ -44,9 +45,9 @@ export const Assistant = () => {
                   <BreadcrumbPage>Starter Template</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
-            </Breadcrumb>
+            </Breadcrumb> */}
           </header>
-          <Thread />
+          <Perplexity />
         </SidebarInset>
       </SidebarProvider>
     </AssistantRuntimeProvider>
