@@ -2,6 +2,8 @@
 
 import { AssistantRuntimeProvider, CompositeAttachmentAdapter, SimpleImageAttachmentAdapter, SimpleTextAttachmentAdapter } from '@assistant-ui/react';
 import { useChatRuntime } from '@assistant-ui/react-ai-sdk';
+import FingerprintJS, { GetResult } from '@fingerprintjs/fingerprintjs-pro';
+
 import { Thread } from '@/components/assistant-ui/thread';
 import {
   SidebarInset,
@@ -19,15 +21,36 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Perplexity } from '@/components/perplexity/Perplexity';
+import { useEffect, useState } from 'react';
 
 export const Assistant = () => {
+  const [fingerprintData, setFingerprintData] = useState<GetResult | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const fpPromise = FingerprintJS.load({
+        apiKey: process.env.NEXT_PUBLIC_FINGERPRINT_API_KEY!,
+        // endpoint: process.env.NEXT_PUBLIC_FINGERPRINT_ENDPOINT!, // TODO: Endpoint needs custom subdomain
+      });
+      const fp = await fpPromise;
+      const data = await fp.get({ extendedResult: true });
+      setFingerprintData(data);
+    })();
+  }, []);
+
   const runtime = useChatRuntime({
     api: '/api/chat',
+    maxSteps: 3,
     adapters: {
       attachments: new CompositeAttachmentAdapter([
         new SimpleImageAttachmentAdapter(),
         new SimpleTextAttachmentAdapter(),
       ]),
+    },
+    body: {
+      customData: {
+        fingerprint: fingerprintData?.requestId,
+      },
     },
   });
 
@@ -38,6 +61,9 @@ export const Assistant = () => {
         <SidebarInset>
           <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger />
+            <div className="flex items-center gap-2">
+              <p>Dev: {fingerprintData?.visitorId}</p>
+            </div>
             {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
             {/* <Breadcrumb>
               <BreadcrumbList>
