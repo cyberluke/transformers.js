@@ -1,5 +1,9 @@
-import { Assistant } from './assistant';
+import { PerplexityClient } from './client';
 
-export default function Home() {
-  return <Assistant />;
+export default function Page() {
+  return (
+    <div className="w-screen h-screen">
+      <PerplexityClient />
+    </div>
+  );
 }

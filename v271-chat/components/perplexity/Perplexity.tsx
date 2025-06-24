@@ -1,8 +1,10 @@
+"use client";
+
 import { Thread } from "./thread";
 
 export const Perplexity = () => {
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="w-full h-full">
       <Thread />
     </div>
   );
