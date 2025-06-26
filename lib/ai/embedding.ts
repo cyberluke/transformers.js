@@ -4,7 +4,7 @@ import { db } from '@/lib/db';
 import { cosineDistance, desc, gt, sql, eq } from 'drizzle-orm';
 import { embeddings } from '@/lib/db/schema/embeddings';
 
-const embeddingModel = openai.embedding('text-embedding-ada-002');
+const embeddingModel = openai.embedding('text-embedding-3-large');
 
 const generateChunks = (input: string): string[] => {
   return input
