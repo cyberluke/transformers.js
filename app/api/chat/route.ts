@@ -1,11 +1,12 @@
 import { findRelevantContent } from '@/lib/ai/embedding';
 import { createResource } from '@/lib/db/actions/resources';
 import client from '@/lib/server/fingerprint/client';
-import { addMemories, getMemories } from "@mem0/vercel-ai-provider";
+//import { addMemories, getMemories } from "@mem0/vercel-ai-provider";
 import { openai } from '@ai-sdk/openai';
 import { frontendTools } from '@assistant-ui/react-ai-sdk';
 import { createDataStreamResponse, streamText, tool } from 'ai';
 import { z } from 'zod';
+import SelfHostedMem0 from '@/components/mem0/mem0';
 
 export const maxDuration = 30;
 
@@ -14,6 +15,9 @@ const mem0Options = {
   baseURL: process.env.MEM0_BASE_URL, // your self-hosted endpoint
   apiKey: process.env.MEM0_API_KEY,   // your API key
 };
+
+// Použití
+const mem0 = new SelfHostedMem0(process.env.MEM0_BASE_URL || 'https://mem.nanotrik.ai');
 
 const retrieveMemories = (memories: any) => {
   if (memories.length === 0) return "";
@@ -46,7 +50,7 @@ export async function POST(req: Request) {
 
   console.log(userId);
 
-  const memories = await getMemories(messages, { user_id: userId, ...mem0Options  });
+  const memories = await mem0.getMemories(messages, userId);
   const mem0Instructions = retrieveMemories(memories);
 
   const result = streamText({
@@ -87,7 +91,7 @@ export async function POST(req: Request) {
     }
   });
 
-  const addMemoriesTask = addMemories(messages, { user_id: userId, ...mem0Options });
+  const addMemoriesTask = mem0.addMemories(messages, userId);
 
   return createDataStreamResponse({
     execute: async (writer) => {
