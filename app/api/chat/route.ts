@@ -1,12 +1,32 @@
 import { findRelevantContent } from '@/lib/ai/embedding';
 import { createResource } from '@/lib/db/actions/resources';
 import client from '@/lib/server/fingerprint/client';
+import { addMemories, getMemories } from "@mem0/vercel-ai-provider";
 import { openai } from '@ai-sdk/openai';
 import { frontendTools } from '@assistant-ui/react-ai-sdk';
-import { streamText, tool } from 'ai';
+import { createDataStreamResponse, streamText, tool } from 'ai';
 import { z } from 'zod';
 
 export const maxDuration = 30;
+
+// Configure mem0 options
+const mem0Options = {
+  baseURL: process.env.MEM0_BASE_URL, // your self-hosted endpoint
+  apiKey: process.env.MEM0_API_KEY,   // your API key
+};
+
+const retrieveMemories = (memories: any) => {
+  if (memories.length === 0) return "";
+  const systemPrompt =
+    "These are the memories I have stored. Give more weightage to the question by users and try to answer that first. You have to modify your answer based on the memories I have provided. If the memories are irrelevant you can ignore them. Also don't reply to this section of the prompt, or the memories, they are only for your reference. The System prompt starts after text System Message: \n\n";
+  const memoriesText = memories
+    .map((memory: any) => {
+      return `Memory: ${memory.memory}\n\n`;
+    })
+    .join("\n\n");
+
+  return `System Message: ${systemPrompt} ${memoriesText}`;
+};
 
 export async function POST(req: Request) {
   const { messages, system, tools, customData } = await req.json();
@@ -26,12 +46,15 @@ export async function POST(req: Request) {
 
   console.log(userId);
 
+  const memories = await getMemories(messages, { user_id: userId, ...mem0Options  });
+  const mem0Instructions = retrieveMemories(memories);
+
   const result = streamText({
     model: openai('gpt-4o'),
     messages,
     // forward system prompt and tools from the frontend
     toolCallStreaming: true,
-    system: `You are a helpful assistant. Check your knowledge base before answering any questions (use the getInformation tool).`,
+    system: [system, mem0Instructions].filter(Boolean).join("\n"),
     tools: {
       addResource: tool({
         description: `add a resource to your knowledge base.
@@ -64,5 +87,27 @@ export async function POST(req: Request) {
     }
   });
 
-  return result.toDataStreamResponse();
+  const addMemoriesTask = addMemories(messages, { user_id: userId, ...mem0Options });
+
+  return createDataStreamResponse({
+    execute: async (writer) => {
+      if (memories.length > 0) {
+        writer.writeMessageAnnotation({
+          type: "mem0-get",
+          memories,
+        });
+      }
+
+      result.mergeIntoDataStream(writer);
+
+      const newMemories = await addMemoriesTask;
+      if (newMemories.length > 0) {
+        writer.writeMessageAnnotation({
+          type: "mem0-update",
+          memories: newMemories,
+        });
+      }
+    },
+  });
+
 }
