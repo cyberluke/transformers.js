@@ -14,7 +14,7 @@ export const embeddings = pgTable(
     ),
     userId: varchar('user_id', { length: 191 }).notNull(),
     content: text('content').notNull(),
-    embedding: vector('embedding', { dimensions: 1536 }).notNull(),
+    embedding: vector('embedding', { dimensions: 3072 }).notNull(),
   },
   table => ({
     embeddingIndex: index('embeddingIndex').using(
