@@ -6,9 +6,9 @@ import { SYSTEM_HIGHLIGHT_PROMPT } from '@/lib/server/mem0/prompt';
 // import { retrieveMemories } from '@/lib/server/mem0/server';
 // import { retrieveMemories } from '@/lib/server/mem0/server';
 //import { addMemories, getMemories } from "@mem0/vercel-ai-provider";
-import { openai } from '@ai-sdk/openai';
+import { anthropic } from '@ai-sdk/anthropic';
 import { frontendTools } from '@assistant-ui/react-ai-sdk';
-import { createDataStreamResponse, streamText, tool } from 'ai';
+import { createDataStreamResponse, streamText, jsonSchema, tool } from 'ai';
 import { randomUUID } from 'crypto';
 // import { z } from 'zod';
 // import SelfHostedMem0 from '@/components/mem0/mem0';
@@ -38,13 +38,14 @@ export const maxDuration = 30;
 // };
 
 export async function POST(req: Request) {
-  const { messages: messagesArray, customData } = await req.json();
+  const { messages: messagesArray, customData, tools } = await req.json();
 
   // const messages = [messagesArray[messagesArray.length - 1]];
   const messages = messagesArray;
   // TODO: Check for security vulnerabilities with system prompt
 
   console.log(messages);
+  console.log("tools", tools);
 
   let userId = null;
 
@@ -81,37 +82,21 @@ export async function POST(req: Request) {
   // console.log(memories, systemMessage);
 
   const result = streamText({
-    model: openai('gpt-4o'),
+    model: anthropic('claude-sonnet-4-20250514'),
     messages,
     // forward system prompt and tools from the frontend
     toolCallStreaming: true,
     system: [SYSTEM_HIGHLIGHT_PROMPT, systemMessage].filter(Boolean).join("\n"),
     tools: {
-      // addResource: tool({
-      //   description: `add a resource to your knowledge base.
-      //     If the user provides a random piece of knowledge unprompted, use this tool without asking for confirmation.`,
-      //   parameters: z.object({
-      //     content: z
-      //       .string()
-      //       .describe('the content or resource to add to the knowledge base'),
-      //   }),
-      //   execute: async ({ content }) => {
-      //     if (!userId) throw new Error('User not authenticated');
-      //     return createEmbedding({ content, userId });
-      //   },
-      // }),
-      // getInformation: tool({
-      //   description: `get information from your knowledge base to answer questions.`,
-      //   parameters: z.object({
-      //     question: z.string().describe('the users question'),
-      //   }),
-      //   execute: async ({ question }) => {
-      //     if (!userId) throw new Error('User not authenticated');
-      //     return findRelevantContent(question, userId);
-      //   },
-      // }),
-      // ...frontendTools(tools),
-    },
+          ...Object.fromEntries(
+            Object.entries<{ parameters: unknown }>(tools).map(([name, tool]) => [
+              name,
+              {
+                parameters: jsonSchema(tool.parameters!),
+              },
+            ]),
+          ),
+        },
     onError: console.log,
     onFinish: (message) => {
       console.log(JSON.stringify(message, null, 2));
