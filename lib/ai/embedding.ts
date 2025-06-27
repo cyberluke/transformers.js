@@ -1,10 +1,12 @@
 import { embed, embedMany } from 'ai';
 import { openai } from '@ai-sdk/openai';
 import { db } from '@/lib/db';
-import { cosineDistance, desc, gt, sql, eq } from 'drizzle-orm';
+import { cosineDistance, desc, gt, sql, eq, or, isNull } from 'drizzle-orm';
 import { embeddings } from '@/lib/db/schema/embeddings';
 
-const embeddingModel = openai.embedding('text-embedding-3-large');
+const embeddingModel = openai.embedding('text-embedding-3-large', {
+  dimensions: 1536,
+});
 
 const generateChunks = (input: string): string[] => {
   return input
@@ -45,7 +47,7 @@ export const findRelevantContent = async (userQuery: string, userId: string) => 
     .select({ name: embeddings.content, similarity })
     .from(embeddings)
     .where(
-      sql`${gt(similarity, 0.5)} AND ${eq(embeddings.userId, userId)}`
+      sql`${gt(similarity, 0.5)} AND (${eq(embeddings.userId, userId)} OR ${isNull(embeddings.userId)})`
     )
     .orderBy(t => desc(t.similarity))
     .limit(4);

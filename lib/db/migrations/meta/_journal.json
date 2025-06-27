@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1719997972944,
-      "tag": "0000_yielding_bloodaxe",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1750807185756,
-      "tag": "0001_slippery_celestials",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1750807515013,
-      "tag": "0002_overrated_ulik",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1735246321000,
-      "tag": "0003_change_embedding_dimensions",
+      "when": 1751026183927,
+      "tag": "0000_fine_rachel_grey",
       "breakpoints": true
     }
   ]

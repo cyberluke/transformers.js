@@ -1,5 +1,5 @@
 import { findRelevantContent } from '@/lib/ai/embedding';
-import { createResource } from '@/lib/db/actions/resources';
+import { createEmbedding } from '@/lib/db/actions/embeddings';
 import client from '@/lib/server/fingerprint/client';
 //import { addMemories, getMemories } from "@mem0/vercel-ai-provider";
 import { openai } from '@ai-sdk/openai';
@@ -70,7 +70,7 @@ export async function POST(req: Request) {
         }),
         execute: async ({ content }) => {
           if (!userId) throw new Error('User not authenticated');
-          return createResource({ content, userId });
+          return createEmbedding({ content, userId });
         },
       }),
       getInformation: tool({

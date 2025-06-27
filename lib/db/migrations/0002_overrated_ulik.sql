@@ -1,1 +1,0 @@
-ALTER TABLE "embeddings" ADD COLUMN "user_id" varchar(191) NOT NULL;

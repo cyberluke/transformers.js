@@ -1,6 +1,6 @@
 import { nanoid } from '@/lib/utils';
-import { index, pgTable, text, varchar, vector } from 'drizzle-orm/pg-core';
-import { resources } from './resources';
+import { index, pgTable, text, varchar, vector, timestamp } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
 
 export const embeddings = pgTable(
   "embeddings",
@@ -8,13 +8,16 @@ export const embeddings = pgTable(
     id: varchar('id', { length: 191 })
       .primaryKey()
       .$defaultFn(() => nanoid()),
-    resourceId: varchar('resource_id', { length: 191 }).references(
-      () => resources.id,
-      { onDelete: 'cascade' },
-    ),
-    userId: varchar('user_id', { length: 191 }).notNull(),
+    userId: varchar('user_id', { length: 191 }),
+    assistantId: varchar('assistant_id', { length: 191 }),
     content: text('content').notNull(),
-    embedding: vector('embedding', { dimensions: 3072 }).notNull(),
+    embedding: vector('embedding', { dimensions: 1536 }).notNull(),
+    createdAt: timestamp('created_at')
+      .notNull()
+      .default(sql`now()`),
+    updatedAt: timestamp('updated_at')
+      .notNull()
+      .default(sql`now()`),
   },
   table => ({
     embeddingIndex: index('embeddingIndex').using(
