@@ -1,39 +1,45 @@
-import { findRelevantContent } from '@/lib/ai/embedding';
-import { createEmbedding } from '@/lib/db/actions/embeddings';
+// import { findRelevantContent } from '@/lib/ai/embedding';
+// import { createEmbedding } from '@/lib/db/actions/embeddings';
 import client from '@/lib/server/fingerprint/client';
+import { addMemories, getMemories, retrieveMemories } from '@/lib/server/mem0/mem0-utils';
+import { SYSTEM_HIGHLIGHT_PROMPT } from '@/lib/server/mem0/prompt';
+// import { retrieveMemories } from '@/lib/server/mem0/server';
+// import { retrieveMemories } from '@/lib/server/mem0/server';
 //import { addMemories, getMemories } from "@mem0/vercel-ai-provider";
 import { openai } from '@ai-sdk/openai';
 import { frontendTools } from '@assistant-ui/react-ai-sdk';
 import { createDataStreamResponse, streamText, tool } from 'ai';
-import { z } from 'zod';
-import SelfHostedMem0 from '@/components/mem0/mem0';
+import { randomUUID } from 'crypto';
+// import { z } from 'zod';
+// import SelfHostedMem0 from '@/components/mem0/mem0';
 
 export const maxDuration = 30;
 
-// Configure mem0 options
-const mem0Options = {
-  baseURL: process.env.MEM0_BASE_URL, // your self-hosted endpoint
-  apiKey: process.env.MEM0_API_KEY,   // your API key
-};
+// // Configure mem0 options
+// const mem0Options = {
+//   baseURL: process.env.MEM0_BASE_URL, // your self-hosted endpoint
+//   apiKey: process.env.MEM0_API_KEY,   // your API key
+// };
 
-// Použití
-const mem0 = new SelfHostedMem0(process.env.MEM0_BASE_URL || 'https://mem.nanotrik.ai');
+// // Použití
+// const mem0 = new SelfHostedMem0(process.env.MEM0_BASE_URL || 'https://mem.nanotrik.ai');
 
-const retrieveMemories = (memories: any) => {
-  if (memories.length === 0) return "";
-  const systemPrompt =
-    "These are the memories I have stored. Give more weightage to the question by users and try to answer that first. You have to modify your answer based on the memories I have provided. If the memories are irrelevant you can ignore them. Also don't reply to this section of the prompt, or the memories, they are only for your reference. The System prompt starts after text System Message: \n\n";
-  const memoriesText = memories
-    .map((memory: any) => {
-      return `Memory: ${memory.memory}\n\n`;
-    })
-    .join("\n\n");
+// const retrieveMemories = (memories: any) => {
+//   if (memories.length === 0) return "";
+//   const systemPrompt =
+//     "These are the memories I have stored. Give more weightage to the question by users and try to answer that first. You have to modify your answer based on the memories I have provided. If the memories are irrelevant you can ignore them. Also don't reply to this section of the prompt, or the memories, they are only for your reference. The System prompt starts after text System Message: \n\n";
+//   const memoriesText = memories
+//     .map((memory: any) => {
+//       return `Memory: ${memory.memory}\n\n`;
+//     })
+//     .join("\n\n");
 
-  return `System Message: ${systemPrompt} ${memoriesText}`;
-};
+//   return `System Message: ${systemPrompt} ${memoriesText}`;
+// };
 
 export async function POST(req: Request) {
   const { messages, system, tools, customData } = await req.json();
+  // TODO: Check for security vulnerabilities with system prompt
 
   let userId = null;
 
@@ -48,41 +54,57 @@ export async function POST(req: Request) {
     return new Response('Unauthorized', { status: 401 });
   }
 
-  console.log(userId);
+  // userId = randomUUID();
+  // userId = "e1de4137-ea87-4b4d-b005-cbcb3aadd7f1";
 
-  const memories = await mem0.getMemories(messages, userId);
-  const mem0Instructions = retrieveMemories(memories);
+  console.log(userId);
+  console.log(messages);
+
+  const config = {
+    user_id: userId,
+    rerank: true,
+    threshold: 0.1,
+    output_format: "v1.0",
+    enable_graph: true
+  }
+
+
+  // const memories = await getMemories(messages, config);
+  // const memories = await getMemories(messages);
+  const {memories, systemMessage} = await retrieveMemories(messages, config);
+  // console.log(memories);
+  console.log(memories, systemMessage);
 
   const result = streamText({
     model: openai('gpt-4o'),
     messages,
     // forward system prompt and tools from the frontend
     toolCallStreaming: true,
-    system: [system, mem0Instructions].filter(Boolean).join("\n"),
+    system: [SYSTEM_HIGHLIGHT_PROMPT, system, systemMessage].filter(Boolean).join("\n"),
     tools: {
-      addResource: tool({
-        description: `add a resource to your knowledge base.
-          If the user provides a random piece of knowledge unprompted, use this tool without asking for confirmation.`,
-        parameters: z.object({
-          content: z
-            .string()
-            .describe('the content or resource to add to the knowledge base'),
-        }),
-        execute: async ({ content }) => {
-          if (!userId) throw new Error('User not authenticated');
-          return createEmbedding({ content, userId });
-        },
-      }),
-      getInformation: tool({
-        description: `get information from your knowledge base to answer questions.`,
-        parameters: z.object({
-          question: z.string().describe('the users question'),
-        }),
-        execute: async ({ question }) => {
-          if (!userId) throw new Error('User not authenticated');
-          return findRelevantContent(question, userId);
-        },
-      }),
+      // addResource: tool({
+      //   description: `add a resource to your knowledge base.
+      //     If the user provides a random piece of knowledge unprompted, use this tool without asking for confirmation.`,
+      //   parameters: z.object({
+      //     content: z
+      //       .string()
+      //       .describe('the content or resource to add to the knowledge base'),
+      //   }),
+      //   execute: async ({ content }) => {
+      //     if (!userId) throw new Error('User not authenticated');
+      //     return createEmbedding({ content, userId });
+      //   },
+      // }),
+      // getInformation: tool({
+      //   description: `get information from your knowledge base to answer questions.`,
+      //   parameters: z.object({
+      //     question: z.string().describe('the users question'),
+      //   }),
+      //   execute: async ({ question }) => {
+      //     if (!userId) throw new Error('User not authenticated');
+      //     return findRelevantContent(question, userId);
+      //   },
+      // }),
       ...frontendTools(tools),
     },
     onError: console.log,
@@ -91,7 +113,7 @@ export async function POST(req: Request) {
     }
   });
 
-  const addMemoriesTask = mem0.addMemories(messages, userId);
+  const addMemoriesTask = addMemories(messages, { user_id: userId });
 
   return createDataStreamResponse({
     execute: async (writer) => {
@@ -113,5 +135,4 @@ export async function POST(req: Request) {
       }
     },
   });
-
 }
