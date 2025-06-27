@@ -1,13 +1,13 @@
-import { nanoid } from '@/lib/utils';
 import { index, pgTable, text, varchar, vector, timestamp } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
+import { randomUUID } from 'crypto';
 
 export const embeddings = pgTable(
   "embeddings",
   {
     id: varchar('id', { length: 191 })
       .primaryKey()
-      .$defaultFn(() => nanoid()),
+      .$defaultFn(() => randomUUID()),
     userId: varchar('user_id', { length: 191 }),
     assistantId: varchar('assistant_id', { length: 191 }),
     content: text('content').notNull(),
