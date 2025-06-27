@@ -38,8 +38,13 @@ export const maxDuration = 30;
 // };
 
 export async function POST(req: Request) {
-  const { messages, system, tools, customData } = await req.json();
+  const { messages: messagesArray, customData } = await req.json();
+
+  // const messages = [messagesArray[messagesArray.length - 1]];
+  const messages = messagesArray;
   // TODO: Check for security vulnerabilities with system prompt
+
+  console.log(messages);
 
   let userId = null;
 
@@ -73,14 +78,14 @@ export async function POST(req: Request) {
   // const memories = await getMemories(messages);
   const {memories, systemMessage} = await retrieveMemories(messages, config);
   // console.log(memories);
-  console.log(memories, systemMessage);
+  // console.log(memories, systemMessage);
 
   const result = streamText({
     model: openai('gpt-4o'),
     messages,
     // forward system prompt and tools from the frontend
     toolCallStreaming: true,
-    system: [SYSTEM_HIGHLIGHT_PROMPT, system, systemMessage].filter(Boolean).join("\n"),
+    system: [SYSTEM_HIGHLIGHT_PROMPT, systemMessage].filter(Boolean).join("\n"),
     tools: {
       // addResource: tool({
       //   description: `add a resource to your knowledge base.
@@ -105,10 +110,11 @@ export async function POST(req: Request) {
       //     return findRelevantContent(question, userId);
       //   },
       // }),
-      ...frontendTools(tools),
+      // ...frontendTools(tools),
     },
     onError: console.log,
     onFinish: (message) => {
+      console.log(JSON.stringify(message, null, 2));
       // console.log(message);
     }
   });

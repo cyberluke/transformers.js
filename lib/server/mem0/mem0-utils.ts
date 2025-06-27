@@ -117,10 +117,6 @@ const searchInternalMemories = async (query: string, config?: Mem0ConfigSettings
       }),
     };
 
-    // ahoj jak se dneska mas a mimochodem mam rad cervena auta
-
-    console.log(process.env.MEM0_API_URL + '/search/', options);
-
     const response = await fetch(process.env.MEM0_API_URL + '/search/', options);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

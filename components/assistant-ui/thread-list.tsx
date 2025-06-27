@@ -41,7 +41,7 @@ const ThreadListItem: FC = () => {
       <ThreadListItemPrimitive.Trigger className="flex-grow px-3 py-2 text-start">
         <ThreadListItemTitle />
       </ThreadListItemPrimitive.Trigger>
-      <ThreadListItemArchive />
+      {/* <ThreadListItemArchive /> */}
     </ThreadListItemPrimitive.Root>
   );
 };
