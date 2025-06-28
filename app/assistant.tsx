@@ -21,6 +21,9 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Perplexity } from '@/components/perplexity/Perplexity';
+import { WeatherSearchToolUI } from "@/components/tools/weather-tool";
+import { GeocodeLocationToolUI } from "@/components/tools/weather-tool";
+import { SearxngSearchToolUI } from "@/components/tools/searxng-tool";
 import { useEffect, useState } from 'react';
 import { useChatRuntime } from '@/lib/client/assistant-ui/chatRuntime';
 
@@ -139,6 +142,9 @@ export const Assistant = () => {
             </Breadcrumb> */}
           </header>
           <Perplexity />
+          <WeatherSearchToolUI />
+          <GeocodeLocationToolUI />
+          <SearxngSearchToolUI />
         </SidebarInset>
       </SidebarProvider>
     </AssistantRuntimeProvider>
