@@ -1,7 +1,7 @@
 'use client';
 
-import { AssistantRuntimeProvider, CompositeAttachmentAdapter, SimpleImageAttachmentAdapter, SimpleTextAttachmentAdapter } from '@assistant-ui/react';
-import { useChatRuntime } from '@assistant-ui/react-ai-sdk';
+import { AssistantRuntimeProvider, CompositeAttachmentAdapter, SimpleImageAttachmentAdapter, SimpleTextAttachmentAdapter, ThreadMessage, useMessage } from '@assistant-ui/react';
+// import { useChatRuntime } from '@assistant-ui/react-ai-sdk';
 import FingerprintJS, { GetResult } from '@fingerprintjs/fingerprintjs-pro';
 
 import { Thread } from '@/components/assistant-ui/thread';
@@ -25,9 +25,20 @@ import { WeatherSearchToolUI } from "@/components/tools/weather-tool";
 import { GeocodeLocationToolUI } from "@/components/tools/weather-tool";
 import { SearxngSearchToolUI } from "@/components/tools/searxng-tool";
 import { useEffect, useState } from 'react';
+import { useChatRuntime } from '@/lib/client/assistant-ui/chatRuntime';
+
+// export const TestMessage = () => {
+//   const msg = useMessage((m) => m);
+//   console.log(msg);
+//   return 'test';
+// }
 
 export const Assistant = () => {
   const [fingerprintData, setFingerprintData] = useState<GetResult | null>(null);
+  const [chatId, setChatId] = useState<string | null>(null);
+  // const annotations = useMessage((m) => m.metadata.unstable_annotations);
+  // const msg = useMessage();
+  // const {message} = useMessage();
 
   useEffect(() => {
     (async () => {
@@ -41,6 +52,11 @@ export const Assistant = () => {
     })();
   }, []);
 
+  // useEffect(() => {
+  //   // console.log(message);
+  //   console.log(annotations);
+  // }, [annotations]);
+
   const runtime = useChatRuntime({
     api: '/api/chat',
     maxSteps: 3,
@@ -53,8 +69,51 @@ export const Assistant = () => {
     body: {
       customData: {
         fingerprint: fingerprintData?.requestId,
+        chatId
       },
+      // messages: [
+      //   {
+      //     role: 'user',
+      //     content: [{
+      //       type: 'text',
+      //       text: TestMessage()
+      //     }]
+      //   }
+      // ]
     },
+    onFinish: (message) => {
+      const annotations = message.metadata.unstable_annotations;
+      const chatId = annotations?.find((annotation: any) => annotation.type === "chat-id")?.chatId;
+      setChatId(chatId);
+      console.log(chatId);
+      // console.log(annotations);
+    },
+
+    // onResponse: async (response) => {
+
+    //   response.body?.pipeThrough(new TransformStream({
+    //     transform(chunk, controller) {
+    //       console.log(chunk);
+    //       controller.enqueue(chunk);
+    //     }
+    //   }));
+
+    //   console.log(response);
+    //   // if (!response.body) return;
+    //   // for await (const chunk of response.body) {
+    //   //   console.log(chunk);
+    //   //   // const decoder = new TextDecoder();
+    //   //   // const text = decoder.decode(chunk);
+    //   //   // console.log(text);
+    //   // }
+    // },
+    experimental_prepareRequestBodyFix: ({messages}) => {
+      const lastMessage = messages[messages.length - 1];
+      return {
+        messages: [lastMessage],
+      };
+    }
+    
   });
 
   return (
