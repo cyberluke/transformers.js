@@ -1,31 +1,19 @@
-'use client';
+"use client";
 
-import { AssistantRuntimeProvider, CompositeAttachmentAdapter, SimpleImageAttachmentAdapter, SimpleTextAttachmentAdapter, ThreadMessage, useMessage } from '@assistant-ui/react';
+import { AssistantRuntimeProvider, CompositeAttachmentAdapter, SimpleImageAttachmentAdapter, SimpleTextAttachmentAdapter, ThreadMessage, useMessage } from "@assistant-ui/react";
 // import { useChatRuntime } from '@assistant-ui/react-ai-sdk';
-import FingerprintJS, { GetResult } from '@fingerprintjs/fingerprintjs-pro';
+import FingerprintJS, { GetResult } from "@fingerprintjs/fingerprintjs-pro";
 
-import { Thread } from '@/components/assistant-ui/thread';
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from '@/components/ui/sidebar';
-import { AppSidebar } from '@/components/app-sidebar';
-import { Separator } from '@/components/ui/separator';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import { Perplexity } from '@/components/perplexity/Perplexity';
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { Separator } from "@/components/ui/separator";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Perplexity } from "@/components/perplexity/Perplexity";
 import { WeatherSearchToolUI } from "@/components/tools/weather-tool";
 import { GeocodeLocationToolUI } from "@/components/tools/weather-tool";
 import { SearxngSearchToolUI } from "@/components/tools/searxng-tool";
-import { useEffect, useState } from 'react';
-import { useChatRuntime } from '@/lib/client/assistant-ui/chatRuntime';
+import { useEffect, useState } from "react";
+import { useChatRuntime } from "@/lib/client/assistant-ui/chatRuntime";
 
 // export const TestMessage = () => {
 //   const msg = useMessage((m) => m);
@@ -58,17 +46,14 @@ export const Assistant = () => {
   // }, [annotations]);
 
   const runtime = useChatRuntime({
-    api: '/api/chat',
+    api: "/api/chat",
     adapters: {
-      attachments: new CompositeAttachmentAdapter([
-        new SimpleImageAttachmentAdapter(),
-        new SimpleTextAttachmentAdapter(),
-      ]),
+      attachments: new CompositeAttachmentAdapter([new SimpleImageAttachmentAdapter(), new SimpleTextAttachmentAdapter()]),
     },
     body: {
       customData: {
         fingerprint: fingerprintData?.requestId,
-        chatId
+        chatId,
       },
       // messages: [
       //   {
@@ -106,7 +91,7 @@ export const Assistant = () => {
     //   //   // console.log(text);
     //   // }
     // },
-    experimental_prepareRequestBodyFix: ({messages}) => {
+    experimental_prepareRequestBodyFix: ({ messages }) => {
       const lastMessage = messages[messages.length - 1];
       return {
         messages: [lastMessage],
@@ -114,8 +99,7 @@ export const Assistant = () => {
       // return {
       //   messages: messages,
       // };
-    }
-    
+    },
   });
 
   return (
