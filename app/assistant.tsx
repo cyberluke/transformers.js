@@ -59,7 +59,6 @@ export const Assistant = () => {
 
   const runtime = useChatRuntime({
     api: '/api/chat',
-    maxSteps: 3,
     adapters: {
       attachments: new CompositeAttachmentAdapter([
         new SimpleImageAttachmentAdapter(),
@@ -112,6 +111,9 @@ export const Assistant = () => {
       return {
         messages: [lastMessage],
       };
+      // return {
+      //   messages: messages,
+      // };
     }
     
   });
@@ -142,9 +144,9 @@ export const Assistant = () => {
             </Breadcrumb> */}
           </header>
           <Perplexity />
-          <WeatherSearchToolUI />
+          {/* <WeatherSearchToolUI />
           <GeocodeLocationToolUI />
-          <SearxngSearchToolUI />
+          <SearxngSearchToolUI /> */}
         </SidebarInset>
       </SidebarProvider>
     </AssistantRuntimeProvider>

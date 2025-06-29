@@ -5,13 +5,16 @@ import { createMessage } from '@/lib/db/actions/messages';
 import client from '@/lib/server/fingerprint/client';
 import { addMemories, getMemories, retrieveMemories } from '@/lib/server/mem0/mem0-utils';
 import { SYSTEM_HIGHLIGHT_PROMPT } from '@/lib/server/mem0/prompt';
+import { searchWebTool } from '@/lib/tools/searchxng';
 // import { retrieveMemories } from '@/lib/server/mem0/server';
 // import { retrieveMemories } from '@/lib/server/mem0/server';
 //import { addMemories, getMemories } from "@mem0/vercel-ai-provider";
 import { openai } from '@ai-sdk/openai';
 import { frontendTools } from '@assistant-ui/react-ai-sdk';
+import { SearxngSearch } from '@langchain/community/tools/searxng_search';
 import { createDataStreamResponse, streamText, tool } from 'ai';
 import { randomUUID } from 'crypto';
+import z from 'zod';
 // import { z } from 'zod';
 // import SelfHostedMem0 from '@/components/mem0/mem0';
 
@@ -46,6 +49,24 @@ function clearUserMessage(message: any) {
     attachments: message.attachments,
     metadata: message.metadata,
   };
+}
+
+const getBaseSystemPrompt = () => {
+  const baseSystemPrompt = `
+  Dnes je ${new Date().toLocaleDateString('cs-CZ', {
+    weekday: 'long', 
+    day: 'numeric', 
+    month: 'long', 
+    year: 'numeric', 
+    hour: '2-digit', 
+    minute: '2-digit' 
+  })}.
+  Jsi asistent, který pomáhá lidem v České republice.
+  Vždy se snaž odpovídat v češtině.
+  Vždy se snaž mít vědomosti aktuální.
+  `;
+  console.log(baseSystemPrompt, "baseSystemPrompt");
+  return baseSystemPrompt;
 }
 
 export async function POST(req: Request) {
@@ -86,13 +107,13 @@ export async function POST(req: Request) {
   // const messages = messagesArray;
   // TODO: Check for security vulnerabilities with system prompt
 
-  console.log(messages);
+  // console.log(messages);
 
   // userId = randomUUID();
   // userId = "e1de4137-ea87-4b4d-b005-cbcb3aadd7f1";
 
-  console.log(userId);
-  console.log(messages);
+  // console.log(userId);
+  // console.log(messages);
 
   const config = {
     user_id: userId,
@@ -105,45 +126,28 @@ export async function POST(req: Request) {
 
   // const memories = await getMemories(messages, config);
   // const memories = await getMemories(messages);
+  console.log(config, "first log");
   const {memories, systemMessage} = await retrieveMemories(messages, config);
-  const systemPrompt = [SYSTEM_HIGHLIGHT_PROMPT, systemMessage].filter(Boolean).join("\n");
+  const systemPrompt = [getBaseSystemPrompt(), SYSTEM_HIGHLIGHT_PROMPT, systemMessage].filter(Boolean).join("\n");
   // console.log(memories);
   // console.log(memories, systemMessage);
 
   const result = streamText({
     model: openai('gpt-4o'),
     messages,
+    maxSteps: 5,
     // forward system prompt and tools from the frontend
     toolCallStreaming: true,
     system: systemPrompt,
     tools: {
-      // addResource: tool({
-      //   description: `add a resource to your knowledge base.
-      //     If the user provides a random piece of knowledge unprompted, use this tool without asking for confirmation.`,
-      //   parameters: z.object({
-      //     content: z
-      //       .string()
-      //       .describe('the content or resource to add to the knowledge base'),
-      //   }),
-      //   execute: async ({ content }) => {
-      //     if (!userId) throw new Error('User not authenticated');
-      //     return createEmbedding({ content, userId });
-      //   },
-      // }),
-      // getInformation: tool({
-      //   description: `get information from your knowledge base to answer questions.`,
-      //   parameters: z.object({
-      //     question: z.string().describe('the users question'),
-      //   }),
-      //   execute: async ({ question }) => {
-      //     if (!userId) throw new Error('User not authenticated');
-      //     return findRelevantContent(question, userId);
-      //   },
-      // }),
-      // ...frontendTools(tools),
+      searchWeb: searchWebTool
+
+
     },
     onError: console.log,
     onFinish: (finishData) => {
+      console.log("finishData");
+
       const userMessage = messages[0];
       const aiMessage = finishData.text;
 
