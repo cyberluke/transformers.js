@@ -6,13 +6,14 @@ import client from '@/lib/server/fingerprint/client';
 import { addMemories, getMemories, retrieveMemories } from '@/lib/server/mem0/mem0-utils';
 import { SYSTEM_HIGHLIGHT_PROMPT } from '@/lib/server/mem0/prompt';
 import { searchWebTool } from '@/lib/tools/searchxng';
+import { Writer } from '@/types/server';
 // import { retrieveMemories } from '@/lib/server/mem0/server';
 // import { retrieveMemories } from '@/lib/server/mem0/server';
 //import { addMemories, getMemories } from "@mem0/vercel-ai-provider";
 import { openai } from '@ai-sdk/openai';
 import { frontendTools } from '@assistant-ui/react-ai-sdk';
 import { SearxngSearch } from '@langchain/community/tools/searxng_search';
-import { createDataStreamResponse, streamText, tool } from 'ai';
+import { createDataStream, createDataStreamResponse, StreamData, streamText, tool } from 'ai';
 import { randomUUID } from 'crypto';
 import z from 'zod';
 // import { z } from 'zod';
@@ -123,6 +124,22 @@ export async function POST(req: Request) {
     enable_graph: true
   }
 
+  // const dataStream = createDataStream({
+  //   execute: async (writer) => {
+  //     console.log("dataStream");
+  //     // writer.writeMessageAnnotation({
+  //     //   type: "chat-id",
+  //     //   chatId: chat.id,
+  //     // });
+  //   }
+  // });
+
+  // const dataStream = createDataStream();
+
+  let writerRef: { value: Writer | null } = {
+    value: null
+  }
+
 
   // const memories = await getMemories(messages, config);
   // const memories = await getMemories(messages);
@@ -140,7 +157,26 @@ export async function POST(req: Request) {
     toolCallStreaming: true,
     system: systemPrompt,
     tools: {
-      searchWeb: searchWebTool
+      // searchWeb: tool({
+      //   description: `search the web for information.`,
+      //   parameters: z.object({
+      //     query: z.string().describe('the query to search the web for'),
+      //   }),
+      //   execute: async ({ query }) => {
+      //     console.log(query, "query search");
+
+      //     writerRef.writeMessageAnnotation({
+      //       type: "search-web",
+      //       query: query,
+      //     });
+          
+      //     const result = await fetch(`${process.env.SEARXNG_URL}/search?q=${query}&format=json`);
+      //     const data = await result.json();
+      //     // console.log(data, "data search");
+      //     return { success: true, result: data };
+      //   },
+      // })
+      searchWeb: searchWebTool(writerRef),
 
 
     },
@@ -183,6 +219,8 @@ export async function POST(req: Request) {
 
   return createDataStreamResponse({
     execute: async (writer) => {
+      writerRef.value = writer;
+
       writer.writeMessageAnnotation({
         type: "chat-id",
         chatId: chat.id,
