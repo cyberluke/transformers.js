@@ -6,6 +6,5 @@ export {
     BranchPicker,
     CircleStopIcon
 } from './thread-common';
-
-export { PerplexityThread } from './perplexity-thread';
-export { AssistantThread } from './assistant-thread'; 
+export { AssistantThread } from './assistant-thread';
+export { Main } from './main';

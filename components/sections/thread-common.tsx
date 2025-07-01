@@ -4,8 +4,6 @@ import { ActionBarPrimitive, BranchPickerPrimitive, ComposerPrimitive, MessagePr
 import type { FC } from "react";
 import { ArrowDownIcon, CheckIcon, ChevronLeftIcon, ChevronRightIcon, CopyIcon, RefreshCwIcon, SendHorizontalIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-import { MarkdownText } from "@/components/assistant-ui/markdown-text";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 
 export const ThreadScrollToBottom: FC = () => {

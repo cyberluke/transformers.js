@@ -8,12 +8,12 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 import { AppSidebar } from "@/components/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Perplexity } from "@/components/perplexity/Perplexity";
 import { WeatherSearchToolUI } from "@/components/tools/weather-tool";
 import { GeocodeLocationToolUI } from "@/components/tools/weather-tool";
 import { SearxngSearchToolUI } from "@/components/tools/searxng-tool";
 import { useEffect, useState } from "react";
 import { useChatRuntime } from "@/lib/client/assistant-ui/chatRuntime";
+import { Main } from "@/components/sections/main";
 
 // export const TestMessage = () => {
 //   const msg = useMessage((m) => m);
@@ -127,7 +127,7 @@ export const Assistant = () => {
               </BreadcrumbList>
             </Breadcrumb> */}
           </header>
-          <Perplexity />
+          <Main />
           {/* <WeatherSearchToolUI />
           <GeocodeLocationToolUI />
           <SearxngSearchToolUI /> */}
