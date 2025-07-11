@@ -1,0 +1,80 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { WelcomeScreen } from './welcome-screen';
+import { MessageList } from './message-list';
+import { Composer } from './composer';
+import { Message } from '@ai-sdk/react';
+
+interface ChatLayoutProps {
+  fingerprintData: any;
+  messages: Message[];
+  input: string;
+  handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleFormSubmit: (e: React.FormEvent) => void;
+  status: string;
+  isDetailed: boolean;
+  setIsDetailed: (value: boolean) => void;
+}
+
+export function ChatLayout({
+  fingerprintData,
+  messages,
+  input,
+  handleInputChange,
+  handleFormSubmit,
+  status,
+  isDetailed,
+  setIsDetailed
+}: ChatLayoutProps) {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+          <SidebarTrigger />
+          <div className="flex items-center gap-2">
+            <p>Dev: {fingerprintData?.visitorId}</p>
+          </div>
+        </header>
+
+        <div className="flex h-full w-full flex-col box-border" style={{ ["--thread-max-width" as string]: "42rem" }}>
+          {/* Welcome Screen nebo Messages */}
+          {messages.length === 0 ? (
+            <WelcomeScreen
+              input={input}
+              handleInputChange={handleInputChange}
+              handleFormSubmit={handleFormSubmit}
+              status={status}
+              isDetailed={isDetailed}
+              setIsDetailed={setIsDetailed}
+            />
+          ) : (
+            /* Messages View */
+            <div className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-4 pt-8">
+              <MessageList messages={messages} status={status} />
+
+              <div className="min-h-8 flex-grow" />
+              <div ref={messagesEndRef} />
+
+              <Composer
+                input={input}
+                handleInputChange={handleInputChange}
+                handleFormSubmit={handleFormSubmit}
+                status={status}
+              />
+            </div>
+          )}
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  );
+} 

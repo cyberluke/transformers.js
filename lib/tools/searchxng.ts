@@ -1,6 +1,7 @@
 import { tool } from "ai";
 import z from "zod";
 import { Writer } from "@/types/server";
+import fs from "fs";
 
 export const searchWebTool = (writer: { value: Writer | null }) => tool({
   description: `search the web for information.`,
@@ -9,26 +10,94 @@ export const searchWebTool = (writer: { value: Writer | null }) => tool({
   }),
   execute: async ({ query }) => {
     console.log(query, "query search");
-    // writer.writeData({
-    //   type: "search-web",
-    //   query: query,
-    // });
-    // writer.writeData({
-    //   type: "status-update",
-    //   payload: { progress: 50 }
-    // });
-    // writer.value?.write("0:test\n")
-    // writer.value?.write("2:test\n")
-    // writer.value?.write("3:test\n")
-    // writer.value?.write("8:test\n")
-    // writer.value?.write("9:test\n")
-    // writer.value?.write("a:test\n")
-    // writer.value?.write("b:test\n")
-    // writer.value?.write("c:test\n")
-    const result = await fetch(`${process.env.SEARXNG_URL}/search?q=${query}&format=json`);
-    const data = await result.json();
-    // console.log(data, "data search");
-    return { success: true, result: data };
+    writer.value?.write("0:\"Prohledávám web\"\n")
+
+    let success: boolean = false;
+    let data: any;
+
+    try {
+      const result = await fetch(`${process.env.SEARXNG_URL}/search?q=${query}&format=json`);
+      data = await result.json();
+      console.log(data, "data search");
+      success = true;
+    } catch (error) {
+      console.log(error, "error search");
+    }
+
+    // Funkce pro získání obrázku z URL
+    const getImageFromUrl = async (url: string): Promise<string> => {
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+          },
+          signal: AbortSignal.timeout(5000) // 5s timeout
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch');
+        }
+
+        const html = await response.text();
+        
+        // Hledáme og:image
+        const ogImageMatch = html.match(/<meta[^>]*property=['"](og:image|twitter:image)['"]\s*content=['"]([^'"]+)['"]/i);
+        if (ogImageMatch && ogImageMatch[2]) {
+          let imageUrl = ogImageMatch[2];
+          // Pokud je relativní URL, převedeme na absolutní
+          if (imageUrl.startsWith('/')) {
+            const urlObj = new URL(url);
+            imageUrl = `${urlObj.protocol}//${urlObj.host}${imageUrl}`;
+          }
+          return imageUrl;
+        }
+
+        // Fallback na favicon
+        const urlObj = new URL(url);
+        return `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=64`;
+      } catch (error) {
+        // Fallback na favicon při chybě
+        try {
+          const urlObj = new URL(url);
+          return `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=64`;
+        } catch {
+          return '';
+        }
+      }
+    };
+
+    // Optimalizace dat - vrácení pouze relevantních informací (omezeno na 5 výsledků)
+    if (success && data?.results) {
+      // console.log(JSON.stringify(data.results, null, 2), "data.results");
+      // save to json file
+      // fs.writeFileSync("data.json", JSON.stringify(data.results, null, 2));
+
+      const limitedResults = data.results.slice(0, 5); // Omezení na prvních 5 výsledků
+      
+      // Paralelně získáme obrázky pro všechny výsledky
+      const resultsWithImages = await Promise.all(
+        limitedResults.map(async (result: any) => {
+          const image = await getImageFromUrl(result.url);
+          return {
+            url: result.url,
+            title: result.title,
+            content: result.content,
+            score: result.score,
+            image: image
+          };
+        })
+      );
+
+      return { 
+        success: true, 
+        result: {
+          query: data.query,
+          results: resultsWithImages
+        }
+      };
+    }
+
+    return { success: false, result: null };
   },
 });
 

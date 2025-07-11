@@ -2,7 +2,7 @@ import * as React from "react";
 import { Github, MessagesSquare, X, Menu } from "lucide-react";
 import Link from "next/link";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail, useSidebar } from "@/components/ui/sidebar";
-import { ThreadList } from "./assistant-ui/thread-list";
+import { ThreadList } from "./new/thread-list";
 import { Button } from "@/components/ui/button";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

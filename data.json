@@ -1,0 +1,1129 @@
+[
+  {
+    "url": "https://www.kudyznudy.cz/kalendar-akci/stredocesky-kraj",
+    "title": "Kalendář akcí v regionu Středočeský kraj - Praha - Kudy z nudy",
+    "content": "Kam vyrazit ve Středočeském kraji za zábavou? Odpoví vám kalendář akcí Střední Čechy, ve kterém najdete ucelenou nabídku zajímavých událostí pro všechny věkové kategorie. Můžete tak vyrazit za kulturou, památkami nebo zážitkovou gastronomií a užít si tak volné odpoledne nebo prodloužený víkend kousek od Prahy.",
+    "thumbnail": "",
+    "engine": "google",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.kudyznudy.cz",
+      "/kalendar-akci/stredocesky-kraj",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "google",
+      "presearch",
+      "duckduckgo",
+      "startpage"
+    ],
+    "positions": [
+      3,
+      1,
+      1,
+      1
+    ],
+    "score": 13.333333333333332,
+    "category": "general",
+    "publishedDate": null
+  },
+  {
+    "url": "https://www.strednicechy.cz/kalendar-akci/",
+    "title": "Kalendář akcí - Střední Čechy",
+    "content": "Vše Festivaly Gastronomické akce Historické a vojenské akce Hudební a divadelní akce Komentované prohlídky Kurzy a workshopy Lidová řemesla a trhy Přednáška Příroda a ekologie Sportovní akce Výstavy Ostatní",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.strednicechy.cz",
+      "/kalendar-akci/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "google",
+      "presearch",
+      "seznam",
+      "startpage",
+      "duckduckgo"
+    ],
+    "positions": [
+      6,
+      4,
+      3,
+      2,
+      2
+    ],
+    "score": 8.75,
+    "category": "general",
+    "publishedDate": null
+  },
+  {
+    "url": "https://novinykraje.cz/stredocesky/2025/07/09/festival-benesov-city-live-2025-startuje-prijdte-nejenom-na-nasup-dobre-hudby/",
+    "title": "Festival Benešov City Live 2025 startuje. Přijďte nejenom na nášup ...",
+    "content": "před 12 hodinami ...",
+    "thumbnail": "",
+    "engine": "google",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "novinykraje.cz",
+      "/stredocesky/2025/07/09/festival-benesov-city-live-2025-startuje-prijdte-nejenom-na-nasup-dobre-hudby/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "google",
+      "startpage"
+    ],
+    "positions": [
+      2,
+      2
+    ],
+    "score": 2,
+    "category": "general",
+    "publishedDate": null
+  },
+  {
+    "url": "https://www.atlasceska.cz/kalendar-akci/l/10",
+    "title": "Akce ve Středočeském kraji - Kalendář akcí - AtlasCeska.cz",
+    "content": "Muzeum amerických historických automobilů JK CLASSICS 24.02.2017 - 31.12.2025 Lužná Muzeum amerických historických automobilů v obci Lužná (okr. Rakovník) je situované jen půlhodinu jízdy autem z Prahy, v těsné blízkosti lesů CHKO Křivoklátsko.",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.atlasceska.cz",
+      "/kalendar-akci/l/10",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "presearch",
+      "seznam",
+      "duckduckgo"
+    ],
+    "positions": [
+      10,
+      5,
+      5
+    ],
+    "score": 1.5,
+    "category": "general"
+  },
+  {
+    "url": "https://www.nekdeneco.cz/akce/stredocesky/vsechna-mesta/vsechny-typy/2021-09-05",
+    "title": "Akce ve Středočeském kraji 5. 9. | NěkdeNěco.cz",
+    "content": "Nevíte co podniknout a kam vyrazit? Máme pro Vás moře kulturních a volnočasových akcí ve Středočeském kraji. Stačí si vybrat a vyrazit za zábavou...",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.nekdeneco.cz",
+      "/akce/stredocesky/vsechna-mesta/vsechny-typy/2021-09-05",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "seznam"
+    ],
+    "positions": [
+      1
+    ],
+    "score": 1,
+    "category": "general"
+  },
+  {
+    "url": "https://www.kudyznudy.cz/kalendar-akci",
+    "title": "Kalendář akcí – Kudy z nudy",
+    "content": "Kalendář akcí je skvělý pomocník pro plánování zábavy. Už si nemusíte lámat hlavu s programem na víkend nebo volné odpoledne. Připravili jsme pro vás nejkomplexnější nabídku zajímavých událostí napříč celou republikou. Vezmeme vás za kulturou, sportem i památkami.",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.kudyznudy.cz",
+      "/kalendar-akci",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "seznam",
+      "duckduckgo"
+    ],
+    "positions": [
+      4,
+      4
+    ],
+    "score": 1,
+    "category": "general"
+  },
+  {
+    "url": "https://www.kudyznudy.cz/?region=stredocesky-kraj",
+    "title": "Aktuality Středočeský kraj",
+    "content": "V kouřimském skanzenu zjistíte, jak vypadalo léto na vsi. 9. červenec 2025 16:00. Památky, Středočeský kraj ; Na Jezeře v Poděbradech zažijete Barvy léta. 8.",
+    "thumbnail": null,
+    "engine": "google",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.kudyznudy.cz",
+      "/",
+      "",
+      "region=stredocesky-kraj",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "google"
+    ],
+    "positions": [
+      1
+    ],
+    "score": 1,
+    "category": "general"
+  },
+  {
+    "title": "Středa, 9. červenec 2025 - kdykde.cz",
+    "url": "https://www.kdykde.cz/calendar/all/day/2025-07-09",
+    "content": "Objevte magii podmořského světa ve Světě Medúz Co Výlety Žánr Zvířata 1.6.2025 - 30.6.2026, 23:59 Místo Arkády Pankrác",
+    "engine": "duckduckgo",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.kdykde.cz",
+      "/calendar/all/day/2025-07-09",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "presearch",
+      "duckduckgo"
+    ],
+    "positions": [
+      6,
+      3
+    ],
+    "score": 1,
+    "category": "general"
+  },
+  {
+    "title": "Vyletnik.cz, Tipy na výlet: Rezervujte si léto v BLACK HOLE! Červenec a .... Přehrát na platformě Vyletnik.cz.",
+    "url": "https://www.vyletnik.cz/clanky/lo/rezervujte-si-leto-v-black-hole-cervenec-a-srpen-2025-posledni-volne-terminy/to/video/",
+    "content": "... kraj Olomoucký kraj Pardubický kraj Plzeňský kraj Praha Středočeský kraj Jeseníky Krkonoše Moravský kras Vysočina Zahraničí. Kategorie. Kategorie Akce a ...Vyletnik.cz · 11. 4. 2025",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.vyletnik.cz",
+      "/clanky/lo/rezervujte-si-leto-v-black-hole-cervenec-a-srpen-2025-posledni-volne-terminy/to/video/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      1
+    ],
+    "score": 1,
+    "category": "general"
+  },
+  {
+    "url": "https://www.vyletnik.cz/clanky/lo/stredocesky-kraj/ka/akce-udalosti/",
+    "title": "Akce a události Středočeský kraj - Vyletnik.cz",
+    "content": "Kulturní tipy na akce a události, slavnosti, festivaly, vinobraní a oblíbené trhy, ale i tipy na výlety do zoo na speciální dny, na programy hradů a zámků, nebo nevšední prohlídky muzeí a galerií, které stojí za vidění. Samozřejmě tipy na akce vhodné pro děti.",
+    "thumbnail": "",
+    "engine": "google",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.vyletnik.cz",
+      "/clanky/lo/stredocesky-kraj/ka/akce-udalosti/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "google",
+      "duckduckgo",
+      "startpage"
+    ],
+    "positions": [
+      10,
+      10,
+      10
+    ],
+    "score": 0.8999999999999999,
+    "category": "general",
+    "publishedDate": null
+  },
+  {
+    "url": "https://denod.cz/stredocesky-kraj/",
+    "title": "Středočeský kraj",
+    "content": "Středočeský kraj Zajímavosti ve Středočeském kraji · Moře u Mělníka 2025 So 12.07.2025 ~ So 12.07.2025 · Prohlídka experitnetální štoly Josef pro veřejnost So ...",
+    "thumbnail": "",
+    "engine": "google",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "denod.cz",
+      "/stredocesky-kraj/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "google",
+      "startpage"
+    ],
+    "positions": [
+      5,
+      5
+    ],
+    "score": 0.8,
+    "category": "general",
+    "publishedDate": null
+  },
+  {
+    "title": "Středočeský kraj- festivaly 2025, koncerty 2025, kultura- Prodej ...",
+    "url": "https://www.rockrock.cz/index.php?kraj=stredocesko",
+    "content": "3 days ago · Středočeský kraj- přehledný seznam koncertů, festivalů 2025. Široká nabídka kulturních akcí ve Středočeském kraji.- Prodej vstupenek.",
+    "engine": "duckduckgo",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.rockrock.cz",
+      "/index.php",
+      "",
+      "kraj=stredocesko",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "presearch",
+      "duckduckgo"
+    ],
+    "positions": [
+      7,
+      4
+    ],
+    "score": 0.7857142857142857,
+    "category": "general"
+  },
+  {
+    "url": "https://www.festivaly.net/?kraj=stredocesko",
+    "title": "Středočeský kraj- festivaly 2025, koncerty 2025, kultura",
+    "content": "9. Country Kaninafest 2025- Kanina. So ... Prodej vstupenek na koncerty, festivaly, do divadel, na sportovní akce, akce pro děti a na další kulturní akce.",
+    "thumbnail": "",
+    "engine": "google",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.festivaly.net",
+      "/",
+      "",
+      "kraj=stredocesko",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "google",
+      "startpage"
+    ],
+    "positions": [
+      6,
+      7
+    ],
+    "score": 0.6190476190476191,
+    "category": "general",
+    "publishedDate": null
+  },
+  {
+    "url": "https://www.strednicechy.cz/",
+    "title": "Střední Čechy: Příroda, památky a kulturní akce",
+    "content": "Tetička Mína povypráví, jak se ve skalním obydlí ve Lhotce žilo… Detaily akce · koncert – vzor. Říčany u Prahy. 09.07.2025. JazzM. Říčanská hudební ...",
+    "thumbnail": "",
+    "engine": "google",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.strednicechy.cz",
+      "/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "google",
+      "startpage"
+    ],
+    "positions": [
+      7,
+      9
+    ],
+    "score": 0.5079365079365079,
+    "category": "general",
+    "publishedDate": null
+  },
+  {
+    "url": "https://www.nekdeneco.cz/akce/stredocesky/vsechna-mesta/vsechny-typy/2024-09-05",
+    "title": "Akce ve Středočeském kraji 5. 9. | NěkdeNěco.cz",
+    "content": "Nevíte co podniknout a kam vyrazit? Máme pro Vás moře kulturních a volnočasových akcí ve Středočeském kraji. Stačí si vybrat a vyrazit za zábavou...",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.nekdeneco.cz",
+      "/akce/stredocesky/vsechna-mesta/vsechny-typy/2024-09-05",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "seznam"
+    ],
+    "positions": [
+      2
+    ],
+    "score": 0.5,
+    "category": "general"
+  },
+  {
+    "title": "eKempy.cz, Nejlepší kempy Středočeský kraj léto 2025. Přehrát na platformě eKempy.cz.",
+    "url": "https://www.ekempy.cz/stredocesky-kraj/?kraj=mittelbohmische-region&v=foto&s=8",
+    "content": "Všechny kempy Středočeský kraj ceny levněji u majitele pro autokempy, apartmány, bungalovy, chatky, mobilní domy, pokoje ubytování, Středočeský kraj , kempy ...eKempy.cz · před 5 dny",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.ekempy.cz",
+      "/stredocesky-kraj/",
+      "",
+      "kraj=mittelbohmische-region&v=foto&s=8",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      2
+    ],
+    "score": 0.5,
+    "category": "general"
+  },
+  {
+    "url": "https://www.kdykde.cz/calendar/misto/cr/stredocesky-kraj",
+    "title": "Středočeský kraj | kdykde.cz",
+    "content": "Středočeský kraj ; JazzM - Letní scéna KC Labuť · JazzM - Letní scéna KC Labuť. 9.7.2025, 19:30 – 21:30 ; Léto s knihovnou: Sex - Rakovník · Léto s knihovnou: Sex - ...",
+    "thumbnail": "",
+    "engine": "google",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.kdykde.cz",
+      "/calendar/misto/cr/stredocesky-kraj",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "google",
+      "startpage"
+    ],
+    "positions": [
+      9,
+      8
+    ],
+    "score": 0.4722222222222222,
+    "category": "general",
+    "publishedDate": null
+  },
+  {
+    "url": "https://www.nekdeneco.cz/akce/stredocesky/vsechna-mesta/ostatni/2021-09-05",
+    "title": "Ostatní akce ve Středočeském kraji 5. 9. | NěkdeNěco.cz",
+    "content": "Nevíte co podniknout a kam vyrazit? Máme pro Vás moře kulturních a volnočasových akcí ve Středočeském kraji. Stačí si vybrat a vyrazit za zábavou...",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.nekdeneco.cz",
+      "/akce/stredocesky/vsechna-mesta/ostatni/2021-09-05",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "seznam"
+    ],
+    "positions": [
+      3
+    ],
+    "score": 0.3333333333333333,
+    "category": "general"
+  },
+  {
+    "title": "Aktuality - Webový portál Středočeského kraje",
+    "url": "https://stredoceskykraj.cz/web/urad/aktuality/-/asset_publisher/zvna/blog/stredoceske-kulturni-leto-2025-opet-ozivi-pamatky-a-muzea-navstevnici-se-mohou-tesit-na-koncerty-divadla-i-letni-kina",
+    "content": "Středočeský kraj i letos o prázdninách zve na sérii kulturních akcí pod širým nebem. Tradiční program Středočeského kulturního léta 2025 nabídne v průběhu června až září desítky koncertů, divadelních představení, promítání letního kina i autorských čtení v areálech muzeí, galerií a památek po celém regionu.",
+    "engine": "duckduckgo",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "stredoceskykraj.cz",
+      "/web/urad/aktuality/-/asset_publisher/zvna/blog/stredoceske-kulturni-leto-2025-opet-ozivi-pamatky-a-muzea-navstevnici-se-mohou-tesit-na-koncerty-divadla-i-letni-kina",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "duckduckgo"
+    ],
+    "positions": [
+      3
+    ],
+    "score": 0.3333333333333333,
+    "category": "general"
+  },
+  {
+    "url": "https://www.kudyznudy.cz/akce/tvorime-a-hrajeme-si-u-vody-1",
+    "title": "Tvoříme a hrajeme si u vody - Kudy z nudy",
+    "content": "Datum začátku akce: 9.7.2025. Doba trvání akce: \"9. červenec 2025 15:00 - 18:00\". ... Středočeský kraj. Oblast: Posázaví. Město: Říčany. Tipy na výlet: Říčany a ...",
+    "publishedDate": null,
+    "engine": "startpage",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.kudyznudy.cz",
+      "/akce/tvorime-a-hrajeme-si-u-vody-1",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "startpage"
+    ],
+    "positions": [
+      4
+    ],
+    "score": 0.25,
+    "category": "general"
+  },
+  {
+    "title": "Vyletnik.cz, Tipy na výlet: Rezervujte si léto v BLACK HOLE! Červenec a .... Přehrát na platformě Vyletnik.cz.",
+    "url": "https://www.vyletnik.cz/clanky/lo/rezervujte-si-leto-v-black-hole-cervenec-a-srpen-2025-posledni-volne-terminy/st/pro-deti/to/video/",
+    "content": "Archiv (23). 20,9 km. Turistická oblast Mělnicko-Kokořínsko je plná historie, přírodních krás a zajímavých aktivit · Středočeský kraj · Kokořín · Tipy na výlety.Vyletnik.cz · 11. 4. 2025",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.vyletnik.cz",
+      "/clanky/lo/rezervujte-si-leto-v-black-hole-cervenec-a-srpen-2025-posledni-volne-terminy/st/pro-deti/to/video/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      4
+    ],
+    "score": 0.25,
+    "category": "general"
+  },
+  {
+    "url": "https://www.kudyznudy.cz/aktuality/novinky-turisticke-sezony-strednich-cech-2025-pout",
+    "title": "Novinky turistické sezóny středních Čech 2025: poutní i naučné…",
+    "content": "Střední Čechy nabízejí každoročně nové možnosti, kam se vydat. Přehled novinek letošního roku, které Středočeský kraj pro turisty připravil, vám přináší",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.kudyznudy.cz",
+      "/aktuality/novinky-turisticke-sezony-strednich-cech-2025-pout",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "seznam"
+    ],
+    "positions": [
+      5
+    ],
+    "score": 0.2,
+    "category": "general"
+  },
+  {
+    "title": "Zámek Dobříš, Zámek Dobříš | oficiální stránky. Přehrát na platformě Zámek Dobříš. 0:18",
+    "url": "https://www.zamekdobris.cz/",
+    "content": "Oficiální stránky Colloredo-Mannsfeld zámku v Dobříši.Zámek Dobříš · 20. 4. 2014",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.zamekdobris.cz",
+      "/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      5
+    ],
+    "score": 0.2,
+    "category": "general"
+  },
+  {
+    "url": "https://www.kicbenesov.cz/?event=benesov-city-live-2025",
+    "title": "Benešov City Live 2025",
+    "content": "9 července, 2025 Středa - 20:00. Masarykovo náměstí. Benešov City Live 2025 ... Děkujeme partnerům akce Město Benešov, Středočeský kraj, BTL Medical ...",
+    "publishedDate": null,
+    "engine": "startpage",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.kicbenesov.cz",
+      "/",
+      "",
+      "event=benesov-city-live-2025",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "startpage"
+    ],
+    "positions": [
+      6
+    ],
+    "score": 0.16666666666666666,
+    "category": "general"
+  },
+  {
+    "url": "https://sokct.cz/wp-content/uploads/2024/11/30475-kct-kalendar-turistickych-akci-2025_final.pdf",
+    "title": "CÍ 2025 K CH A Ý K TURISTIC Středočeská oblastÁŘ D",
+    "content": "6. 9. 2025, Šerlich Pořádá: KČT, odbor Hradec Králové Kontakt: www.ubytovani-serlich.cz Masarykova chata u Deštného v Orlických horách stojí na hře- dmořské výšce 1019 m.n.m s výhledem do Čech i do Polska. Chata je ve velmi výhodné poloze pro pěší i ly-žařskou turistiku. Prochází kolem ní červeně značená",
+    "engine": "presearch",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "sokct.cz",
+      "/wp-content/uploads/2024/11/30475-kct-kalendar-turistickych-akci-2025_final.pdf",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "presearch"
+    ],
+    "positions": [
+      6
+    ],
+    "score": 0.16666666666666666,
+    "category": "general"
+  },
+  {
+    "url": "https://www.seznamzpravy.cz/clanek/kultura-kultura-akce-9-10-11-kveten-275808",
+    "title": "Kam o víkendu? Tipy na kulturní akce napříč republikou",
+    "content": "Před 2 měsíciDruhý májový víkend přinese kromě Brněnského Majálesu koncerty amerického rapera Tylera, the Creatora a švédských rockerů Ghost. V Olomouci a Ostravě se konají divadelní festivaly, zatímco Liberec žije animovanými filmy.",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.seznamzpravy.cz",
+      "/clanek/kultura-kultura-akce-9-10-11-kveten-275808",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "seznam"
+    ],
+    "positions": [
+      7
+    ],
+    "score": 0.14285714285714285,
+    "category": "general"
+  },
+  {
+    "title": "Kolínský deník, Hudební večer na Kmochově ostrově. Jelenovi popřejí kapely .... Přehrát na platformě Kolínský deník. 0:23",
+    "url": "https://kolinsky.denik.cz/ctenar-reporter/kolin-kmochuv-ostrov-amfiteatr-koncert-kapela-jelen-poetika-bikini-pozvanka-2024.html",
+    "content": "VIDEO, FOTOGALERIE/ Deset let od svého založení oslaví kapela Jelen také koncertem v Kolíně. V sobotu 6. července poprvé vystoupí v ...Kolínský deník · 17. 4. 2024",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "kolinsky.denik.cz",
+      "/ctenar-reporter/kolin-kmochuv-ostrov-amfiteatr-koncert-kapela-jelen-poetika-bikini-pozvanka-2024.html",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      7
+    ],
+    "score": 0.14285714285714285,
+    "category": "general"
+  },
+  {
+    "title": "Středočeský kraj",
+    "url": "https://www.youtube.com/watch?v=kNGnJUTJ6xE",
+    "content": "",
+    "thumbnail": "https://tse3.mm.bing.net/th/id/OVP.FmwWI0bk0hiQAe4Nxm-hYwHgFo?pid=Api",
+    "length": 773,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.youtube.com",
+      "/watch",
+      "",
+      "v=kNGnJUTJ6xE",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      3
+    ],
+    "score": 0.3333333333333333,
+    "category": "general"
+  },
+  {
+    "title": "Středočeský kraj - Jeho krásy a příležitosti",
+    "url": "https://www.youtube.com/watch?v=T6OoV18qi0k",
+    "content": "",
+    "thumbnail": "https://tse1.mm.bing.net/th/id/OVP.kAWgsA5tVhn0gbQVAejf5AEsDh?pid=Api",
+    "length": 600,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.youtube.com",
+      "/watch",
+      "",
+      "v=T6OoV18qi0k",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      6
+    ],
+    "score": 0.16666666666666666,
+    "category": "general"
+  },
+  {
+    "title": "Letní přebor Středočeského kraje žactva 2025 - neděle 01. 06. 2025",
+    "url": "https://www.youtube.com/watch?v=Bp-9D8JyJIE",
+    "content": "",
+    "thumbnail": "https://tse2.mm.bing.net/th/id/OVP.zgwrV3QtPm7LQHrExG1M0gHgFo?pid=Api",
+    "length": 368,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.youtube.com",
+      "/watch",
+      "",
+      "v=Bp-9D8JyJIE",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      10
+    ],
+    "score": 0.1,
+    "category": "general"
+  },
+  {
+    "url": "https://www.visitstrednicechy.cz/en/calendar-of-events-in-stredni-cechy/2/",
+    "title": "Calendar of events in Střední Čechy - visitstrednicechy.cz",
+    "content": "4 days ago · Aperol Spritz & Prosecco Festival, Beroun Date: 12.7.2025 Time: 12:00 Venue: Státní hrad Křivoklát, Křivoklát 47, Křivoklát",
+    "engine": "presearch",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.visitstrednicechy.cz",
+      "/en/calendar-of-events-in-stredni-cechy/2/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "presearch"
+    ],
+    "positions": [
+      7
+    ],
+    "score": 0.14285714285714285,
+    "category": "general"
+  },
+  {
+    "url": "https://goout.net/cs/cesko/akce/lezfymfti/?scheduleTag=week",
+    "title": "Akce v Česku Tento týden - Program a vstupenky na 2025 - GoOut",
+    "content": "Program a vstupenky na nejlepší akce v Česku, Fuchs2, Archa+, Klubovna, Střecha Radost, Divadlo VILA Štvanice a další. Kompletní přehled na Červenec 2025 a dále. Info kam v Česku a lístky najdete na GoOut.",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "goout.net",
+      "/cs/cesko/akce/lezfymfti/",
+      "",
+      "scheduleTag=week",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "seznam"
+    ],
+    "positions": [
+      8
+    ],
+    "score": 0.125,
+    "category": "general"
+  },
+  {
+    "url": "https://www.denik.cz/cestovani/tipy-na-mesic-cervenec-2025.html",
+    "title": "Kam v Česku vyrazit nejen o víkendu od 11. do 13. července",
+    "content": "před 16 hodinami",
+    "thumbnail": null,
+    "engine": "google",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.denik.cz",
+      "/cestovani/tipy-na-mesic-cervenec-2025.html",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "google"
+    ],
+    "positions": [
+      8
+    ],
+    "score": 0.125,
+    "category": "general"
+  },
+  {
+    "title": "Události, akce, slavnosti ... Region Středočeský",
+    "url": "https://www.ajdnes.cz/stredocesky-kraj/r20",
+    "content": "Události, akce, slavnosti ... Region Středočeský. O všem co se děje právě dnes ve vašem regionu.",
+    "engine": "duckduckgo",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.ajdnes.cz",
+      "/stredocesky-kraj/r20",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "duckduckgo"
+    ],
+    "positions": [
+      8
+    ],
+    "score": 0.125,
+    "category": "general"
+  },
+  {
+    "title": "Jak postoupila modernizace železnice na Kladně? Podívejte ..., autor: Správa železnic, vydavatel: Naše Kladno. Přehrát na platformě Naše Kladno. 3:37",
+    "url": "https://www.nasekladno.cz/jak-postoupila-modernizace-zeleznice-na-kladne-podivejte-se-na-video/",
+    "content": "červenec, 2025. Typ události. All. Akce pro děti. Jídlo & pití ... Středočeský Kraj. Středokluky. Středokluky, Nad Běloky (BUS). Strojovna.Naše Kladno · Správa železnic · 24. 4. 2025",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.nasekladno.cz",
+      "/jak-postoupila-modernizace-zeleznice-na-kladne-podivejte-se-na-video/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      8
+    ],
+    "score": 0.125,
+    "category": "general"
+  },
+  {
+    "url": "https://www.ttg.cz/na-co-se-muzete-tesit-ve-stredoceskem-kraji-v-cervenci/2024/06/",
+    "title": "Na co se můžete těšit ve Středočeském kraji v červenci - TTG…",
+    "content": "Doba školních prázdnin a dovolených se nezadržitelně blíží, a je proto třeba plánovat, kam se vydat za odpočinkem, ale i za zábavou a sportem.",
+    "engine": "seznam",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.ttg.cz",
+      "/na-co-se-muzete-tesit-ve-stredoceskem-kraji-v-cervenci/2024/06/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "seznam"
+    ],
+    "positions": [
+      9
+    ],
+    "score": 0.1111111111111111,
+    "category": "general"
+  },
+  {
+    "title": "Kalendář akcí - Střední Čechy",
+    "url": "https://www.strednicechy.info/kalendar-akci/",
+    "content": "Seznam akcí z kalendáře akcí všech typů - kultura, sport, zábava apod. konaných na území Střední Čechy",
+    "engine": "duckduckgo",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.strednicechy.info",
+      "/kalendar-akci/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "thumbnail": "",
+    "priority": "",
+    "engines": [
+      "duckduckgo"
+    ],
+    "positions": [
+      9
+    ],
+    "score": 0.1111111111111111,
+    "category": "general"
+  },
+  {
+    "title": "Video o Stochově - Oficiální stránky města Stochov, autor: MARCEL ŘIČÁNEK, vydavatel: Město Stochov. Přehrát na platformě Město Stochov. 12:42",
+    "url": "https://www.stochov.cz/mesto/o-stochove/video-o-stochove/",
+    "content": "Kalendář akcí. Předchozí Červenec2025 Další. Po, Út, St, Čt, Pá, So, Ne. 30, 1, 2, 3 ... Středočeský kraj · Czechpoint · Sportovní areály města Stochov · Platební ...Město Stochov · MARCEL ŘIČÁNEK · před 5 dny",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.stochov.cz",
+      "/mesto/o-stochove/video-o-stochove/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      9
+    ],
+    "score": 0.1111111111111111,
+    "category": "general"
+  },
+  {
+    "title": "CNN Prima NEWS, Neměl bych tu být: Pastor v bouři vyrazil rybařit, skončil uvnitř .... Přehrát na platformě CNN Prima NEWS. 1:04",
+    "url": "https://cnn.iprima.cz/nemel-bych-tu-byt-pastor-v-bouri-vyrazil-rybarit-skoncil-v-tornadu-hruzu-zachytilo-video-457610",
+    "content": "července 2025 23:23. Olympijský vítěz Dostál a kajakářka ...CNN Prima NEWS · 3. 1. 2025",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "cnn.iprima.cz",
+      "/nemel-bych-tu-byt-pastor-v-bouri-vyrazil-rybarit-skoncil-v-tornadu-hruzu-zachytilo-video-457610",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      11
+    ],
+    "score": 0.09090909090909091,
+    "category": "general"
+  },
+  {
+    "title": "Facebook, Hledá se extrovertní, kreativní a svým způsobem originální a .... Přehrát na platformě Facebook.",
+    "url": "https://www.facebook.com/groups/1540818896159522/posts/hled%C3%A1-se-extrovertn%C3%AD-kreativn%C3%AD-a-sv%C3%BDm-zp%C5%AFsobem-origin%C3%A1ln%C3%AD-a-bl%C3%A1zniv%C3%A1-kamar%C3%A1dka-p/4168977230010329/",
+    "content": "... Středočeský kraj plus minus 90 km, mam ... července 2025 | Vědomé plutí s jógou na řece Nežárce Každý den ...Facebook · před 4 týdny",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.facebook.com",
+      "/groups/1540818896159522/posts/hled%C3%A1-se-extrovertn%C3%AD-kreativn%C3%AD-a-sv%C3%BDm-zp%C5%AFsobem-origin%C3%A1ln%C3%AD-a-bl%C3%A1zniv%C3%A1-kamar%C3%A1dka-p/4168977230010329/",
+      "",
+      "",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      12
+    ],
+    "score": 0.08333333333333333,
+    "category": "general"
+  },
+  {
+    "title": "Největší tuzemská bikrosová 🚴‍♂️ dráha je v Benátky nad ..., autor: Středočeský kraj - oficiální stránka, vydavatel: Facebook. Přehrát na platformě Facebook. 2:05",
+    "url": "https://www.facebook.com/StredoceskyK/videos/bikros/613404352924128/?locale=cs_CZ",
+    "content": "Last viewed on: Jul 9, 2025. More videos you may like. 00:40. Něco ... Středočeský kraj posiluje síť pomoci lidem se závislostmi. ...Facebook · Středočeský kraj - oficiální stránka · 13. 7. 2020",
+    "thumbnail": null,
+    "length": null,
+    "engine": "presearch videos",
+    "template": "default.html",
+    "parsed_url": [
+      "https",
+      "www.facebook.com",
+      "/StredoceskyK/videos/bikros/613404352924128/",
+      "",
+      "locale=cs_CZ",
+      ""
+    ],
+    "img_src": "",
+    "priority": "",
+    "engines": [
+      "presearch videos"
+    ],
+    "positions": [
+      13
+    ],
+    "score": 0.07692307692307693,
+    "category": "general"
+  }
+]

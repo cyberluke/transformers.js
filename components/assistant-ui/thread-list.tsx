@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { ThreadListItemPrimitive, ThreadListPrimitive } from "@assistant-ui/react";
+import { ThreadListItemPrimitive, ThreadListPrimitive, useThreadListItemRuntime } from "@assistant-ui/react";
 import { ArchiveIcon, PlusIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -26,10 +26,16 @@ const ThreadListNew: FC = () => {
 };
 
 const ThreadListItems: FC = () => {
+  // const threadListItemRuntime = useThreadListItemRuntime();
+  // threadListItemRuntime.rename("test");
+
   return <ThreadListPrimitive.Items components={{ ThreadListItem }} />;
 };
 
 const ThreadListItem: FC = () => {
+  const threadListItemRuntime = useThreadListItemRuntime();
+  threadListItemRuntime.rename("test");
+
   return (
     <ThreadListItemPrimitive.Root className="data-[active]:bg-white/10 data-[active]:backdrop-blur-sm data-[active]:border-l-4 data-[active]:border-blue-400 data-[active]:shadow-lg data-[active]:text-white hover:bg-white/5 hover:backdrop-blur-sm focus-visible:bg-white/10 focus-visible:ring-ring flex items-center gap-2 rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2">
       <ThreadListItemPrimitive.Trigger className="flex-grow px-3 py-2 text-start">

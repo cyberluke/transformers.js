@@ -26,3 +26,5 @@ export const embeddings = pgTable(
     ),
   }),
 );
+
+// Todo embedings zmenit na to aby to slouzilo k ukladni souboru, tedy id soboru a to bude odkazovat na tabulku documents, kde bude mit db i podle hashů

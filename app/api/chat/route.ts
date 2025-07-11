@@ -45,7 +45,7 @@ export const maxDuration = 30;
 
 function clearUserMessage(message: any) {
   return {
-    role: message.role,
+    // role: message.role,
     content: message.content,
     attachments: message.attachments,
     metadata: message.metadata,
@@ -72,6 +72,9 @@ const getBaseSystemPrompt = () => {
 
 export async function POST(req: Request) {
   const { messages, customData } = await req.json();
+
+  console.log(messages, customData, "customData");
+  console.log(JSON.stringify(messages, null, 2), "req.body");
 
   let userId = null;
 
@@ -184,14 +187,23 @@ export async function POST(req: Request) {
     onFinish: (finishData) => {
       console.log("finishData");
 
-      const userMessage = messages[0];
-      const aiMessage = finishData.text;
+      const userMessage = [
+        clearUserMessage(messages[0])
+      ];
+      const aiMessage = finishData.response.messages;
 
       createMessage({
         chatId: chat.id,
         userId: userId,
         data: clearUserMessage(userMessage),
         role: 'user',
+      });
+
+      createMessage({
+        chatId: chat.id,
+        userId: userId,
+        data: aiMessage,
+        role: 'assistant',
       });
 
       // createMessage({
@@ -221,10 +233,15 @@ export async function POST(req: Request) {
     execute: async (writer) => {
       writerRef.value = writer;
 
-      writer.writeMessageAnnotation({
+      // writer.writeMessageAnnotation({
+      //   type: "chat-id",
+      //   chatId: chat.id,
+      // });
+
+      writer.writeData({
         type: "chat-id",
         chatId: chat.id,
-      });
+      })
       
       if (memories.length > 0) {
         writer.writeMessageAnnotation({

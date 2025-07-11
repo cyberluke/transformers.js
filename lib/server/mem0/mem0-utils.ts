@@ -7,13 +7,13 @@ interface Message {
   content: string | Array<{ type: string, text: string }>;
 }
 
-const flattenPrompt = (prompt: LanguageModelV1Prompt) => {
+const flattenPrompt = (prompt: any) => { // TODO: fix typescript
   try {
-    return prompt.map((part) => {
+    return prompt.map((part: any) => {
       if (part.role === "user") {
-        return part.content
-          .filter((obj) => obj.type === 'text')
-          .map((obj) => obj.text)
+        return part.parts
+          .filter((obj: any) => obj.type === 'text')
+          .map((obj: any) => obj.text)
           .join(" ");
       }
       return "";
@@ -35,7 +35,7 @@ const convertToMem0Format = (messages: LanguageModelV1Prompt) => {
           };
         }
         else {
-          return message.content.map((obj: any) => {
+          return message.parts.map((obj: any) => {
             try {
               if (obj.type === "text") {
                 return {

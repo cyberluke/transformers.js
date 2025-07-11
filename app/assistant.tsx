@@ -1,6 +1,6 @@
 "use client";
 
-import { AssistantRuntimeProvider, CompositeAttachmentAdapter, SimpleImageAttachmentAdapter, SimpleTextAttachmentAdapter, ThreadMessage, useMessage } from "@assistant-ui/react";
+import { AssistantRuntimeProvider, CompositeAttachmentAdapter, SimpleImageAttachmentAdapter, SimpleTextAttachmentAdapter, ThreadMessage, useMessage, useThreadListItemRuntime } from "@assistant-ui/react";
 // import { useChatRuntime } from '@assistant-ui/react-ai-sdk';
 import FingerprintJS, { GetResult } from "@fingerprintjs/fingerprintjs-pro";
 
@@ -55,15 +55,6 @@ export const Assistant = () => {
         fingerprint: fingerprintData?.requestId,
         chatId,
       },
-      // messages: [
-      //   {
-      //     role: 'user',
-      //     content: [{
-      //       type: 'text',
-      //       text: TestMessage()
-      //     }]
-      //   }
-      // ]
     },
     onFinish: (message) => {
       const annotations = message.metadata.unstable_annotations;
@@ -72,34 +63,17 @@ export const Assistant = () => {
       console.log(chatId);
       // console.log(annotations);
     },
-
-    // onResponse: async (response) => {
-
-    //   response.body?.pipeThrough(new TransformStream({
-    //     transform(chunk, controller) {
-    //       console.log(chunk);
-    //       controller.enqueue(chunk);
-    //     }
-    //   }));
-
-    //   console.log(response);
-    //   // if (!response.body) return;
-    //   // for await (const chunk of response.body) {
-    //   //   console.log(chunk);
-    //   //   // const decoder = new TextDecoder();
-    //   //   // const text = decoder.decode(chunk);
-    //   //   // console.log(text);
-    //   // }
-    // },
     experimental_prepareRequestBodyFix: ({ messages }) => {
       const lastMessage = messages[messages.length - 1];
       return {
         messages: [lastMessage],
       };
-      // return {
-      //   messages: messages,
-      // };
     },
+  });
+
+  const threadListItemRuntime = useThreadListItemRuntime();
+  threadListItemRuntime.initialize({
+    remoteId: "test",
   });
 
   return (
