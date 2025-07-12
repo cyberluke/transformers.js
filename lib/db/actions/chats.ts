@@ -1,6 +1,6 @@
 import { db } from '@/lib/db';
 import { chats, Chat, NewChatParams, UpdateChatParams } from '@/lib/db/schema/chats';
-import { eq, desc, or, isNull, sql } from 'drizzle-orm';
+import { eq, desc, or, isNull, sql, and, lt } from 'drizzle-orm';
 
 // Vytvoření nového chatu
 export const createChat = async (input: NewChatParams): Promise<Chat> => {
@@ -19,16 +19,42 @@ export const createChat = async (input: NewChatParams): Promise<Chat> => {
   }
 };
 
-// Získání všech chatů uživatele (jen vlastní chaty)
-export const getUserChats = async (userId: string): Promise<Chat[]> => {
+// NOVÁ FUNKCE: Paginace chatů s ULID cursor (načte prvních 10, pak dalších 10, atd.)
+export const getUserChatsWithPagination = async (
+  userId: string,
+  cursor?: string, // ULID cursor
+  limit: number = 10
+): Promise<{
+  chats: Chat[];
+  nextCursor: string | null;
+  hasMore: boolean;
+}> => {
   try {
-    return await db
+    const whereClause = cursor
+      ? and(
+          eq(chats.userId, userId),
+          lt(chats.id, cursor) // ULID jsou sortable, takže lt() funguje
+        )
+      : eq(chats.userId, userId);
+
+    const results = await db
       .select()
       .from(chats)
-      .where(eq(chats.userId, userId))
-      .orderBy(desc(chats.updatedAt));
+      .where(whereClause)
+      .orderBy(desc(chats.id)) // Seřadit podle ULID (chronologicky)
+      .limit(limit + 1); // +1 pro zjištění hasMore
+
+    const hasMore = results.length > limit;
+    const chatsList = hasMore ? results.slice(0, -1) : results;
+    const nextCursor = hasMore ? chatsList[chatsList.length - 1].id : null;
+
+    return {
+      chats: chatsList,
+      nextCursor,
+      hasMore,
+    };
   } catch (error) {
-    throw new Error(error instanceof Error ? error.message : 'Failed to get user chats');
+    throw new Error(error instanceof Error ? error.message : 'Failed to get paginated chats');
   }
 };
 

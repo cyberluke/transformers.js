@@ -1,15 +1,15 @@
 import { index, pgTable, text, varchar, timestamp, json } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { chats } from './chats';
-import { randomUUID } from 'crypto';
+import { ulid } from 'ulid';
 
 export const messages = pgTable(
   'messages',
   {
-    id: varchar('id', { length: 191 })
+    id: varchar('id', { length: 26 })
       .primaryKey()
-      .$defaultFn(() => randomUUID()),
-    chatId: varchar('chat_id', { length: 191 })
+      .$defaultFn(() => ulid()),
+    chatId: varchar('chat_id', { length: 26 })
       .references(() => chats.id, { onDelete: 'cascade' })
       .notNull(),
     userId: varchar('user_id', { length: 191 }).notNull(),
@@ -24,6 +24,8 @@ export const messages = pgTable(
     chatIdIndex: index('messages_chat_id_idx').on(table.chatId),
     userIdIndex: index('messages_user_id_idx').on(table.userId),
     createdAtIndex: index('messages_created_at_idx').on(table.createdAt),
+    // Nový index pro ULID paginaci
+    chatIdUlidIndex: index('messages_chat_id_ulid_idx').on(table.chatId, table.id),
   }),
 );
 

@@ -42,11 +42,11 @@ export function ThreadList() {
   };
 
   return (
-    <div className="flex flex-col items-stretch gap-1.5 p-2">
+    <div className="flex flex-col items-stretch gap-2 p-3">
       {/* New Thread Button */}
       <Button 
         onClick={handleNewThread}
-        className="flex items-center justify-start gap-2 rounded-lg px-2.5 py-2 text-start" 
+        className="flex items-center justify-start gap-2 rounded-xl px-3 py-3 text-start bg-gradient-to-r from-gray-100/90 to-gray-200/80 backdrop-blur-sm border border-gray-300/50 hover:from-gray-200/90 hover:to-gray-300/80 hover:border-gray-400/60 transition-all duration-200 shadow-lg hover:shadow-xl text-gray-800 font-medium"
         variant="ghost"
       >
         <PlusIcon className="h-4 w-4" />
@@ -54,26 +54,25 @@ export function ThreadList() {
       </Button>
 
       {/* Thread List */}
-      <div className="space-y-1">
+      <div className="space-y-2">
         {threads.map((thread) => (
           <div
             key={thread.id}
             onClick={() => switchThread(thread.id)}
             className={cn(
-              "group flex items-center gap-2 rounded-lg px-2.5 py-2 cursor-pointer transition-all",
-              "hover:bg-white/5 hover:backdrop-blur-sm",
+              "group relative flex items-center gap-3 rounded-xl px-3 py-3 cursor-pointer transition-all duration-200 border",
               currentThreadId === thread.id 
-                ? "bg-white/10 backdrop-blur-sm border-l-4 border-blue-400 shadow-lg text-white" 
-                : "text-muted-foreground"
+                ? "bg-gradient-to-r from-blue-500/80 to-blue-600/70 backdrop-blur-lg border-blue-400/60 shadow-lg shadow-blue-500/30 text-white" 
+                : "bg-white/5 backdrop-blur-sm border-white/10 text-gray-800 hover:bg-white/10 hover:border-white/20 hover:text-gray-900 hover:shadow-lg"
             )}
           >
-            <MessageSquareIcon className="h-4 w-4 flex-shrink-0" />
+            <MessageSquareIcon className="h-4 w-4 flex-shrink-0 opacity-80" />
             
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium truncate">
+              <p className="text-sm font-medium truncate leading-tight">
                 {thread.title}
               </p>
-              <p className="text-xs opacity-70">
+              <p className="text-xs opacity-70 mt-0.5">
                 {thread.messages.length > 0 
                   ? `${thread.messages.length} zpráv`
                   : 'Prázdný'
@@ -86,18 +85,23 @@ export function ThreadList() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 hover:bg-destructive hover:text-destructive-foreground"
+                className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 hover:bg-red-500/20 hover:text-red-400 transition-all duration-200 rounded-lg"
                 onClick={(e) => handleDeleteThread(thread.id, e)}
               >
                 <TrashIcon className="h-3 w-3" />
               </Button>
+            )}
+            
+            {/* Selected indicator */}
+            {currentThreadId === thread.id && (
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-blue-400 rounded-r-full" />
             )}
           </div>
         ))}
       </div>
 
       {threads.length === 0 && (
-        <div className="text-sm text-muted-foreground px-2.5 py-4 text-center">
+        <div className="text-sm text-gray-600 px-3 py-8 text-center bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
           Žádné chaty zatím
         </div>
       )}

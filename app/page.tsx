@@ -14,7 +14,8 @@ export default function Page() {
     currentThread, 
     currentThreadId, 
     createThread, 
-    updateThreadMessages 
+    updateThreadMessages,
+    setServerChatId 
   } = useThreadStore();
 
   // Initialize first thread if none exists
@@ -32,6 +33,7 @@ export default function Page() {
       const fp = await fpPromise;
       const data = await fp.get({ extendedResult: true });
       setFingerprintData(data);
+      // Tady nacist data z db do thread store
     })();
   }, []);
 
@@ -40,17 +42,23 @@ export default function Page() {
     body: {
       customData: {
         fingerprint: fingerprintData?.requestId,
-        // chatId: currentThreadId,
+        chatId: currentThread?.serverChatId, // Pouze server-potvrzené chat ID
         detailed: isDetailed,
       },
     },
-    initialMessages: currentThread?.messages || [],
+    id: currentThreadId || undefined
   });
 
-  // console.log(data, "data");
+  // Sledování server response pro chat ID
   useEffect(() => {
-    console.log(data, "data");
-  }, [data]);
+    if (data && Array.isArray(data) && currentThreadId) {
+      const chatIdData = data.find((item: any) => item.type === 'chat-id') as { type: string; chatId: string } | undefined;
+      if (chatIdData?.chatId) {
+        console.log('Received server chat ID:', chatIdData.chatId);
+        setServerChatId(currentThreadId, chatIdData.chatId);
+      }
+    }
+  }, [data, currentThreadId, setServerChatId]);
 
   // Update thread when messages change
   useEffect(() => {
@@ -76,23 +84,15 @@ export default function Page() {
   };
 
   return (
-    <>
-      {/* {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-      bubu */}
-      <div className='fixed top-0 left-0 w-full  z-50'>
-        Haf
-        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-      </div>
-      <ChatLayout
-        fingerprintData={fingerprintData}
-        messages={messages}
-        input={input}
-        handleInputChange={handleInputChange}
-        handleFormSubmit={handleFormSubmit}
-        status={status}
-        isDetailed={isDetailed}
-        setIsDetailed={setIsDetailed}
-      />
-    </>
+    <ChatLayout
+      fingerprintData={fingerprintData}
+      messages={messages}
+      input={input}
+      handleInputChange={handleInputChange}
+      handleFormSubmit={handleFormSubmit}
+      status={status}
+      isDetailed={isDetailed}
+      setIsDetailed={setIsDetailed}
+    />
   );
 }

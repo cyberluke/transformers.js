@@ -1,7 +1,7 @@
 import { db } from '@/lib/db';
 import { messages, Message, NewMessageParams } from '@/lib/db/schema/messages';
 import { chats } from '@/lib/db/schema/chats';
-import { eq, desc } from 'drizzle-orm';
+import { eq, desc, and, lt } from 'drizzle-orm';
 import { getChat } from './chats';
 
 // Vytvoření nové zprávy
@@ -30,12 +30,17 @@ export const createMessage = async (input: NewMessageParams): Promise<Message> =
   }
 };
 
-// Získání zpráv z chatu
-export const getChatMessages = async (
-  chatId: string, 
+// SJEDNOCENÁ FUNKCE: Paginace zpráv (nejnovější i starší)
+export const getChatMessagesWithPagination = async (
+  chatId: string,
   userId: string,
-  limit: number = 50
-): Promise<Message[]> => {
+  cursor?: string, // ULID cursor - pokud undefined, načte nejnovější
+  limit: number = 10
+): Promise<{
+  messages: Message[];
+  nextCursor: string | null;
+  hasMore: boolean;
+}> => {
   try {
     // Ověříme přístup k chatu
     const chat = await getChat(chatId, userId);
@@ -43,14 +48,31 @@ export const getChatMessages = async (
       throw new Error('Chat not found or access denied');
     }
 
-    return await db
+    const whereClause = cursor
+      ? and(
+          eq(messages.chatId, chatId),
+          lt(messages.id, cursor) // ULID jsou sortable, takže lt() najde starší zprávy
+        )
+      : eq(messages.chatId, chatId);
+
+    const results = await db
       .select()
       .from(messages)
-      .where(eq(messages.chatId, chatId))
-      .orderBy(desc(messages.createdAt))
-      .limit(limit);
+      .where(whereClause)
+      .orderBy(desc(messages.id)) // Nejnovější první (podle ULID)
+      .limit(limit + 1); // +1 pro zjištění hasMore
+
+    const hasMore = results.length > limit;
+    const messagesList = hasMore ? results.slice(0, -1) : results;
+    const nextCursor = hasMore ? messagesList[messagesList.length - 1].id : null;
+
+    return {
+      messages: messagesList.reverse(), // Reverse pro chronologické pořadí (nejstarší první)
+      nextCursor,
+      hasMore,
+    };
   } catch (error) {
-    throw new Error(error instanceof Error ? error.message : 'Failed to get chat messages');
+    throw new Error(error instanceof Error ? error.message : 'Failed to get messages');
   }
 };
 

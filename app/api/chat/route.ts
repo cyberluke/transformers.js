@@ -2,7 +2,7 @@
 // import { createEmbedding } from '@/lib/db/actions/embeddings';
 import { createChat, getChat } from '@/lib/db/actions/chats';
 import { createMessage } from '@/lib/db/actions/messages';
-import client from '@/lib/server/fingerprint/client';
+import { validateFingerprint } from '@/lib/server/fingerprint/auth';
 import { addMemories, getMemories, retrieveMemories } from '@/lib/server/mem0/mem0-utils';
 import { SYSTEM_HIGHLIGHT_PROMPT } from '@/lib/server/mem0/prompt';
 import { searchWebTool } from '@/lib/tools/searchxng';
@@ -76,28 +76,22 @@ export async function POST(req: Request) {
   console.log(messages, customData, "customData");
   console.log(JSON.stringify(messages, null, 2), "req.body");
 
-  let userId = null;
+  // Validace fingerprint
+  const { userId, error } = await validateFingerprint(customData?.fingerprint);
 
-  try {
-    const fingerprint = await client.getEvent(customData.fingerprint);
-    userId = fingerprint.products.identification?.data?.visitorId;
-  } catch (error) {
-    console.log(error);
-  }
-
-  if (!userId) {
-    return new Response('Unauthorized', { status: 401 });
+  if (error) {
+    return error;
   }
 
   let chat = null;
 
   if (!customData.chatId) {
     chat = await createChat({
-      userId,
+      userId: userId!,
       title: 'New Chat',
     });
   } else {
-    chat = await getChat(customData.chatId, userId);
+    chat = await getChat(customData.chatId, userId!);
 
     if (!chat) {
       return new Response('Chat not found', { status: 404 });
@@ -120,7 +114,7 @@ export async function POST(req: Request) {
   // console.log(messages);
 
   const config = {
-    user_id: userId,
+    user_id: userId!,
     rerank: true,
     threshold: 0.1,
     output_format: "v1.0",
@@ -194,14 +188,14 @@ export async function POST(req: Request) {
 
       createMessage({
         chatId: chat.id,
-        userId: userId,
+        userId: userId!,
         data: clearUserMessage(userMessage),
         role: 'user',
       });
 
       createMessage({
         chatId: chat.id,
-        userId: userId,
+        userId: userId!,
         data: aiMessage,
         role: 'assistant',
       });
@@ -227,7 +221,7 @@ export async function POST(req: Request) {
     }
   });
 
-  const addMemoriesTask = addMemories(messages, { user_id: userId });
+  const addMemoriesTask = addMemories(messages, { user_id: userId! });
 
   return createDataStreamResponse({
     execute: async (writer) => {

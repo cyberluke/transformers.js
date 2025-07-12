@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { Message } from '@ai-sdk/react';
 
 export interface Thread {
@@ -8,6 +8,7 @@ export interface Thread {
   messages: Message[];
   createdAt: Date;
   updatedAt: Date;
+  serverChatId?: string; // Server-generated chat ID
 }
 
 interface ThreadStore {
@@ -23,6 +24,7 @@ interface ThreadStore {
   updateThread: (threadId: string, updates: Partial<Thread>) => void;
   addMessageToThread: (threadId: string, message: Message) => void;
   updateThreadMessages: (threadId: string, messages: Message[]) => void;
+  setServerChatId: (threadId: string, serverChatId: string) => void;
   deleteThread: (threadId: string) => void;
   generateThreadTitle: (messages: Message[]) => string;
 }
@@ -100,6 +102,16 @@ export const useThreadStore = create<ThreadStore>()(
         }));
       },
       
+      setServerChatId: (threadId: string, serverChatId: string) => {
+        set(state => ({
+          threads: state.threads.map(thread =>
+            thread.id === threadId
+              ? { ...thread, serverChatId, updatedAt: new Date() }
+              : thread
+          ),
+        }));
+      },
+      
       deleteThread: (threadId: string) => {
         set(state => {
           const newThreads = state.threads.filter(thread => thread.id !== threadId);
@@ -131,6 +143,7 @@ export const useThreadStore = create<ThreadStore>()(
     }),
     {
       name: 'chat-threads',
+      storage: createJSONStorage(() => localStorage),
     }
   )
 ); 
