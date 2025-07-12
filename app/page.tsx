@@ -2,40 +2,51 @@
 
 import { useChat } from '@ai-sdk/react';
 import { useState, useEffect } from 'react';
-import FingerprintJS, { GetResult } from "@fingerprintjs/fingerprintjs-pro";
 import { ChatLayout } from '@/components/new';
-import { useThreadStore } from '@/lib/stores/thread-store';
+import { useThreads } from '@/hooks/useThreads';
+import { useFingerprint } from '../hooks/useFingerprint';
 
 export default function Page() {
-  const [fingerprintData, setFingerprintData] = useState<GetResult | null>(null);
   const [isDetailed, setIsDetailed] = useState(false);
   
   const { 
     currentThread, 
     currentThreadId, 
     createThread, 
-    updateThreadMessages,
-    setServerChatId 
-  } = useThreadStore();
+    updateMessages,
+    setServerChatIdForThread,
+    threads,
+    loadThreads,
+    hasServerThreads 
+  } = useThreads();
+
+  const { 
+    fingerprintData,
+    initialize: initializeFingerprint,
+    isInitialized,
+  } = useFingerprint();
+
+  // Initialize fingerprint first - eager initialization in root
+  useEffect(() => {
+    if (!isInitialized) {
+      initializeFingerprint();
+    }
+  }, [isInitialized, initializeFingerprint]);
+
+  // Initialize threads from server - eager initialization after fingerprint
+  useEffect(() => {
+    console.log('useEffect', isInitialized, hasServerThreads);
+    if (isInitialized && !hasServerThreads) {
+      loadThreads();
+    }
+  }, [isInitialized, hasServerThreads, loadThreads]);
 
   // Initialize first thread if none exists
   useEffect(() => {
-    if (!currentThreadId && useThreadStore.getState().threads.length === 0) {
+    if (!currentThreadId && threads.length === 0) {
       createThread();
     }
-  }, [currentThreadId, createThread]);
-
-  useEffect(() => {
-    (async () => {
-      const fpPromise = FingerprintJS.load({
-        apiKey: process.env.NEXT_PUBLIC_FINGERPRINT_API_KEY!,
-      });
-      const fp = await fpPromise;
-      const data = await fp.get({ extendedResult: true });
-      setFingerprintData(data);
-      // Tady nacist data z db do thread store
-    })();
-  }, []);
+  }, [currentThreadId, threads.length, createThread]);
 
   const { messages, input, handleInputChange, handleSubmit, status, setMessages, data } = useChat({
     api: '/api/chat',
@@ -55,26 +66,17 @@ export default function Page() {
       const chatIdData = data.find((item: any) => item.type === 'chat-id') as { type: string; chatId: string } | undefined;
       if (chatIdData?.chatId) {
         console.log('Received server chat ID:', chatIdData.chatId);
-        setServerChatId(currentThreadId, chatIdData.chatId);
+        setServerChatIdForThread(currentThreadId, chatIdData.chatId);
       }
     }
-  }, [data, currentThreadId, setServerChatId]);
+  }, [data, currentThreadId, setServerChatIdForThread]);
 
   // Update thread when messages change
   useEffect(() => {
     if (currentThreadId && messages.length > 0) {
-      updateThreadMessages(currentThreadId, messages);
+      updateMessages(currentThreadId, messages);
     }
-  }, [messages, currentThreadId, updateThreadMessages]);
-
-  // Update messages when switching threads
-  useEffect(() => {
-    if (currentThread) {
-      setMessages(currentThread.messages);
-    } else {
-      setMessages([]);
-    }
-  }, [currentThread, setMessages]);
+  }, [messages, currentThreadId, updateMessages]);
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,8 +87,6 @@ export default function Page() {
 
   return (
     <ChatLayout
-      fingerprintData={fingerprintData}
-      messages={messages}
       input={input}
       handleInputChange={handleInputChange}
       handleFormSubmit={handleFormSubmit}

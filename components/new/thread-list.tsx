@@ -1,9 +1,11 @@
 'use client';
 
-import { PlusIcon, MessageSquareIcon, TrashIcon } from "lucide-react";
+import { PlusIcon, MessageSquareIcon, TrashIcon, RefreshCwIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useThreadStore } from "@/lib/stores/thread-store";
+import { useThreads } from "@/hooks/useThreads";
 import { cn } from "@/lib/utils";
+import { Thread } from "@/lib/services/threadService";
+import { useState } from "react";
 
 export function ThreadList() {
   const { 
@@ -11,8 +13,13 @@ export function ThreadList() {
     currentThreadId, 
     createThread, 
     switchThread, 
-    deleteThread 
-  } = useThreadStore();
+    deleteThread,
+    hasNextPage,
+    loadMoreThreads,
+    isLoading 
+  } = useThreads();
+
+
 
   const handleNewThread = () => {
     createThread();
@@ -22,6 +29,16 @@ export function ThreadList() {
     e.stopPropagation();
     if (threads.length > 1) {
       deleteThread(threadId);
+    }
+  };
+
+  const handleLoadMore = async () => {
+    if (!hasNextPage || isLoading) return;
+    
+    try {
+      await loadMoreThreads();
+    } catch (error) {
+      console.error('Error loading more threads:', error);
     }
   };
 
@@ -98,6 +115,19 @@ export function ThreadList() {
             )}
           </div>
         ))}
+
+        {/* Load More Button */}
+        {hasNextPage && (
+          <Button
+            onClick={handleLoadMore}
+            disabled={isLoading}
+            className="flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-start bg-gradient-to-r from-green-100/90 to-green-200/80 backdrop-blur-sm border border-green-300/50 hover:from-green-200/90 hover:to-green-300/80 hover:border-green-400/60 transition-all duration-200 shadow-lg hover:shadow-xl text-green-800 font-medium disabled:opacity-50"
+            variant="ghost"
+          >
+            <RefreshCwIcon className={cn("h-4 w-4", isLoading && "animate-spin")} />
+            {isLoading ? 'Načítání...' : 'Načíst více'}
+          </Button>
+        )}
       </div>
 
       {threads.length === 0 && (

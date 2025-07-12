@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { Message } from '@ai-sdk/react';
+import { useFingerprintStore } from './fingerprint-store';
 
 export interface Thread {
   id: string;
@@ -14,6 +15,7 @@ export interface Thread {
 interface ThreadStore {
   threads: Thread[];
   currentThreadId: string | null;
+  nextCursor: string | null;
   
   // Computed
   currentThread: Thread | null;
@@ -27,6 +29,7 @@ interface ThreadStore {
   setServerChatId: (threadId: string, serverChatId: string) => void;
   deleteThread: (threadId: string) => void;
   generateThreadTitle: (messages: Message[]) => string;
+  loadThreadsFromServer: (cursor?: string) => Promise<void>;
 }
 
 export const useThreadStore = create<ThreadStore>()(
@@ -34,6 +37,7 @@ export const useThreadStore = create<ThreadStore>()(
     (set, get) => ({
       threads: [],
       currentThreadId: null,
+      nextCursor: null,
       
       get currentThread() {
         const { threads, currentThreadId } = get();
@@ -139,6 +143,60 @@ export const useThreadStore = create<ThreadStore>()(
           : firstSentence;
         
         return title || 'Nový chat';
+      },
+
+      loadThreadsFromServer: async (cursor?: string) => {
+        try {
+          // Získáme fingerprintId z fingerprint store
+          const fingerprintData = useFingerprintStore.getState().fingerprintData;
+          
+          if (!fingerprintData?.requestId) {
+            throw new Error('Fingerprint not available');
+          }
+
+          const params = new URLSearchParams({
+            fingerprint: fingerprintData.requestId,
+          });
+
+          if (cursor) {
+            params.append('cursor', cursor);
+          }
+
+          const response = await fetch(`/api/chats?${params}`);
+          
+          if (!response.ok) {
+            throw new Error(`Failed to load threads: ${response.statusText}`);
+          }
+
+          const result = await response.json();
+          
+          if (!result.success) {
+            throw new Error(result.error || 'Failed to load threads');
+          }
+
+          const { chats, nextCursor, hasMore } = result.data;
+
+          // Transformace Chat na Thread
+          const serverThreads: Thread[] = chats.map((chat: any) => ({
+            id: crypto.randomUUID(), // Frontend ID
+            title: chat.title,
+            messages: [], // Zprávy načteme později při přepnutí na thread
+            createdAt: new Date(chat.createdAt),
+            updatedAt: new Date(chat.updatedAt),
+            serverChatId: chat.id, // Server chat ID
+          }));
+
+          set(state => ({
+            threads: cursor 
+              ? [...state.threads, ...serverThreads] // Přidáme na konec pro paginaci
+              : [...serverThreads, ...state.threads.filter(t => !t.serverChatId)], // Při první načtení nahradíme server threads, zachováme lokální
+            nextCursor: hasMore ? nextCursor : null,
+          }));
+
+        } catch (error) {
+          console.error('Error loading threads from server:', error);
+          throw error;
+        }
       },
     }),
     {

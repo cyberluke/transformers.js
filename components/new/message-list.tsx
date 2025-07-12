@@ -1,15 +1,16 @@
 'use client';
 
 import { SparkleIcon } from "lucide-react";
-import { Message } from '@ai-sdk/react';
 import { MarkdownRenderer } from './markdown-renderer';
+import { useThreads } from '@/hooks/useThreads';
 
 interface MessageListProps {
-  messages: Message[];
   status: string;
 }
 
-export function MessageList({ messages, status }: MessageListProps) {
+export function MessageList({ status }: MessageListProps) {
+  const { currentThread } = useThreads();
+  const messages = currentThread?.messages || [];
   return (
     <div className="w-full max-w-[var(--thread-max-width)] space-y-4">
       {messages.map((message) => (

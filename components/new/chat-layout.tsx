@@ -6,11 +6,10 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { WelcomeScreen } from './welcome-screen';
 import { MessageList } from './message-list';
 import { Composer } from './composer';
-import { Message } from '@ai-sdk/react';
+import { useFingerprint } from '@/hooks/useFingerprint';
+import { useThreads } from '@/hooks/useThreads';
 
 interface ChatLayoutProps {
-  fingerprintData: any;
-  messages: Message[];
   input: string;
   handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleFormSubmit: (e: React.FormEvent) => void;
@@ -20,8 +19,6 @@ interface ChatLayoutProps {
 }
 
 export function ChatLayout({
-  fingerprintData,
-  messages,
   input,
   handleInputChange,
   handleFormSubmit,
@@ -30,6 +27,9 @@ export function ChatLayout({
   setIsDetailed
 }: ChatLayoutProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { fingerprintData } = useFingerprint();
+  const { currentThread } = useThreads();
+  const messages = currentThread?.messages || [];
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -60,7 +60,7 @@ export function ChatLayout({
           ) : (
             /* Messages View */
             <div className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-4 pt-8">
-              <MessageList messages={messages} status={status} />
+              <MessageList status={status} />
 
               <div className="min-h-8 flex-grow" />
               <div ref={messagesEndRef} />
