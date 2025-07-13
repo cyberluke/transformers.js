@@ -1,7 +1,7 @@
 'use client';
 
 import { useChat } from '@ai-sdk/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChatLayout } from '@/components/new';
 import { useThreads } from '@/hooks/useThreads';
 import { useFingerprint } from '../hooks/useFingerprint';
@@ -33,10 +33,13 @@ export default function Page() {
     }
   }, [isInitialized, initializeFingerprint]);
 
+
+  const didLoadRef = useRef(false);
+
   // Initialize threads from server - eager initialization after fingerprint
   useEffect(() => {
-    console.log('useEffect', isInitialized, hasServerThreads);
-    if (isInitialized && !hasServerThreads) {
+    if (isInitialized && !hasServerThreads && !didLoadRef.current) {
+      didLoadRef.current = true;
       loadThreads();
     }
   }, [isInitialized, hasServerThreads, loadThreads]);
@@ -71,9 +74,22 @@ export default function Page() {
     }
   }, [data, currentThreadId, setServerChatIdForThread]);
 
-  // Update thread when messages change
+  // Synchronizace zpráv při switching threadu
   useEffect(() => {
-    if (currentThreadId && messages.length > 0) {
+    if (currentThreadId && currentThread) {
+      // Při switching nastav zprávy z thread store do useChat
+      if (currentThread.messages.length > 0 && messages.length === 0) {
+        setMessages(currentThread.messages);
+      }
+    }
+  }, [currentThreadId, currentThread, setMessages, messages.length]);
+
+  // TODO: Podivat se pak poradne na nejlepsi reseni tohoto problému.
+
+  // Update thread when messages change (jen pokud se skutečně změnily)
+  useEffect(() => {
+    if (currentThreadId) {
+      console.log('updateMessages', messages);
       updateMessages(currentThreadId, messages);
     }
   }, [messages, currentThreadId, updateMessages]);

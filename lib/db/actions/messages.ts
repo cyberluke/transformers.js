@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import { messages, Message, NewMessageParams } from '@/lib/db/schema/messages';
+import { messages, Message, MessageWithoutContext, NewMessageParams } from '@/lib/db/schema/messages';
 import { chats } from '@/lib/db/schema/chats';
 import { eq, desc, and, lt } from 'drizzle-orm';
 import { getChat } from './chats';
@@ -37,7 +37,7 @@ export const getChatMessagesWithPagination = async (
   cursor?: string, // ULID cursor - pokud undefined, načte nejnovější
   limit: number = 10
 ): Promise<{
-  messages: Message[];
+  messages: MessageWithoutContext[];
   nextCursor: string | null;
   hasMore: boolean;
 }> => {
@@ -56,7 +56,14 @@ export const getChatMessagesWithPagination = async (
       : eq(messages.chatId, chatId);
 
     const results = await db
-      .select()
+      .select({
+        id: messages.id,
+        data: messages.data,
+        role: messages.role,
+        createdAt: messages.createdAt,
+        metadata: messages.metadata,
+        // chatId a userId vynecháno - jsou známo z kontextu
+      })
       .from(messages)
       .where(whereClause)
       .orderBy(desc(messages.id)) // Nejnovější první (podle ULID)

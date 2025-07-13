@@ -44,7 +44,7 @@ export function useThreads() {
   // Computed values
   const currentThread = useMemo(() => {
     return currentThreadId ? getThreadById(currentThreadId) : null;
-  }, [currentThreadId, getThreadById]);
+  }, [currentThreadId, getThreadById, threads]); // TODO: remove threads from dependencies, and find better solution
 
   const hasNextPage = useMemo(() => {
     return !!nextCursor;
@@ -69,25 +69,30 @@ export function useThreads() {
     clearError();
 
     try {
-      // const result = await threadService.fetchThreads(fingerprintData.requestId, cursor);
+      const result = await threadService.fetchThreads(fingerprintData.requestId, cursor);
       
-      // if (cursor) {
-      //   // Pagination - add to existing threads
-      //   addThreads(result.threads);
-      // } else {
-      //   // Initial load - replace server threads, keep local ones
-      //   const localThreads = threads.filter(t => !t.serverChatId);
-      //   setThreads([...result.threads, ...localThreads]);
-      // }
+      if (cursor) {
+        // Pagination - add to existing threads
+        addThreads(result.threads);
+      } else {
+        // console.log('threads', threads);
+        // Initial load - replace server threads, keep local ones
+        // const localThreads = threads.filter(t => !t.serverChatId);
+        // console.log('localThreads', localThreads);
+        setThreads(prev => {
+          const localThreads = prev.filter(t => !t.serverChatId);
+          return [...result.threads, ...localThreads];
+        });
+      }
       
-      // setNextCursor(result.nextCursor);
+      setNextCursor(result.nextCursor);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Failed to load threads';
       setError(errorMessage);
     } finally {
       setLoading(false);
     }
-  }, [fingerprintData?.requestId, threadService, addThreads, setThreads, threads, setNextCursor, setError, setLoading, clearError]);
+  }, [fingerprintData?.requestId, threadService, addThreads, setThreads, setNextCursor, setError, setLoading, clearError]);
 
   // Create new thread
   const createThread = useCallback(async (request: CreateThreadRequest = {}) => {
@@ -98,6 +103,7 @@ export function useThreads() {
       const newThread = await threadService.createThread(request);
       addThread(newThread);
       setCurrentThreadId(newThread.id);
+      console.log('newThread', newThread);
       return newThread.id;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Failed to create thread';
@@ -176,6 +182,7 @@ export function useThreads() {
 
   // Update thread messages
   const updateMessages = useCallback((threadId: string, messages: Message[]) => {
+    console.log('updateMessages', threadId, messages);
     updateThreadMessages(threadId, messages);
   }, [updateThreadMessages]);
 

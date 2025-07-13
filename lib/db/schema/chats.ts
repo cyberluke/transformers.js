@@ -29,6 +29,7 @@ export const chats = pgTable(
 
 // Types
 export type Chat = typeof chats.$inferSelect;
+export type ChatWithoutUserId = Omit<Chat, 'userId'>;
 export type NewChatParams = {
   userId: string;
   assistentId?: string;

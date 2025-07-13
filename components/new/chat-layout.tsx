@@ -35,6 +35,10 @@ export function ChatLayout({
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  useEffect(() => {
+    console.log('messages', messages);
+  }, [messages]);
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -48,6 +52,7 @@ export function ChatLayout({
 
         <div className="flex h-full w-full flex-col box-border" style={{ ["--thread-max-width" as string]: "42rem" }}>
           {/* Welcome Screen nebo Messages */}
+          {JSON.stringify(messages)}
           {messages.length === 0 ? (
             <WelcomeScreen
               input={input}

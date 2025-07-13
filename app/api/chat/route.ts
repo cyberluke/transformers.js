@@ -181,15 +181,14 @@ export async function POST(req: Request) {
     onFinish: (finishData) => {
       console.log("finishData");
 
-      const userMessage = [
-        clearUserMessage(messages[0])
-      ];
+      const userMessage = messages[0];
       const aiMessage = finishData.response.messages;
+      console.log(aiMessage[0].content, "userMessage, aiMessage");
 
       createMessage({
         chatId: chat.id,
         userId: userId!,
-        data: clearUserMessage(userMessage),
+        data: [userMessage],
         role: 'user',
       });
 
@@ -199,6 +198,8 @@ export async function POST(req: Request) {
         data: aiMessage,
         role: 'assistant',
       });
+
+      console.log("DONE STREAMING");
 
       // createMessage({
       //   chatId: chat.id,
@@ -246,13 +247,17 @@ export async function POST(req: Request) {
 
       result.mergeIntoDataStream(writer);
 
-      const newMemories = await addMemoriesTask;
+      console.log("MERGED INTO DATA STREAM");
+
+      const newMemories = await addMemoriesTask; // TODO: Check if needed, it takes a lot of time
       if (newMemories.length > 0) {
         writer.writeMessageAnnotation({
           type: "mem0-update",
           memories: newMemories,
         });
       }
+
+      console.log("ADDED MEMORIES");
     },
   });
 }

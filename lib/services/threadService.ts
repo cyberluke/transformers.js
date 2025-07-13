@@ -131,7 +131,45 @@ export class ThreadService {
         throw new Error(result.error || 'Failed to load messages');
       }
 
-      return result.data.messages || [];
+      // Transformace z API formátu (S1) na AI SDK formát (S2)
+      const transformedData = result.data.messages.map((msg: any) => {
+        // Pokud message má data pole (database format), rozbalíme ho
+        if (msg.data && Array.isArray(msg.data) && msg.data.length > 0) {
+          const aiMessage = msg.data[0];
+          
+          // Extrahujeme text obsah z content pole
+          let textContent = '';
+          if (Array.isArray(aiMessage.content)) {
+            // Content je array objektů - extrahujeme text
+            textContent = aiMessage.content
+              .filter((item: any) => item.type === 'text')
+              .map((item: any) => item.text)
+              .join('');
+          } else if (typeof aiMessage.content === 'string') {
+            // Content je už string
+            textContent = aiMessage.content;
+          }
+          
+          return {
+            id: aiMessage.id || msg.id,
+            createdAt: new Date(msg.createdAt),
+            role: aiMessage.role as 'user' | 'assistant' | 'system' | 'data',
+            content: textContent,
+            // parts: aiMessage.parts || aiMessage.content,
+          };
+        }
+        
+        // Pokud už je v AI SDK formátu, vrátíme ho jak je
+        return {
+          id: msg.id,
+          createdAt: new Date(msg.createdAt),
+          role: msg.role as 'user' | 'assistant' | 'system' | 'data',
+          content: msg.content,
+          // parts: msg.parts,
+        };
+      });
+
+      return transformedData;
     } catch (error) {
       throw new Error(
         `Failed to load thread messages: ${error instanceof Error ? error.message : 'Unknown error'}`

@@ -6,7 +6,7 @@ interface ThreadDataState {
   threads: Thread[];
   
   // Pure state mutations
-  setThreads: (threads: Thread[]) => void;
+  setThreads: (updater: Thread[] | ((prev: Thread[]) => Thread[])) => void;
   addThread: (thread: Thread) => void;
   addThreads: (threads: Thread[]) => void;
   removeThread: (threadId: string) => void;
@@ -25,8 +25,10 @@ interface ThreadDataState {
 export const useThreadDataStore = create<ThreadDataState>()((set, get) => ({
   threads: [],
   
-  setThreads: (threads) => {
-    set({ threads });
+  setThreads: (updater) => {
+    set(state => ({
+      threads: typeof updater === 'function' ? updater(state.threads) : updater,
+    }));
   },
   
   addThread: (thread) => {

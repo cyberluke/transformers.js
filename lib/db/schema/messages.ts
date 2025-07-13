@@ -31,6 +31,7 @@ export const messages = pgTable(
 
 // Types
 export type Message = typeof messages.$inferSelect;
+export type MessageWithoutContext = Omit<Message, 'chatId' | 'userId'>;
 export type NewMessageParams = {
   chatId: string;
   userId: string;

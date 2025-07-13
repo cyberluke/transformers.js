@@ -16,7 +16,6 @@ export function useFingerprint() {
 
   // Orchestration layer - connects service and store
   const fetchFingerprint = useCallback(async (force = false) => {
-    console.log('fetchFingerprint', force);
     if (!force && (fingerprintData || isLoading)) return; // Guard against duplicate initialization
     
     setLoading(true);

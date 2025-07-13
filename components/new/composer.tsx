@@ -18,7 +18,7 @@ export function Composer({ input, handleInputChange, handleFormSubmit, status }:
           onChange={handleInputChange}
           rows={1}
           placeholder="Ask follow-up"
-          disabled={status !== 'ready'}
+          // disabled={status !== 'ready'}
           className="placeholder:text-muted-foreground max-h-40 w-full flex-grow resize-none border-none bg-transparent px-2 py-4 text-lg outline-none focus:ring-0 disabled:cursor-not-allowed min-w-0 cursor-pointer"
           style={{ wordBreak: "break-word", overflowWrap: "break-word" }}
         />

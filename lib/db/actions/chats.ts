@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import { chats, Chat, NewChatParams, UpdateChatParams } from '@/lib/db/schema/chats';
+import { chats, Chat, ChatWithoutUserId, NewChatParams, UpdateChatParams } from '@/lib/db/schema/chats';
 import { eq, desc, or, isNull, sql, and, lt } from 'drizzle-orm';
 
 // Vytvoření nového chatu
@@ -25,7 +25,7 @@ export const getUserChatsWithPagination = async (
   cursor?: string, // ULID cursor
   limit: number = 10
 ): Promise<{
-  chats: Chat[];
+  chats: ChatWithoutUserId[];
   nextCursor: string | null;
   hasMore: boolean;
 }> => {
@@ -38,7 +38,15 @@ export const getUserChatsWithPagination = async (
       : eq(chats.userId, userId);
 
     const results = await db
-      .select()
+      .select({
+        id: chats.id,
+        assistentId: chats.assistentId,
+        title: chats.title,
+        createdAt: chats.createdAt,
+        updatedAt: chats.updatedAt,
+        metadata: chats.metadata,
+        // userId vynecháno - je známo z kontextu
+      })
       .from(chats)
       .where(whereClause)
       .orderBy(desc(chats.id)) // Seřadit podle ULID (chronologicky)
