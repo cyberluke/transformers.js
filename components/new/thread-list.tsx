@@ -42,21 +42,7 @@ export function ThreadList() {
     }
   };
 
-  const formatDate = (date: Date) => {
-    const now = new Date();
-    const diff = now.getTime() - date.getTime();
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    
-    if (days === 0) {
-      return 'Dnes';
-    } else if (days === 1) {
-      return 'Včera';
-    } else if (days < 7) {
-      return `Před ${days} dny`;
-    } else {
-      return date.toLocaleDateString('cs-CZ');
-    }
-  };
+
 
   return (
     <div className="flex flex-col items-stretch gap-2 p-3">

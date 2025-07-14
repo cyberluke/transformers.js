@@ -69,7 +69,7 @@ const getBaseSystemPrompt = () => {
   Vždy se snaž mít vědomosti aktuální.
   
   DŮLEŽITÉ: Na začátku každé nové konverzace vždy vygeneruj krátký, výstižný název chatu (max 50 znaků) na základě uživatelovy první otázky. 
-  Použij tool generateChatTitle pro odeslání názvu.
+  Použij tool generateChatTitle pro odeslání názvu. Tento krok je nezbytný.
   `;
   console.log(baseSystemPrompt, "baseSystemPrompt");
   return baseSystemPrompt;

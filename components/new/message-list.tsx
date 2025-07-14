@@ -2,6 +2,7 @@
 
 import { SparkleIcon } from "lucide-react";
 import { MarkdownRenderer } from './markdown-renderer';
+import { ToolInvocation } from './tool-invocation';
 import { useThreads } from '@/hooks/useThreads';
 
 interface MessageListProps {
@@ -22,19 +23,7 @@ function renderMessagePart(part: any, index: number) {
       );
     
     case 'tool-invocation':
-      const { toolInvocation } = part;
-      return (
-        <div key={index} className="mb-4 rounded-lg border bg-muted/50 p-3">
-          <div className="text-sm font-medium text-foreground">
-            🔧 {toolInvocation.toolName}
-          </div>
-          {toolInvocation.state === 'result' && toolInvocation.result && (
-            <div className="mt-2 text-xs text-muted-foreground">
-              {toolInvocation.result.success ? '✅ Úspěšně dokončeno' : '❌ Chyba'}
-            </div>
-          )}
-        </div>
-      );
+      return <ToolInvocation key={index} toolInvocation={part.toolInvocation} index={index} />;
     
     case 'text':
       return (

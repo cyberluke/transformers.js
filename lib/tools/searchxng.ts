@@ -22,8 +22,8 @@ export const searchWebTool = () => tool({
       console.log(error, "error search");
     }
 
-    // Funkce pro získání obrázku z URL
-    const getImageFromUrl = async (url: string): Promise<string> => {
+    // Funkce pro získání obrázku z URL s rozlišením typu
+    const getImageFromUrl = async (url: string): Promise<{ image: string; imgType: 'image' | 'favicon' }> => {
       try {
         const response = await fetch(url, {
           headers: {
@@ -38,7 +38,7 @@ export const searchWebTool = () => tool({
 
         const html = await response.text();
         
-        // Hledáme og:image
+        // Hledáme og:image nebo twitter:image
         const ogImageMatch = html.match(/<meta[^>]*property=['"](og:image|twitter:image)['"]\s*content=['"]([^'"]+)['"]/i);
         if (ogImageMatch && ogImageMatch[2]) {
           let imageUrl = ogImageMatch[2];
@@ -47,19 +47,25 @@ export const searchWebTool = () => tool({
             const urlObj = new URL(url);
             imageUrl = `${urlObj.protocol}//${urlObj.host}${imageUrl}`;
           }
-          return imageUrl;
+          return { image: imageUrl, imgType: 'image' };
         }
 
         // Fallback na favicon
         const urlObj = new URL(url);
-        return `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=64`;
+        return { 
+          image: `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=64`,
+          imgType: 'favicon'
+        };
       } catch (error) {
         // Fallback na favicon při chybě
         try {
           const urlObj = new URL(url);
-          return `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=64`;
+          return { 
+            image: `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=64`,
+            imgType: 'favicon'
+          };
         } catch {
-          return '';
+          return { image: '', imgType: 'favicon' };
         }
       }
     };
@@ -75,13 +81,14 @@ export const searchWebTool = () => tool({
       // Paralelně získáme obrázky pro všechny výsledky
       const resultsWithImages = await Promise.all(
         limitedResults.map(async (result: any) => {
-          const image = await getImageFromUrl(result.url);
+          const imageData = await getImageFromUrl(result.url);
           return {
             url: result.url,
             title: result.title,
             content: result.content,
             score: result.score,
-            image: image
+            image: imageData.image,
+            imgType: imageData.imgType
           };
         })
       );
