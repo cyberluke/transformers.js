@@ -1,16 +1,14 @@
 import { tool } from "ai";
 import z from "zod";
-import { Writer } from "@/types/server";
-import fs from "fs";
 
-export const searchWebTool = (writer: { value: Writer | null }) => tool({
+export const searchWebTool = () => tool({
   description: `search the web for information.`,
   parameters: z.object({
     query: z.string().describe('the query to search the web for'),
   }),
   execute: async ({ query }) => {
     console.log(query, "query search");
-    writer.value?.write("0:\"Prohledávám web\"\n")
+    // writer.value?.write("0:\"Prohledávám web\"\n")
 
     let success: boolean = false;
     let data: any;

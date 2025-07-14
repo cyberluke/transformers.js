@@ -8,9 +8,50 @@ interface MessageListProps {
   status: string;
 }
 
+// Funkce pro renderování jednotlivých částí zprávy
+function renderMessagePart(part: any, index: number) {
+  switch (part.type) {
+    case 'step-start':
+      return (
+        <div key={index} className="mb-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+            Spouštím krok...
+          </div>
+        </div>
+      );
+    
+    case 'tool-invocation':
+      const { toolInvocation } = part;
+      return (
+        <div key={index} className="mb-4 rounded-lg border bg-muted/50 p-3">
+          <div className="text-sm font-medium text-foreground">
+            🔧 {toolInvocation.toolName}
+          </div>
+          {toolInvocation.state === 'result' && toolInvocation.result && (
+            <div className="mt-2 text-xs text-muted-foreground">
+              {toolInvocation.result.success ? '✅ Úspěšně dokončeno' : '❌ Chyba'}
+            </div>
+          )}
+        </div>
+      );
+    
+    case 'text':
+      return (
+        <div key={index} className="prose prose-sm max-w-none">
+          <MarkdownRenderer content={part.text} />
+        </div>
+      );
+    
+    default:
+      return null;
+  }
+}
+
 export function MessageList({ status }: MessageListProps) {
   const { currentThread } = useThreads();
   const messages = currentThread?.messages || [];
+  
   return (
     <div className="w-full max-w-[var(--thread-max-width)] space-y-4">
       {messages.map((message) => (
@@ -19,7 +60,11 @@ export function MessageList({ status }: MessageListProps) {
             /* User Message */
             <div className="relative w-full gap-y-2 py-4">
               <div className="text-foreground break-words rounded-3xl py-2.5 text-3xl">
-                {message.content}
+                {/* Zpětná kompatibilita - pokud má parts, použij první text part, jinak content */}
+                {message.parts 
+                  ? message.parts.find(part => part.type === 'text')?.text || message.content
+                  : message.content
+                }
               </div>
             </div>
           ) : (
@@ -29,9 +74,17 @@ export function MessageList({ status }: MessageListProps) {
                 <h1 className="mb-4 inline-flex items-center gap-2 text-2xl">
                   <SparkleIcon /> Answer
                 </h1>
-                <div className="prose prose-sm max-w-none">
-                  <MarkdownRenderer content={message.content} />
-                </div>
+                
+                {/* Renderování parts nebo fallback na content */}
+                {message.parts && message.parts.length > 0 ? (
+                  <div className="space-y-2">
+                    {message.parts.map((part, index) => renderMessagePart(part, index))}
+                  </div>
+                ) : (
+                  <div className="prose prose-sm max-w-none">
+                    <MarkdownRenderer content={message.content} />
+                  </div>
+                )}
               </div>
             </div>
           )}

@@ -89,12 +89,6 @@ export function ThreadList() {
               <p className="text-sm font-medium truncate leading-tight">
                 {thread.title}
               </p>
-              <p className="text-xs opacity-70 mt-0.5">
-                {thread.messages.length > 0 
-                  ? `${thread.messages.length} zpráv`
-                  : 'Prázdný'
-                } • {formatDate(new Date(thread.updatedAt))}
-              </p>
             </div>
 
             {/* Delete Button */}

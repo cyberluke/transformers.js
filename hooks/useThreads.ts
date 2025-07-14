@@ -81,7 +81,7 @@ export function useThreads() {
         // console.log('localThreads', localThreads);
         setThreads(prev => {
           const localThreads = prev.filter(t => !t.serverChatId);
-          return [...result.threads, ...localThreads];
+          return [...localThreads, ...result.threads];
         });
       }
       

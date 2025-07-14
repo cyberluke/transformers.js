@@ -131,45 +131,24 @@ export class ThreadService {
         throw new Error(result.error || 'Failed to load messages');
       }
 
-      // Transformace z API formátu (S1) na AI SDK formát (S2)
-      const transformedData = result.data.messages.map((msg: any) => {
-        // Pokud message má data pole (database format), rozbalíme ho
-        if (msg.data && Array.isArray(msg.data) && msg.data.length > 0) {
-          const aiMessage = msg.data[0];
-          
-          // Extrahujeme text obsah z content pole
-          let textContent = '';
-          if (Array.isArray(aiMessage.content)) {
-            // Content je array objektů - extrahujeme text
-            textContent = aiMessage.content
-              .filter((item: any) => item.type === 'text')
-              .map((item: any) => item.text)
-              .join('');
-          } else if (typeof aiMessage.content === 'string') {
-            // Content je už string
-            textContent = aiMessage.content;
-          }
-          
-          return {
-            id: aiMessage.id || msg.id,
-            createdAt: new Date(msg.createdAt),
-            role: aiMessage.role as 'user' | 'assistant' | 'system' | 'data',
-            content: textContent,
-            // parts: aiMessage.parts || aiMessage.content,
-          };
-        }
-        
-        // Pokud už je v AI SDK formátu, vrátíme ho jak je
-        return {
-          id: msg.id,
-          createdAt: new Date(msg.createdAt),
-          role: msg.role as 'user' | 'assistant' | 'system' | 'data',
-          content: msg.content,
-          // parts: msg.parts,
-        };
-      });
+      console.log(JSON.stringify(result.data, null, 2), "result.data");
 
-      return transformedData;
+      // const testData = [{"id":"01K03VGTN1FPHA7W1DQ40JYJCM","createdAt":"2025-07-14T06:56:24.203Z","role":"user","content":"test","parts":[{"type":"text","text":"test"}]},{"id":"01K03VGWYK8510GEYG11PVFZCK","createdAt":"2025-07-14T06:56:26.560Z","role":"assistant","content":"Jak vám mohu pomoci dnes? Pokud máte nějaké otázky nebo potřebujete s něčím poradit, neváhejte se zeptat!","parts":[{"type":"step-start"},{"type":"tool-invocation","toolInvocation":{"state":"result","step":0,"toolName":"generateChatTitle","args":{"title":"Testování systému"},"result":{"success":true,"title":"Testování systému"}}},{"type":"step-start"},{"type":"text","text":"Jak vám mohu pomoci dnes? Pokud máte nějaké otázky nebo potřebujete s něčím poradit, neváhejte se zeptat!"}]}]
+
+
+      // Transformace dat z API formátu na očekávaný formát
+      const transformedMessages = result.data.messages.map((message: any) => ({
+        id: message.id,
+        createdAt: message.createdAt,
+        role: message.role,
+        content: message.data.content,
+        parts: message.data.parts,
+        metadata: message.metadata,
+      }));
+
+      console.log(JSON.stringify(transformedMessages, null, 2), "transformedMessages");
+
+      return transformedMessages;
     } catch (error) {
       throw new Error(
         `Failed to load thread messages: ${error instanceof Error ? error.message : 'Unknown error'}`

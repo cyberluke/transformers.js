@@ -15,6 +15,7 @@ export default function Page() {
     createThread, 
     updateMessages,
     setServerChatIdForThread,
+    setTitleForThread,
     threads,
     loadThreads,
     hasServerThreads 
@@ -63,7 +64,7 @@ export default function Page() {
     id: currentThreadId || undefined
   });
 
-  // Sledování server response pro chat ID
+  // Sledování server response pro chat ID a title
   useEffect(() => {
     if (data && Array.isArray(data) && currentThreadId) {
       const chatIdData = data.find((item: any) => item.type === 'chat-id') as { type: string; chatId: string } | undefined;
@@ -71,8 +72,14 @@ export default function Page() {
         console.log('Received server chat ID:', chatIdData.chatId);
         setServerChatIdForThread(currentThreadId, chatIdData.chatId);
       }
+
+      const chatTitleData = data.find((item: any) => item.type === 'chat-title') as { type: string; title: string } | undefined;
+      if (chatTitleData?.title) {
+        console.log('Received chat title:', chatTitleData.title);
+        setTitleForThread(currentThreadId, chatTitleData.title);
+      }
     }
-  }, [data, currentThreadId, setServerChatIdForThread]);
+  }, [data, currentThreadId, setServerChatIdForThread, setTitleForThread]);
 
   // Synchronizace zpráv při switching threadu
   useEffect(() => {
