@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRightIcon, PaperclipIcon, ZapIcon, LightbulbIcon } from "lucide-react";
+import { ArrowRightIcon, ZapIcon, LightbulbIcon } from "lucide-react";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import { AttachmentButton, AttachmentList } from "@/components/attachments";
 
 interface WelcomeScreenProps {
   input: string;
@@ -76,12 +77,7 @@ export function WelcomeScreen({
               </TooltipContent>
             </Tooltip>
             <div className="mx-1.5 flex gap-2">
-              <button 
-                type="button"
-                className="rounded-max text-muted-foreground my-2.5 size-8 p-2 transition-opacity ease-in cursor-pointer hover:bg-accent"
-              >
-                <PaperclipIcon className="!size-4.5" />
-              </button>
+              <AttachmentButton disabled={status !== 'ready'} />
               <button 
                 type="submit"
                 disabled={status !== 'ready' || !input.trim()}
@@ -91,6 +87,9 @@ export function WelcomeScreen({
               </button>
             </div>
           </div>
+          
+          {/* Attachment List */}
+          <AttachmentList />
         </form>
       </div>
     </div>

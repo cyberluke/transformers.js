@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { ChatLayout } from '@/components/new';
 import { useThreads } from '@/hooks/useThreads';
 import { useFingerprint } from '../hooks/useFingerprint';
+import { useAttachments } from '@/hooks/useAttachments';
 
 export default function Page() {
   const [isDetailed, setIsDetailed] = useState(false);
@@ -26,6 +27,8 @@ export default function Page() {
     initialize: initializeFingerprint,
     isInitialized,
   } = useFingerprint();
+
+  const { attachments, clearAttachments } = useAttachments();
 
   // Initialize fingerprint first - eager initialization in root
   useEffect(() => {
@@ -104,7 +107,17 @@ export default function Page() {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim() && currentThreadId) {
-      handleSubmit(e);
+      // Připojení attachments k useChat
+      handleSubmit(e, {
+        experimental_attachments: attachments.map((att: any) => ({
+          name: att.name,
+          contentType: att.contentType,
+          url: att.url,
+        })),
+      });
+      
+      // Vymazání attachments po odeslání
+      clearAttachments();
     }
   };
 

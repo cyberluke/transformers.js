@@ -1,6 +1,7 @@
 'use client';
 
-import { ArrowRightIcon, PaperclipIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
+import { AttachmentButton, AttachmentList } from "@/components/attachments";
 
 interface ComposerProps {
   input: string;
@@ -24,12 +25,7 @@ export function Composer({ input, handleInputChange, handleFormSubmit, status }:
         />
         <div className="flex w-full items-center justify-between pt-1 pb-0">
           <div className="mx-1.5 flex gap-2 ml-auto">
-            <button 
-              type="button"
-              className="rounded-max text-muted-foreground my-2.5 size-8 p-2 transition-opacity ease-in cursor-pointer hover:bg-accent"
-            >
-              <PaperclipIcon className="!size-4.5" />
-            </button>
+            <AttachmentButton disabled={status !== 'ready'} />
             <button 
               type="submit"
               disabled={status !== 'ready' || !input.trim()}
@@ -39,6 +35,9 @@ export function Composer({ input, handleInputChange, handleFormSubmit, status }:
             </button>
           </div>
         </div>
+        
+        {/* Attachment List */}
+        <AttachmentList />
       </form>
     </div>
   );
