@@ -177,7 +177,7 @@ const updateMemories = async (messages: Array<Message>, config?: Mem0ConfigSetti
 const retrieveMemories = async (prompt: LanguageModelV1Prompt | string, config?: Mem0ConfigSettings) => {
   try {
     const message = typeof prompt === 'string' ? prompt : flattenPrompt(prompt);
-    const systemPrompt = "These are the memories I have stored. Give more weightage to the question by users and try to answer that first. You have to modify your answer based on the memories I have provided. If the memories are irrelevant you can ignore them. Also don't reply to this section of the prompt, or the memories, they are only for your reference. The System prompt starts after text System Message: \n\n";
+    const systemPrompt = "Toto jsou uložené paměti. Dej větší váhu otázkám uživatelů a odpověz na ně přednostně. Uprav svou odpověď podle poskytnutých pamětí. Pokud jsou paměti irelevantní, ignoruj je. Neodpovídej na tuto část promptu ani na paměti - slouží pouze jako reference. Systémový prompt začíná za textem System Message: \n\n";
 
     const memories = await searchInternalMemories(message, config);
     let memoriesText1 = "";
@@ -186,14 +186,15 @@ const retrieveMemories = async (prompt: LanguageModelV1Prompt | string, config?:
 
     try {
       memoriesText1 = memories?.results?.map((memory: any) => {
-        return `Memory: ${memory.memory}\n\n`;
-      }).join("\n\n");
+        return `Memory: ${memory.memory}`;
+      }).join("\n");
 
       if (config?.enable_graph) {
         memoriesText2 = memories?.relations?.map((memory: any) => {
-          return `Relation: ${memory.source} -> ${memory.relationship} -> ${memory.target} \n\n`;
-        }).join("\n\n");
-        graphPrompt = `HERE ARE THE GRAPHS RELATIONS FOR THE PREFERENCES OF THE USER:\n\n ${memoriesText2}`;
+          console.log(memory, "memory");
+          return `Relation: ${memory.source} -> ${memory.relationship} -> ${memory.destination}`;
+        }).join("\n");
+        graphPrompt = `ZDE JSOU GRAFOVÉ VZTAHY PRO UŽIVATELSKÉ PREFERENCE:\n\n ${memoriesText2}`;
       }
     } catch (error) {
       console.error("Error while parsing memories:", error);
