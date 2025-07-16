@@ -38,18 +38,11 @@ export function useAttachments() {
       setIsUploading(true);
       setUploadProgress(fileId, {
         fileId,
-        progress: 0,
         status: 'uploading',
       });
 
-      // Upload přes service s progress callback
-      const attachment = await attachmentService.uploadFile(file, (progress: number) => {
-        setUploadProgress(fileId, {
-          fileId,
-          progress,
-          status: 'uploading',
-        });
-      });
+      // Upload přes service
+      const attachment = await attachmentService.uploadFile(file);
 
       // Přidání do store
       addAttachmentToStore(attachment);
@@ -57,7 +50,6 @@ export function useAttachments() {
       // Success indikátor
       setUploadProgress(fileId, {
         fileId,
-        progress: 100,
         status: 'success',
       });
 
@@ -70,7 +62,6 @@ export function useAttachments() {
       // Error handling
       setUploadProgress(fileId, {
         fileId,
-        progress: 0,
         status: 'error',
       });
 

@@ -2,9 +2,7 @@ import type { Attachment, AttachmentUploadResponse } from '@/types/attachments';
 import { validateFile } from '@/types/attachments';
 import { ulid } from 'ulid';
 
-export interface UploadProgressCallback {
-  (progress: number): void;
-}
+
 
 export class AttachmentService {
   private static instance: AttachmentService;
@@ -21,20 +19,12 @@ export class AttachmentService {
   /**
    * Nahraje soubor na server a vrátí Attachment objekt
    */
-  async uploadFile(
-    file: File, 
-    onProgress?: UploadProgressCallback
-  ): Promise<Attachment> {
+  async uploadFile(file: File): Promise<Attachment> {
     // Klientská validace
     const validation = validateFile(file);
     if (!validation.valid) {
       throw new Error(validation.error);
     }
-
-    // Simulace progress pro lepší UX
-    const progressInterval = onProgress ? setInterval(() => {
-      onProgress(Math.random() * 90); // Random progress do 90%
-    }, 100) : null;
 
     try {
       const formData = new FormData();
@@ -51,19 +41,10 @@ export class AttachmentService {
         throw new Error(result.error || 'Upload failed');
       }
 
-      // Dokončení progress
-      if (onProgress) {
-        onProgress(100);
-      }
-
       return result.attachment;
 
     } catch (error) {
       throw error instanceof Error ? error : new Error('Neočekávaná chyba při uploadu');
-    } finally {
-      if (progressInterval) {
-        clearInterval(progressInterval);
-      }
     }
   }
 

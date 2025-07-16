@@ -4,18 +4,6 @@ import { AttachmentItem } from './attachment-item';
 import { useAttachments } from '@/hooks/useAttachments';
 import { Loader2, AlertCircle } from 'lucide-react';
 
-// Jednoduchý Progress komponent
-function Progress({ value, className }: { value: number; className?: string }) {
-  return (
-    <div className={`w-full bg-gray-200 rounded-full h-2 ${className || ''}`}>
-      <div 
-        className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-        style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
-      />
-    </div>
-  );
-}
-
 export function AttachmentList() {
   const { attachments, uploadProgress } = useAttachments();
   
@@ -56,14 +44,8 @@ export function AttachmentList() {
               {progress.fileId.split('-')[0]} {/* Zobrazí název souboru */}
             </p>
             
-            {progress.status === 'uploading' && (
-              <div className="mt-1">
-                <Progress value={progress.progress} className="h-1.5" />
-              </div>
-            )}
-            
             <p className="text-xs text-gray-500 mt-0.5">
-              {progress.status === 'uploading' && `Nahrávám... ${progress.progress}%`}
+              {progress.status === 'uploading' && 'Nahrávám...'}
               {progress.status === 'success' && 'Nahráno'}
               {progress.status === 'error' && 'Chyba při nahrávání'}
             </p>

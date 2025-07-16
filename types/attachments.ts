@@ -16,7 +16,6 @@ export interface AttachmentUploadResponse {
 
 export interface AttachmentUploadProgress {
   fileId: string;
-  progress: number;
   status: 'uploading' | 'success' | 'error';
 }
 
