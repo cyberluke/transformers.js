@@ -22,7 +22,8 @@ CREATE TABLE "messages" (
 	"id" varchar(26) PRIMARY KEY NOT NULL,
 	"chat_id" varchar(26) NOT NULL,
 	"user_id" varchar(191) NOT NULL,
-	"data" json NOT NULL,
+	"content" text NOT NULL,
+	"parts" json,
 	"role" varchar(20) NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"metadata" json
@@ -36,4 +37,5 @@ CREATE INDEX "embeddingIndex" ON "embeddings" USING hnsw ("embedding" vector_cos
 CREATE INDEX "messages_chat_id_idx" ON "messages" USING btree ("chat_id");--> statement-breakpoint
 CREATE INDEX "messages_user_id_idx" ON "messages" USING btree ("user_id");--> statement-breakpoint
 CREATE INDEX "messages_created_at_idx" ON "messages" USING btree ("created_at");--> statement-breakpoint
+CREATE INDEX "messages_content_idx" ON "messages" USING btree ("content");--> statement-breakpoint
 CREATE INDEX "messages_chat_id_ulid_idx" ON "messages" USING btree ("chat_id","id");

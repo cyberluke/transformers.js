@@ -1,6 +1,7 @@
 'use client';
 
-import { SearchWebTool, GenericTool } from './tools';
+import { SearchWebTool } from '@/lib/tools/search-web';
+import { GenericTool } from './tools';
 
 interface ToolInvocationProps {
   toolInvocation: any;

@@ -141,10 +141,11 @@ export class ThreadService {
         id: message.id,
         createdAt: message.createdAt,
         role: message.role,
-        content: message.data.content,
-        parts: message.data.parts,
+        content: message.content,
+        parts: message.parts,
         metadata: message.metadata,
       }));
+      // TODO: Maybe no need for transoform
 
       console.log(JSON.stringify(transformedMessages, null, 2), "transformedMessages");
 

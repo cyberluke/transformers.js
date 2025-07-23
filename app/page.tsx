@@ -64,7 +64,17 @@ export default function Page() {
         detailed: isDetailed,
       },
     },
-    id: currentThreadId || undefined
+    id: currentThreadId || undefined,
+    experimental_prepareRequestBody({ messages }) {
+      return { 
+        message: messages[messages.length - 1],
+        customData: {
+          fingerprint: fingerprintData?.requestId,
+          chatId: currentThread?.serverChatId, // Pouze server-potvrzené chat ID
+          detailed: isDetailed,
+        }
+      };
+    },
   });
 
   // Sledování server response pro chat ID a title

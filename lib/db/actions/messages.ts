@@ -58,7 +58,8 @@ export const getChatMessagesWithPagination = async (
     const results = await db
       .select({
         id: messages.id,
-        data: messages.data,
+        content: messages.content,
+        parts: messages.parts,
         role: messages.role,
         createdAt: messages.createdAt,
         metadata: messages.metadata,

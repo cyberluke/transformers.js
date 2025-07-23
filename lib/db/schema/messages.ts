@@ -13,7 +13,8 @@ export const messages = pgTable(
       .references(() => chats.id, { onDelete: 'cascade' })
       .notNull(),
     userId: varchar('user_id', { length: 191 }).notNull(),
-    data: json('data').notNull(),
+    content: text('content').notNull(), // Hlavní textový obsah zprávy
+    parts: json('parts'), // Strukturované části (tool invocations, step-start, atd.)
     role: varchar('role', { length: 20 }).notNull(), // 'user', 'assistant', 'system'
     createdAt: timestamp('created_at')
       .notNull()
@@ -24,6 +25,7 @@ export const messages = pgTable(
     chatIdIndex: index('messages_chat_id_idx').on(table.chatId),
     userIdIndex: index('messages_user_id_idx').on(table.userId),
     createdAtIndex: index('messages_created_at_idx').on(table.createdAt),
+    contentIndex: index('messages_content_idx').on(table.content), // Pro full-text search
     // Nový index pro ULID paginaci
     chatIdUlidIndex: index('messages_chat_id_ulid_idx').on(table.chatId, table.id),
   }),
@@ -35,7 +37,8 @@ export type MessageWithoutContext = Omit<Message, 'chatId' | 'userId'>;
 export type NewMessageParams = {
   chatId: string;
   userId: string;
-  data: any;
+  content: string;
+  parts?: any[]; // Optional - some messages might not have complex parts
   role: 'user' | 'assistant' | 'system';
   metadata?: any;
 }; 

@@ -1,5 +1,5 @@
 {
-  "id": "adfa3851-53a7-49a8-8242-b85848251cb3",
+  "id": "d8c5a245-8ab5-4323-837a-6e57e042719f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -209,11 +209,17 @@
           "primaryKey": false,
           "notNull": true
         },
-        "data": {
-          "name": "data",
-          "type": "json",
+        "content": {
+          "name": "content",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "parts": {
+          "name": "parts",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false
         },
         "role": {
           "name": "role",
@@ -271,6 +277,21 @@
           "columns": [
             {
               "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "messages_content_idx": {
+          "name": "messages_content_idx",
+          "columns": [
+            {
+              "expression": "content",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
