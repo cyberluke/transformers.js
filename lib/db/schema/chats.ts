@@ -2,6 +2,12 @@ import { index, pgTable, text, varchar, timestamp, json } from 'drizzle-orm/pg-c
 import { sql } from 'drizzle-orm';
 import { ulid } from 'ulid';
 
+// Interface pro chat metadata
+export interface ChatMetadata {
+  detailed?: boolean;
+  [key: string]: any;
+}
+
 export const chats = pgTable(
   'chats',
   {
@@ -28,16 +34,18 @@ export const chats = pgTable(
 );
 
 // Types
-export type Chat = typeof chats.$inferSelect;
+export type Chat = typeof chats.$inferSelect & {
+  metadata?: ChatMetadata;
+};
 export type ChatWithoutUserId = Omit<Chat, 'userId'>;
 export type NewChatParams = {
   userId: string;
   assistentId?: string;
   title: string;
-  metadata?: any;
+  metadata?: ChatMetadata;
 };
 export type UpdateChatParams = {
   assistentId?: string;
   title?: string;
-  metadata?: any;
+  metadata?: ChatMetadata;
 }; 

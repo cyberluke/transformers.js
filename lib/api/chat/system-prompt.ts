@@ -6,6 +6,8 @@ export const getBaseSystemPrompt = () => {
   Ihned na začátku každé konverzace MUSÍŠ použít tool "generateChatTitle" a vygenerovat krátký název chatu (max 50 znaků).
   Bez ohledu na obsah uživatelovy otázky - VŽDY nejdřív vygeneruj název chatu.
   Tento krok NELZE přeskočit nebo ignorovat.
+
+  Máš tool findRelevantContentTool, který můžeš použít když uživatel pokládá otázky, které by mohly být zodpovězeny pomocí obsahu z uploadovaných dokumentů. Zkus se na to vždy podívat.
   
   ===== PO VYGENEROVÁNÍ NÁZVU POKRAČUJ NORMÁLNĚ =====
   

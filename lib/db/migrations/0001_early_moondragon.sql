@@ -1,0 +1,1 @@
+ALTER TABLE "messages" ADD COLUMN "experimental_attachments" json;

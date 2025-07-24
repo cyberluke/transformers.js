@@ -15,6 +15,7 @@ export const messages = pgTable(
     userId: varchar('user_id', { length: 191 }).notNull(),
     content: text('content').notNull(), // Hlavní textový obsah zprávy
     parts: json('parts'), // Strukturované části (tool invocations, step-start, atd.)
+    experimental_attachments: json('experimental_attachments'), // Attachmenty pro zprávu
     role: varchar('role', { length: 20 }).notNull(), // 'user', 'assistant', 'system'
     createdAt: timestamp('created_at')
       .notNull()
@@ -39,6 +40,7 @@ export type NewMessageParams = {
   userId: string;
   content: string;
   parts?: any[]; // Optional - some messages might not have complex parts
+  experimental_attachments?: any[]; // Optional - attachmenty pro zprávu
   role: 'user' | 'assistant' | 'system';
   metadata?: any;
 }; 

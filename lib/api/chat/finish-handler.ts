@@ -11,7 +11,6 @@ export const createMessageParts = (finishData: any) => {
 
       for (const toolResult of step.toolResults) {
         if (toolResult.type === "tool-result") {
-          console.log(toolResult, "toolResult");
           parts.push({
             type: "tool-invocation",
             toolInvocation: {

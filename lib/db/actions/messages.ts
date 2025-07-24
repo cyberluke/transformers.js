@@ -63,6 +63,7 @@ export const getChatMessagesWithPagination = async (
         role: messages.role,
         createdAt: messages.createdAt,
         metadata: messages.metadata,
+        experimental_attachments: messages.experimental_attachments,
         // chatId a userId vynecháno - jsou známo z kontextu
       })
       .from(messages)
