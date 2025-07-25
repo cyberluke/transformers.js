@@ -1,4 +1,5 @@
 import { parse } from 'node-html-parser';
+import fs from 'fs';
 
 export const maxDuration = 30;
 
@@ -125,6 +126,7 @@ export async function POST(req: Request) {
     }
 
     const tikaData = await tikaResponse.json();
+    fs.writeFileSync('tikaData.json', JSON.stringify(tikaData, null, 2));
     console.log('Tika response:', JSON.stringify(tikaData, null, 2));
     
     // Extrahujeme první objekt z pole (Tika vrací pole s jedním objektem)

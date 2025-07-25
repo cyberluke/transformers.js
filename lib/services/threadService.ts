@@ -1,9 +1,9 @@
-import { Message } from '@ai-sdk/react';
+import { AppMessage } from "@/types/messages";
 
 export interface Thread {
   id: string;
   title: string;
-  messages: Message[];
+  messages: AppMessage[];
   createdAt: Date;
   updatedAt: Date;
   serverChatId?: string;
@@ -17,7 +17,7 @@ export interface ThreadsResponse {
 
 export interface CreateThreadRequest {
   title?: string;
-  messages?: Message[];
+  messages?: AppMessage[];
 }
 
 export class ThreadService {

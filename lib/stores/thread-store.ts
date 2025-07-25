@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { Message } from '@ai-sdk/react';
 import { useFingerprintStore } from './fingerprint-store';
+import { AppMessage } from '@/types/messages';
 
 export interface Thread {
   id: string;
   title: string;
-  messages: Message[];
+  messages: AppMessage[];
   createdAt: Date;
   updatedAt: Date;
   serverChatId?: string; // Server-generated chat ID
@@ -24,11 +24,11 @@ interface ThreadStore {
   createThread: () => string;
   switchThread: (threadId: string) => void;
   updateThread: (threadId: string, updates: Partial<Thread>) => void;
-  addMessageToThread: (threadId: string, message: Message) => void;
-  updateThreadMessages: (threadId: string, messages: Message[]) => void;
+  addMessageToThread: (threadId: string, message: AppMessage) => void;
+  updateThreadMessages: (threadId: string, messages: AppMessage[]) => void;
   setServerChatId: (threadId: string, serverChatId: string) => void;
   deleteThread: (threadId: string) => void;
-  generateThreadTitle: (messages: Message[]) => string;
+  generateThreadTitle: (messages: AppMessage[]) => string;
   loadThreadsFromServer: (cursor?: string) => Promise<void>;
 }
 
@@ -75,7 +75,7 @@ export const useThreadStore = create<ThreadStore>()(
         }));
       },
       
-      addMessageToThread: (threadId: string, message: Message) => {
+      addMessageToThread: (threadId: string, message: AppMessage) => {
         set(state => ({
           threads: state.threads.map(thread =>
             thread.id === threadId
@@ -89,7 +89,7 @@ export const useThreadStore = create<ThreadStore>()(
         }));
       },
       
-      updateThreadMessages: (threadId: string, messages: Message[]) => {
+      updateThreadMessages: (threadId: string, messages: AppMessage[]) => {
         const { generateThreadTitle } = get();
         
         set(state => ({
@@ -131,7 +131,7 @@ export const useThreadStore = create<ThreadStore>()(
         });
       },
       
-      generateThreadTitle: (messages: Message[]) => {
+      generateThreadTitle: (messages: AppMessage[]) => {
         const firstUserMessage = messages.find(m => m.role === 'user');
         if (!firstUserMessage) return 'Nový chat';
         

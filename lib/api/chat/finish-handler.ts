@@ -1,4 +1,5 @@
 import { createMessage } from '@/lib/db/actions/messages';
+import fs from 'fs';
 
 // Vytvoření parts z finishData
 export const createMessageParts = (finishData: any) => {
@@ -53,6 +54,8 @@ export const saveAssistantMessage = async (chatId: string, userId: string, textC
 export const createFinishHandler = (chatId: string, userId: string) => {
   return (finishData: any) => {
     console.log("finishData");
+
+    // fs.writeFileSync('finishData.json', JSON.stringify(finishData, null, 2));
 
     const { parts, textContent } = createMessageParts(finishData);
     

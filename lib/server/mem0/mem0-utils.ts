@@ -1,5 +1,6 @@
 import { LanguageModelV1Prompt } from 'ai';
 import { Mem0ConfigSettings } from '@mem0/vercel-ai-provider';
+import { AppMessage } from '@/types/messages';
 // import { loadApiKey } from '@ai-sdk/provider-utils';
 
 interface Message {
@@ -174,7 +175,7 @@ const updateMemories = async (messages: Array<Message>, config?: Mem0ConfigSetti
   }
 }
 
-const retrieveMemories = async (prompt: LanguageModelV1Prompt | string, config?: Mem0ConfigSettings) => {
+const retrieveMemories = async (prompt: AppMessage[] | string, config?: Mem0ConfigSettings) => {
   try {
     const message = typeof prompt === 'string' ? prompt : flattenPrompt(prompt);
     const systemPrompt = "Toto jsou uložené paměti. Dej větší váhu otázkám uživatelů a odpověz na ně přednostně. Uprav svou odpověď podle poskytnutých pamětí. Pokud jsou paměti irelevantní, ignoruj je. Neodpovídej na tuto část promptu ani na paměti - slouží pouze jako reference. Systémový prompt začíná za textem System Message: \n\n";
@@ -202,7 +203,7 @@ const retrieveMemories = async (prompt: LanguageModelV1Prompt | string, config?:
 
     if (!memories || memories?.length === 0) {
       return {
-        system: "",
+        systemMessage: "",
         memories: []
       };
     }

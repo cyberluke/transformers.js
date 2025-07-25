@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ArrowRightIcon, ZapIcon, LightbulbIcon } from "lucide-react";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { AttachmentButton, AttachmentList } from "@/components/attachments";
+import { AgentSelector } from "@/components/agent-selector";
 
 interface WelcomeScreenProps {
   input: string;
@@ -12,6 +13,8 @@ interface WelcomeScreenProps {
   status: string;
   isDetailed: boolean;
   setIsDetailed: (value: boolean) => void;
+  selectedAgent: string | null;
+  onAgentSelect: (agentId: string) => void;
 }
 
 export function WelcomeScreen({ 
@@ -20,7 +23,9 @@ export function WelcomeScreen({
   handleFormSubmit, 
   status, 
   isDetailed, 
-  setIsDetailed 
+  setIsDetailed,
+  selectedAgent,
+  onAgentSelect
 }: WelcomeScreenProps) {
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -32,7 +37,16 @@ export function WelcomeScreen({
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <div className="flex w-full max-w-[var(--thread-max-width)] flex-grow flex-col gap-12">
+      <div className="flex w-full max-w-[var(--thread-max-width)] flex-grow flex-col gap-8">
+        {/* Agent Selection */}
+        <div className="w-full">
+          <AgentSelector 
+            selectedAgent={selectedAgent}
+            onAgentSelect={onAgentSelect}
+            className="max-w-2xl mx-auto"
+          />
+        </div>
+        
         <div className="flex w-full flex-grow flex-col items-center justify-center">
           <p className="font-regular font-display text-4xl md:text-5xl">Co se chcete dozvědět?</p>
         </div>

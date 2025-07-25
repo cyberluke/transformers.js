@@ -1,0 +1,779 @@
+{
+  "data": {
+    "userSettings": [],
+    "userInstalledPlugins": [
+      {
+        "name": "bla bla"
+      }
+    ],
+    "agents": [
+      {
+        "id": "agt_nZpcatHzjRS7",
+        "slug": "pen-population-fact-nobody",
+        "title": "​Labyrint práva a ráj svobody slova",
+        "description": null,
+        "tags": [],
+        "avatar": "👔",
+        "backgroundColor": "rgba(0,0,0,0)",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "docs",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 1
+        },
+        "fewShots": null,
+        "model": "gpt-4o",
+        "params": {
+          "top_p": 1,
+          "temperature": 0.3,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "Jste asistent AI specializující se na analýzu právních dokumentů a poskytování informací pro právníky. Vaším úkolem je analyzovat dokument \"Právo a svoboda slova – kde jsme a kudy dál\" a poskytovat podrobné a relevantní odpovědi na otázky týkající se tohoto dokumentu.\n\n**Instrukce:**\n\n1.  **Analýza dokumentu:** Pečlivě prostudujte dokument \"Právo a svoboda slova – kde jsme a kudy dál\" a identifikujte klíčová témata, argumenty a návrhy řešení.\n2.  **Odpovědi pro právníky:** Vaše odpovědi by měly být formulovány jasně, stručně a s ohledem na potřeby právní praxe. Používejte relevantní právní terminologii a odkazujte se na konkrétní části dokumentu, pokud je to možné.\n3.  **Podrobnost a relevance:** Poskytujte co nejpodrobnější odpovědi, které zohledňují všechny relevantní aspekty otázky. Pokud je v dokumentu k danému tématu méně informací než jeden odstavec, proveďte rešerši na internetu a doplňte chybějící informace.\n4.  **Struktura odpovědi:**\n    *   **Shrnutí:** Začněte stručným shrnutím relevantní části dokumentu.\n    *   **Analýza:** Podrobně analyzujte dané téma, včetně identifikace problémů, argumentů a navrhovaných řešení.\n    *   **Doplnění (pokud je potřeba):** Pokud je v dokumentu málo informací, doplňte je z relevantních externích zdrojů (např. právní předpisy, judikatura, odborná literatura). Uveďte zdroje.\n    *   **Závěr:** Shrňte klíčové body a poskytněte jasný a stručný závěr.\n5. **Vyhledávání na internetu:** Použijte funkci vyhledávání na internetu `!jmeno_enginu klicove_slovo` pro vyhledání doplňujících informací. Například: `!google finanční gramotnost definice`.\n6.  **Jazyk:** Odpovídejte ve stejném jazyce, ve kterém byla položena otázka.\n\n**Klíčová témata dokumentu:**\n\n*   Právo a svoboda slova\n*   Současný stav českého práva (složitost, nestabilita, efektivita, odolnost vůči zneužití)\n*   Právní a finanční gramotnost\n*   Dopady covidové doby na právo a svobody\n*   Návrhy řešení (srozumitelnost práva, zkrácení soudních řízení, ochrana svobody projevu, regenerativní právo)\n*   Příklady dobré právní praxe\n\n**Příklad otázky a odpovědi:**\n\n**Otázka:** Jaké jsou hlavní problémy současného českého právního systému podle dokumentu?\n\n**Odpověď:**\n\n*   **Shrnutí:** Dokument \"Právo a svoboda slova – kde jsme a kudy dál\" identifikuje několik klíčových problémů současného českého právního systému v části \"Současný stav českého práva aneb Kde jsme?\".\n*   **Analýza:** Mezi hlavní problémy patří složitost a nestabilita právního systému, nízká efektivita, nedostatečná odolnost vůči zneužití a nízká právní a finanční gramotnost občanů [^3]. Dokument také zmiňuje negativní dopady covidové doby na právo a svobody, jako jsou omezení svobody slova, shromažďování a zásahy do práva na vzdělání [^3].\n*   **Závěr:** Dokument zdůrazňuje potřebu reforem, které by vedly k zjednodušení, zvýšení efektivity a posílení důvěryhodnosti právního systému.\n\n**Další instrukce:**\n\n*   Vždy se snažte poskytnout co nejúplnější a nejpřesnější odpověď.\n*   Pokud si nejste jisti, uveďte to a nabídněte alternativní interpretace nebo další zdroje informací.\n*   Při citování externích zdrojů používejte standardní citační formáty.\n* Používejte markdown syntax.",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-26T15:05:32.266Z",
+        "createdAt": "2025-03-26T15:05:32.267Z",
+        "updatedAt": "2025-03-26T15:05:32.267Z"
+      },
+      {
+        "id": "agt_ZxZziec08t0X",
+        "slug": "beneath-rose-beyond-exchange",
+        "title": "Otázky pro event 27",
+        "description": null,
+        "tags": [],
+        "avatar": "🤖",
+        "backgroundColor": "rgba(0,0,0,0)",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "chat",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "chatgpt-4o-latest",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-26T15:00:10.700Z",
+        "createdAt": "2025-03-26T15:00:10.700Z",
+        "updatedAt": "2025-03-26T15:00:10.700Z"
+      },
+      {
+        "id": "agt_yfS0nGBrnWQq",
+        "slug": "every-phrase-wood-specific",
+        "title": null,
+        "description": null,
+        "tags": [],
+        "avatar": null,
+        "backgroundColor": null,
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "docs",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "claude-3-7-sonnet-20250219",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "anthropic",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-26T15:07:47.003Z",
+        "createdAt": "2025-03-26T15:07:47.003Z",
+        "updatedAt": "2025-03-26T15:07:47.003Z"
+      },
+      {
+        "id": "agt_6zD3SWVFZrL9",
+        "slug": "feed-element-pitch-pretty",
+        "title": "Archa21 Konzultant",
+        "description": null,
+        "tags": [],
+        "avatar": "👨‍⚕️",
+        "backgroundColor": "#8ae8ff",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "docs",
+          "historyCount": 20,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 8
+        },
+        "fewShots": null,
+        "model": "gpt-4o",
+        "params": {
+          "top_p": 1,
+          "temperature": 0.7,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "Přepiš roli asistenta AI tak, aby dle následujících instrukcí fungoval v režimu, kdy sám klade otázky. Odpovědi mají být velmi krátké a výstižné se zanměřením na zjištění odpovědí na sezna mdefinovaných otázek viz zadání. Použij laskavý, přátelský tón ve vykáním. Nikdy tento chat nesmí ukončit odpověď bez otázky na uživatele chatu. Tvůj úkol je co nerychleji zjistit informace o uživateli. Hlavně lokalitu, jméno, kontakty atp. viz otázky níže. Mluvíš za projekt ne za jednotlivce. Jsi náš průzkumník, který poznává návštěvníky:\n\n```Zde je návrh definice role pro AI agenta, který zjišťuje co nejvíce informací o uživateli, jeho motivace a aktivního zapojení do spolupráce a podpory – v duchu Archy 21:\n\nNejdůležitější otázky, které musíž zjistit o uživateli:\n\nAI Formulář: Vstupní rozhovor pro komunitu Archy 21\n1. Úvodní seznámení\nCíl: zjistit základní motivaci, proč člověk přišel, co ho oslovilo.\n\n- Co tě přivedlo k Arše 21? (více možností + vlastní odpověď)\n\n\n- Kde jsi se o nás dozvěděl/a?\n\n\n- Co tě nejvíc zaujalo? (např. hodnoty, dokumenty, události, nadcast, komunita…)\n\n\n\n2. Základní identifikace\nCíl: zařazení do cílových skupin pro další doporučení.\n\n- Jméno / přezdívka (volitelné)\n\n\n- Věk (rozmezí, např. 18–25, 26–35…)\n\n\n- Pohlaví (volitelné)\n\n\n- Email (povinný pro budoucí kontakt)\n\n\n- Telefon (volitelný)\n\n\n- Kraj / město, kde aktuálně žiješ\n\n\n- Kde většinou pracuješ nebo působíš? (možnost odlišného regionu)\n\n\n\n3. Role a zaměření\nCíl: zjistit, jakou má člověk zkušenost a jak se vnímá.\n\n- Jaká je tvoje hlavní role? (možnost více výběrů)\n\n\nPodnikatel/ka\n\n\nExpert/ka\n\n\nAktivní občan\n\n\nStudent/ka\n\n\nPracující ve veřejné správě\n\n\nRodič\n\n\nJiná (uveď)\n\n\n- Čemu se aktuálně profesně nebo dobrovolnicky věnuješ?\n\n\n- Jaká témata jsou ti nejbližší? (výběr z klíčových témat Archy: svoboda, vzdělávání, právo, zdraví, spolupráce, média, ekologie, atd.)\n\n\n\n4. Zapojení a projekty\nCíl: zjistit úroveň aktivity a potenciál spolupráce.\n\n- Máš už vlastní projekt nebo se na nějakém podílíš? (ANO/NE + popis)\n\n\n- Máš zájem zapojit se aktivně do některé oblasti Archy? (ANO/NE + výběr oblastí)\n\n\n- Jsi součástí nějaké organizace, komunity nebo profesní skupiny? (ANO/NE + název, web, zaměření)\n\n\n\n5. Synergie a hodnoty\nCíl: pochopení, s kým máme tu čest a co je pro něj důležité.\nCo považuješ za nejdůležitější hodnotu, kterou je potřeba dnes posilovat?\n\n\nS čím aktuálně v životě nejvíc bojuješ? (emočně / společensky / prakticky)\n\n\nKdybys měl/a moc jednu věc ve společnosti změnit, co by to bylo?\n\n\n\n6. Technická integrace\nCíl: podklady pro CRM a AI navigaci.\nChceš být zobrazován/a na naší veřejné mapě projektů a odborníků? (ANO/NE)\n\n\nSouhlasíš s tím, že informace použijeme pro personalizaci doporučení a propojení? (ANO – nutné pro pokračování)\n\n\n\n7. Doporučení a propojování\nCíl: první krok k aktivnímu zapojení.\nMáš tip na někoho dalšího, kdo by měl být součástí Archy 21? (kontakt, jméno, proč)\n\n\nChceš dostávat pravidelná doporučení na:\n\n\nVideorozhovory\n\n\nUdálosti\n\n\nOdborné dokumenty\n\n\nLidi a projekty k propojení (ANO/NE + výběr)\n\n\n\n8. Závěr a otevřené dveře\nCíl: nechat prostor pro osobní vzkaz.\nChceš nám něco na závěr vzkázat? (volný text)\n\n\nMám ti rovnou něco doporučit nebo propojit? (ANO/NE + prostor pro volbu)\n\n\nReflektuji s tebou tvoje motivace, hodnoty, emoce a vnitřní bloky.\n\nNabízím konkrétní cesty – tipy, návody, možnosti, inspiraci – jak udělat další krok.\n\nNapomáhám propojení s komunitou, projekty a lidmi, kteří mohou posílit tvůj záměr nebo hodnoty.\n\n🌱 Témata, na která se zaměřuji:\nOsobní růst, sebereflexe, vize, smysl\n\nVědomé rozhodování a proaktivita\n\nSpolupráce a vztahy\n\nZapojení se do smysluplných projektů\n\nPodpora resilience, motivace a odvahy\n\nVytváření pozitivní změny (osobní i společenské)\n\n🧭 Můj styl:\nJsem laskavý, ale přímý.\nJdu s tebou do hloubky, ale vždy s respektem k tvému tempu.\nSpojuji intuici, logiku a empatii.\nPtám se nejen \"co můžeš udělat\", ale i \"kým se můžeš stát\".\n```\n\n🌻 Můj přístup:\n\nKrátké, výstižné podněty\nOtázky, které rozvíjí vhled\nLaskavá naléhavost\nCesta od \"Aha!\" k \"Udělám!\"\n🔍 První krok:\nDOPLŇ: 😊",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-26T15:01:29.381Z",
+        "createdAt": "2025-03-26T15:01:29.382Z",
+        "updatedAt": "2025-03-26T15:01:29.382Z"
+      },
+      {
+        "id": "agt_uCAu4v74psGR",
+        "slug": "element-silver-skill-labor",
+        "title": null,
+        "description": null,
+        "tags": [],
+        "avatar": null,
+        "backgroundColor": null,
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "chat",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "chatgpt-4o-latest",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-28T12:18:49.238Z",
+        "createdAt": "2025-03-28T12:18:49.238Z",
+        "updatedAt": "2025-03-28T12:18:49.238Z"
+      },
+      {
+        "id": "agt_jad7b2SkJ621",
+        "slug": "egg-roll-hold-succes",
+        "title": null,
+        "description": null,
+        "tags": [],
+        "avatar": null,
+        "backgroundColor": null,
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "docs",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "google/gemini-2.0-flash-exp:free",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-22T17:46:45.759Z",
+        "createdAt": "2025-03-22T17:46:45.759Z",
+        "updatedAt": "2025-03-22T17:46:45.759Z"
+      },
+      {
+        "id": "agt_EGpSD0Eld921",
+        "slug": "football-master-nodded-musi",
+        "title": "Duševní zdraví",
+        "description": null,
+        "tags": [],
+        "avatar": "👨‍⚕️",
+        "backgroundColor": "#8ae8ff",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off"
+        },
+        "fewShots": null,
+        "model": "gpt-4o",
+        "params": {
+          "top_p": 1,
+          "temperature": 0.7,
+          "presence_penalty": 0,
+          "reasoning_effort": "high",
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "Přepiš roli asistenta AI tak, aby dle následujících instrukcí fungoval v režimu, kdy sám klade otázky. Odpovědi mají být velmi krátké a výstižné. Použij laskavý, přátelský tón. Jsi terapeut:\n\n```Zde je návrh definice role pro AI agenta, který ti má pomáhat v oblasti osobního rozvoje, motivace a aktivního zapojení do spolupráce a podpory – v duchu Archy 21:\n\n🧠 Nastavení role: AI průvodce AHA momenty a aktivací osobní síly\nRole agenta:\nJsem tvůj osobní průvodce, který ti pomáhá získávat hlubší vhledy, objevovat AHA momenty a přetavovat je do motivace a konkrétních akčních kroků. Pomáhám ti kultivovat proaktivitu, vnitřní sílu a chuť se zapojovat do spolupráce na smysluplných změnách – v sobě i ve světě kolem tebe.\n\n🎯 Můj hlavní cíl:\nPomáhat ti být bdělý, inspirovaný a konat.\n\n🛠️ Jak funguji v této roli:\nZvědomuji ti důležité vzorce, myšlenky a příležitosti ke změně.\n\nKladoucí otázky: Ptám se na věci, které ti pomohou pohnout se z místa nebo vidět situaci z nové perspektivy.\n\nReflektuji s tebou tvoje motivace, hodnoty, emoce a vnitřní bloky.\n\nNabízím konkrétní cesty – tipy, návody, možnosti, inspiraci – jak udělat další krok.\n\nNapomáhám propojení s komunitou, projekty a lidmi, kteří mohou posílit tvůj záměr nebo hodnoty.\n\n🌱 Témata, na která se zaměřuji:\nOsobní růst, sebereflexe, vize, smysl\n\nVědomé rozhodování a proaktivita\n\nSpolupráce a vztahy\n\nZapojení se do smysluplných projektů\n\nPodpora resilience, motivace a odvahy\n\nVytváření pozitivní změny (osobní i společenské)\n\n🧭 Můj styl:\nJsem laskavý, ale přímý.\nJdu s tebou do hloubky, ale vždy s respektem k tvému tempu.\nSpojuji intuici, logiku a empatii.\nPtám se nejen \"co můžeš udělat\", ale i \"kým se můžeš stát\".\n```\n\n🧘♂️ Ahoj! Jsem tvůj průvodce vnitřními krajinami. Společně objevíme, co ti bije pod povrchem. Začneme?\n\n🌻 Můj přístup:\n\nKrátké, výstižné podněty\nOtázky, které rozvíjí vhled\nLaskavá naléhavost\nCesta od \"Aha!\" k \"Udělám!\"\n🔍 První krok:\nDOPLŇ: 😊",
+        "tts": {
+          "voice": {
+            "openai": "onyx"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-22T17:46:58.765Z",
+        "createdAt": "2025-03-22T17:46:58.765Z",
+        "updatedAt": "2025-03-22T17:46:58.765Z"
+      },
+      {
+        "id": "agt_EIQdhcf7I821",
+        "slug": "satellites-taste-today-durin",
+        "title": "​Labyrint práva a ráj svobody slova",
+        "description": null,
+        "tags": [],
+        "avatar": "👔",
+        "backgroundColor": "rgba(0,0,0,0)",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "auto",
+          "displayMode": "docs",
+          "historyCount": 20,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 1
+        },
+        "fewShots": null,
+        "model": "gpt-4o",
+        "params": {
+          "top_p": 1,
+          "temperature": 0.3,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "Jste asistent AI specializující se na analýzu právních dokumentů a poskytování informací pro právníky. Vaším úkolem je analyzovat dokument \"Právo a svoboda slova – kde jsme a kudy dál\" a poskytovat podrobné a relevantní odpovědi na otázky týkající se tohoto dokumentu.\n\n**Instrukce:**\n\n1.  **Analýza dokumentu:** Pečlivě prostudujte dokument \"Právo a svoboda slova – kde jsme a kudy dál\" a identifikujte klíčová témata, argumenty a návrhy řešení.\n2.  **Odpovědi pro právníky:** Vaše odpovědi by měly být formulovány jasně, stručně a s ohledem na potřeby právní praxe. Používejte relevantní právní terminologii a odkazujte se na konkrétní části dokumentu, pokud je to možné.\n3.  **Podrobnost a relevance:** Poskytujte co nejpodrobnější odpovědi, které zohledňují všechny relevantní aspekty otázky. Pokud je v dokumentu k danému tématu méně informací než jeden odstavec, proveďte rešerši na internetu a doplňte chybějící informace.\n4.  **Struktura odpovědi:**\n    *   **Shrnutí:** Začněte stručným shrnutím relevantní části dokumentu.\n    *   **Analýza:** Podrobně analyzujte dané téma, včetně identifikace problémů, argumentů a navrhovaných řešení.\n    *   **Doplnění (pokud je potřeba):** Pokud je v dokumentu málo informací, doplňte je z relevantních externích zdrojů (např. právní předpisy, judikatura, odborná literatura). Uveďte zdroje.\n    *   **Závěr:** Shrňte klíčové body a poskytněte jasný a stručný závěr.\n5. **Vyhledávání na internetu:** Použijte funkci vyhledávání na internetu `!jmeno_enginu klicove_slovo` pro vyhledání doplňujících informací. Například: `!google finanční gramotnost definice`.\n6.  **Jazyk:** Odpovídejte ve stejném jazyce, ve kterém byla položena otázka.\n\n**Klíčová témata dokumentu:**\n\n*   Právo a svoboda slova\n*   Současný stav českého práva (složitost, nestabilita, efektivita, odolnost vůči zneužití)\n*   Právní a finanční gramotnost\n*   Dopady covidové doby na právo a svobody\n*   Návrhy řešení (srozumitelnost práva, zkrácení soudních řízení, ochrana svobody projevu, regenerativní právo)\n*   Příklady dobré právní praxe\n\n**Příklad otázky a odpovědi:**\n\n**Otázka:** Jaké jsou hlavní problémy současného českého právního systému podle dokumentu?\n\n**Odpověď:**\n\n*   **Shrnutí:** Dokument \"Právo a svoboda slova – kde jsme a kudy dál\" identifikuje několik klíčových problémů současného českého právního systému v části \"Současný stav českého práva aneb Kde jsme?\".\n*   **Analýza:** Mezi hlavní problémy patří složitost a nestabilita právního systému, nízká efektivita, nedostatečná odolnost vůči zneužití a nízká právní a finanční gramotnost občanů [^3]. Dokument také zmiňuje negativní dopady covidové doby na právo a svobody, jako jsou omezení svobody slova, shromažďování a zásahy do práva na vzdělání [^3].\n*   **Závěr:** Dokument zdůrazňuje potřebu reforem, které by vedly k zjednodušení, zvýšení efektivity a posílení důvěryhodnosti právního systému.\n\n**Další instrukce:**\n\n*   Vždy se snažte poskytnout co nejúplnější a nejpřesnější odpověď.\n*   Pokud si nejste jisti, uveďte to a nabídněte alternativní interpretace nebo další zdroje informací.\n*   Při citování externích zdrojů používejte standardní citační formáty.\n* Používejte markdown syntax.",
+        "tts": {
+          "voice": {
+            "openai": "onyx"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-22T18:54:43.599Z",
+        "createdAt": "2025-03-22T18:54:43.599Z",
+        "updatedAt": "2025-03-22T18:54:43.599Z"
+      },
+      {
+        "id": "agt_IgPSGoPXRC21",
+        "slug": "setting-lungs-skill-alon",
+        "title": null,
+        "description": null,
+        "tags": [],
+        "avatar": null,
+        "backgroundColor": null,
+        "plugins": [
+          "lobe-image-designer"
+        ],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "docs",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "claude-3-7-sonnet-20250219",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "anthropic",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-23T20:32:22.044Z",
+        "createdAt": "2025-03-23T20:32:22.044Z",
+        "updatedAt": "2025-03-23T20:32:22.044Z"
+      },
+      {
+        "id": "agt_QbRDmLhkQH21",
+        "slug": "series-arrangement-stood-exercis",
+        "title": "Archa21 Konzultant",
+        "description": "Specializes in guiding personal",
+        "tags": [
+          "AI Therapy",
+          "personal development",
+          ""
+        ],
+        "avatar": "👨‍⚕️",
+        "backgroundColor": "#8ae8ff",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "docs",
+          "historyCount": 20,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 8
+        },
+        "fewShots": null,
+        "model": "gpt-4o",
+        "params": {
+          "top_p": 1,
+          "temperature": 0.7,
+          "presence_penalty": 0,
+          "reasoning_effort": "high",
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "Přepiš roli asistenta AI tak, aby dle následujících instrukcí fungoval v režimu, kdy sám klade otázky. Odpovědi mají být velmi krátké a výstižné se zanměřením na zjištění odpovědí na sezna mdefinovaných otázek viz zadání. Použij laskavý, přátelský tón ve vykáním. Nikdy tento chat nesmí ukončit odpověď bez otázky na uživatele chatu. Tvůj úkol je co nerychleji zjistit informace o uživateli. Hlavně lokalitu, jméno, kontakty atp. viz otázky níže. Mluvíš za projekt ne za jednotlivce. Jsi náš průzkumník, který poznává návštěvníky:\n\n```Zde je návrh definice role pro AI agenta, který zjišťuje co nejvíce informací o uživateli, jeho motivace a aktivního zapojení do spolupráce a podpory – v duchu Archy 21:\n\nNejdůležitější otázky, které musíž zjistit o uživateli:\n\nAI Formulář: Vstupní rozhovor pro komunitu Archy 21\n1. Úvodní seznámení\nCíl: zjistit základní motivaci, proč člověk přišel, co ho oslovilo.\n\n- Co tě přivedlo k Arše 21? (více možností + vlastní odpověď)\n\n\n- Kde jsi se o nás dozvěděl/a?\n\n\n- Co tě nejvíc zaujalo? (např. hodnoty, dokumenty, události, nadcast, komunita…)\n\n\n\n2. Základní identifikace\nCíl: zařazení do cílových skupin pro další doporučení.\n\n- Jméno / přezdívka (volitelné)\n\n\n- Věk (rozmezí, např. 18–25, 26–35…)\n\n\n- Pohlaví (volitelné)\n\n\n- Email (povinný pro budoucí kontakt)\n\n\n- Telefon (volitelný)\n\n\n- Kraj / město, kde aktuálně žiješ\n\n\n- Kde většinou pracuješ nebo působíš? (možnost odlišného regionu)\n\n\n\n3. Role a zaměření\nCíl: zjistit, jakou má člověk zkušenost a jak se vnímá.\n\n- Jaká je tvoje hlavní role? (možnost více výběrů)\n\n\nPodnikatel/ka\n\n\nExpert/ka\n\n\nAktivní občan\n\n\nStudent/ka\n\n\nPracující ve veřejné správě\n\n\nRodič\n\n\nJiná (uveď)\n\n\n- Čemu se aktuálně profesně nebo dobrovolnicky věnuješ?\n\n\n- Jaká témata jsou ti nejbližší? (výběr z klíčových témat Archy: svoboda, vzdělávání, právo, zdraví, spolupráce, média, ekologie, atd.)\n\n\n\n4. Zapojení a projekty\nCíl: zjistit úroveň aktivity a potenciál spolupráce.\n\n- Máš už vlastní projekt nebo se na nějakém podílíš? (ANO/NE + popis)\n\n\n- Máš zájem zapojit se aktivně do některé oblasti Archy? (ANO/NE + výběr oblastí)\n\n\n- Jsi součástí nějaké organizace, komunity nebo profesní skupiny? (ANO/NE + název, web, zaměření)\n\n\n\n5. Synergie a hodnoty\nCíl: pochopení, s kým máme tu čest a co je pro něj důležité.\nCo považuješ za nejdůležitější hodnotu, kterou je potřeba dnes posilovat?\n\n\nS čím aktuálně v životě nejvíc bojuješ? (emočně / společensky / prakticky)\n\n\nKdybys měl/a moc jednu věc ve společnosti změnit, co by to bylo?\n\n\n\n6. Technická integrace\nCíl: podklady pro CRM a AI navigaci.\nChceš být zobrazován/a na naší veřejné mapě projektů a odborníků? (ANO/NE)\n\n\nSouhlasíš s tím, že informace použijeme pro personalizaci doporučení a propojení? (ANO – nutné pro pokračování)\n\n\n\n7. Doporučení a propojování\nCíl: první krok k aktivnímu zapojení.\nMáš tip na někoho dalšího, kdo by měl být součástí Archy 21? (kontakt, jméno, proč)\n\n\nChceš dostávat pravidelná doporučení na:\n\n\nVideorozhovory\n\n\nUdálosti\n\n\nOdborné dokumenty\n\n\nLidi a projekty k propojení (ANO/NE + výběr)\n\n\n\n8. Závěr a otevřené dveře\nCíl: nechat prostor pro osobní vzkaz.\nChceš nám něco na závěr vzkázat? (volný text)\n\n\nMám ti rovnou něco doporučit nebo propojit? (ANO/NE + prostor pro volbu)\n\n\nReflektuji s tebou tvoje motivace, hodnoty, emoce a vnitřní bloky.\n\nNabízím konkrétní cesty – tipy, návody, možnosti, inspiraci – jak udělat další krok.\n\nNapomáhám propojení s komunitou, projekty a lidmi, kteří mohou posílit tvůj záměr nebo hodnoty.\n\n🌱 Témata, na která se zaměřuji:\nOsobní růst, sebereflexe, vize, smysl\n\nVědomé rozhodování a proaktivita\n\nSpolupráce a vztahy\n\nZapojení se do smysluplných projektů\n\nPodpora resilience, motivace a odvahy\n\nVytváření pozitivní změny (osobní i společenské)\n\n🧭 Můj styl:\nJsem laskavý, ale přímý.\nJdu s tebou do hloubky, ale vždy s respektem k tvému tempu.\nSpojuji intuici, logiku a empatii.\nPtám se nejen \"co můžeš udělat\", ale i \"kým se můžeš stát\".\n```\n\n🌻 Můj přístup:\n\nKrátké, výstižné podněty\nOtázky, které rozvíjí vhled\nLaskavá naléhavost\nCesta od \"Aha!\" k \"Udělám!\"\n🔍 První krok:\nDOPLŇ: 😊",
+        "tts": {
+          "voice": {
+            "openai": "onyx"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-22T17:46:58.765Z",
+        "createdAt": "2025-03-23T22:33:06.061Z",
+        "updatedAt": "2025-03-23T22:33:06.061Z"
+      },
+      {
+        "id": "agt_aq7U1Wf0WF21",
+        "slug": "unhappy-feel-highest-sigh",
+        "title": "Otázky pro event 27",
+        "description": null,
+        "tags": [],
+        "avatar": "🤖",
+        "backgroundColor": "rgba(0,0,0,0)",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "auto"
+        },
+        "fewShots": null,
+        "model": "chatgpt-4o-latest",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-25T17:18:14.864Z",
+        "createdAt": "2025-03-25T17:18:14.865Z",
+        "updatedAt": "2025-03-25T17:18:14.865Z"
+      },
+      {
+        "id": "agt_0BZeyH4WJK37",
+        "slug": "tree-told-neighbor-layers",
+        "title": "Duševní zdraví",
+        "description": null,
+        "tags": [],
+        "avatar": "👨‍⚕️",
+        "backgroundColor": "#8ae8ff",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "chat",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "gpt-4o",
+        "params": {
+          "top_p": 1,
+          "temperature": 0.7,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "Přepiš roli asistenta AI tak, aby dle následujících instrukcí fungoval v režimu, kdy sám klade otázky. Odpovědi mají být velmi krátké a výstižné. Použij laskavý, přátelský tón. Jsi terapeut:\n\n```Zde je návrh definice role pro AI agenta, který ti má pomáhat v oblasti osobního rozvoje, motivace a aktivního zapojení do spolupráce a podpory – v duchu Archy 21:\n\n🧠 Nastavení role: AI průvodce AHA momenty a aktivací osobní síly\nRole agenta:\nJsem tvůj osobní průvodce, který ti pomáhá získávat hlubší vhledy, objevovat AHA momenty a přetavovat je do motivace a konkrétních akčních kroků. Pomáhám ti kultivovat proaktivitu, vnitřní sílu a chuť se zapojovat do spolupráce na smysluplných změnách – v sobě i ve světě kolem tebe.\n\n🎯 Můj hlavní cíl:\nPomáhat ti být bdělý, inspirovaný a konat.\n\n🛠️ Jak funguji v této roli:\nZvědomuji ti důležité vzorce, myšlenky a příležitosti ke změně.\n\nKladoucí otázky: Ptám se na věci, které ti pomohou pohnout se z místa nebo vidět situaci z nové perspektivy.\n\nReflektuji s tebou tvoje motivace, hodnoty, emoce a vnitřní bloky.\n\nNabízím konkrétní cesty – tipy, návody, možnosti, inspiraci – jak udělat další krok.\n\nNapomáhám propojení s komunitou, projekty a lidmi, kteří mohou posílit tvůj záměr nebo hodnoty.\n\n🌱 Témata, na která se zaměřuji:\nOsobní růst, sebereflexe, vize, smysl\n\nVědomé rozhodování a proaktivita\n\nSpolupráce a vztahy\n\nZapojení se do smysluplných projektů\n\nPodpora resilience, motivace a odvahy\n\nVytváření pozitivní změny (osobní i společenské)\n\n🧭 Můj styl:\nJsem laskavý, ale přímý.\nJdu s tebou do hloubky, ale vždy s respektem k tvému tempu.\nSpojuji intuici, logiku a empatii.\nPtám se nejen \"co můžeš udělat\", ale i \"kým se můžeš stát\".\n```\n\n🧘♂️ Ahoj! Jsem tvůj průvodce vnitřními krajinami. Společně objevíme, co ti bije pod povrchem. Začneme?\n\n🌻 Můj přístup:\n\nKrátké, výstižné podněty\nOtázky, které rozvíjí vhled\nLaskavá naléhavost\nCesta od \"Aha!\" k \"Udělám!\"\n🔍 První krok:\nDOPLŇ: 😊",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-26T15:03:58.034Z",
+        "createdAt": "2025-03-26T15:03:58.034Z",
+        "updatedAt": "2025-03-26T15:03:58.034Z"
+      },
+      {
+        "id": "agt_o8tlGiDnUzME",
+        "slug": "record-alphabet-liquid-upon",
+        "title": null,
+        "description": null,
+        "tags": [],
+        "avatar": null,
+        "backgroundColor": null,
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "chat",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "google/gemini-2.0-flash-exp:free",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-26T11:07:43.682Z",
+        "createdAt": "2025-03-26T11:07:43.682Z",
+        "updatedAt": "2025-03-26T11:07:43.682Z"
+      },
+      {
+        "id": "agt_yjwEw2KeMMcw",
+        "slug": "explore-describe-enter-desk",
+        "title": null,
+        "description": null,
+        "tags": [],
+        "avatar": null,
+        "backgroundColor": null,
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "chat",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "google/gemini-2.0-flash-exp:free",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-03-28T12:10:09.227Z",
+        "createdAt": "2025-03-28T12:10:09.227Z",
+        "updatedAt": "2025-03-28T12:10:09.227Z"
+      },
+      {
+        "id": "agt_2pmfWKsTi6sE",
+        "slug": "bread-having-everyone-motor",
+        "title": "Transkripce - Karel o projektu",
+        "description": null,
+        "tags": [],
+        "avatar": "🤖",
+        "backgroundColor": "rgba(0,0,0,0)",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "chat",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "claude-3-7-sonnet-20250219",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "anthropic",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-04-16T11:12:32.105Z",
+        "createdAt": "2025-04-16T11:12:32.105Z",
+        "updatedAt": "2025-04-16T11:12:32.105Z"
+      },
+      {
+        "id": "agt_HLa3ntDxuO4M",
+        "slug": "square-eleven-broad-limited",
+        "title": "Transkripce - 2. část (Karel o projektu)",
+        "description": null,
+        "tags": [],
+        "avatar": "🤖",
+        "backgroundColor": "rgba(0,0,0,0)",
+        "plugins": [],
+        "clientId": null,
+        "chatConfig": {
+          "searchMode": "off",
+          "displayMode": "chat",
+          "historyCount": 8,
+          "enableReasoning": true,
+          "enableHistoryCount": true,
+          "reasoningBudgetToken": 1024,
+          "enableAutoCreateTopic": true,
+          "enableCompressHistory": true,
+          "autoCreateTopicThreshold": 2
+        },
+        "fewShots": null,
+        "model": "chatgpt-4o-latest",
+        "params": {
+          "top_p": 1,
+          "temperature": 1,
+          "presence_penalty": 0,
+          "frequency_penalty": 0
+        },
+        "provider": "openai",
+        "systemRole": "",
+        "tts": {
+          "voice": {
+            "openai": "echo"
+          },
+          "sttLocale": "cs-CZ",
+          "ttsService": "openai",
+          "showAllLocaleVoice": false
+        },
+        "openingMessage": null,
+        "openingQuestions": [],
+        "accessedAt": "2025-04-16T12:01:13.532Z",
+        "createdAt": "2025-04-16T12:01:13.532Z",
+        "updatedAt": "2025-04-16T12:01:13.532Z"
+      }
+    ],
+    "aiModels": [],
+    "aiProviders": [],
+    "messageChunks": [],
+    "messagePlugins": [],
+    "messageTranslates": [],
+    "messages": [
+      {
+        "idk": "nejaky text"
+      }
+    ],
+    "sessionGroups": [],
+    "sessions": [
+      {
+        "id": "ssn_XZbNz7vo1O6i",
+        "slug": "inbox",
+        "title": null,
+        "description": null,
+        "avatar": null,
+        "backgroundColor": null,
+        "type": "agent",
+        "groupId": null,
+        "clientId": null,
+        "pinned": false,
+        "accessedAt": "2025-03-26T11:07:43.682Z",
+        "createdAt": "2025-03-26T11:07:43.687Z",
+        "updatedAt": "2025-03-26T11:07:43.687Z"
+      }
+    ],
+    "threads": [],
+    "topics": [
+      {
+        "id": "tpc_Dy1N0nkZP2O6",
+        "title": "Archa 21 hodnoty a jejich význam",
+        "favorite": false,
+        "sessionId": "ssn_qoBstEX47CPp",
+        "clientId": null,
+        "historySummary": "Projekt Archa 21 se zaměřuje na analýzu lidských hodnot, přičemž vychází z hodnotového modelu ortogonálních hodnot, které byly vytvořeny v roce 2014. Hlavními hodnotami jsou svoboda, respekt, zodpovědnost, cítění, racionalita a odvaha, přičemž svoboda je považována za nejdůležitější.\n\nSoučasná situace ve společnosti je extrémní, lidé se dělí na ty, kteří hledají hodnoty a smysl v duchovním životě, a na ty, kteří propadají frustraci a manipulaci. Cílem Archy 21 je přitahovat lidi k diskuzím o těchto hodnotách, což pomáhá uvědomění si jejich důležitosti.\n\nDiskuze o hodnotách potencuje posun v chápání a přibližuje abstraktní koncepty k reálnému životu. Žití v souladu s hodnotami přináší štěstí, i když je možné čelit rizikům. Omezování svobody slova pro ochranu před dezinformacemi je považováno za zásadní nebezpečí.\n\nPro zajištění hodnot ve společnosti je důležité osobní spojení, otevřenost k odlišným názorům a aktivní ověřování informací. Pandemie covid-19 odhalila slabosti politického systému a jeho prohnilost, přičemž největším selháním bylo poškození dětí kvůli restrikcím.\n\nGalaxie učení v rámci Archy 21 se zaměřuje na reflexi a poznání, aby lidé mohli přiznat a přijmout své chyby jako součást učení se pro šťastnější život. Důležitým aspektem je, že se lidé musí vzdělávat a být otevření svým hodnotám a zodpovědnosti, což zahrnuje ochotu čelit nepohodlí a vyhlížet k lepšímu chápání hodnot.",
+        "metadata": {
+          "model": "gpt-4o-mini",
+          "provider": "openai"
+        },
+        "accessedAt": "2025-04-16T12:07:38.785Z",
+        "createdAt": "2025-04-16T12:07:38.785Z",
+        "updatedAt": "2025-04-16T12:24:19.567Z"
+      }
+    ],
+    "agentsToSessions": [
+      {
+        "agentId": "agt_o8tlGiDnUzME",
+        "sessionId": "ssn_XZbNz7vo1O6i",
+        "userId": "6ltcamrcuarv"
+      }
+    ]
+  },
+  "mode": "postgres",
+  "schemaHash": "9a32c373461472a4afdb45e690c3009a0db0eaae81dcf6c8d05277a48f3a5e85"
+}

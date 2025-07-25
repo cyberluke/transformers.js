@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useEffect } from 'react';
-import { Message } from '@ai-sdk/react';
 import { useThreadDataStore } from '@/lib/stores/thread-data-store';
 import { useThreadUIStore } from '@/lib/stores/thread-ui-store';
 import { getThreadService, Thread, CreateThreadRequest } from '@/lib/services/threadService';
 import { useFingerprint } from './useFingerprint';
+import { AppMessage } from '@/types/messages';
 
 export function useThreads() {
   // Data store
@@ -176,12 +176,12 @@ export function useThreads() {
   }, [getThreadById, threadService, removeThread, currentThreadId, threads, setCurrentThreadId, setError, setLoading, clearError]);
 
   // Add message to thread
-  const addMessage = useCallback((threadId: string, message: Message) => {
+  const addMessage = useCallback((threadId: string, message: AppMessage) => {
     addMessageToThread(threadId, message);
   }, [addMessageToThread]);
 
   // Update thread messages
-  const updateMessages = useCallback((threadId: string, messages: Message[]) => {
+  const updateMessages = useCallback((threadId: string, messages: AppMessage[]) => {
     console.log('updateMessages', threadId, messages);
     updateThreadMessages(threadId, messages);
   }, [updateThreadMessages]);

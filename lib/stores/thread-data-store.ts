@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { Thread } from '@/lib/services/threadService';
-import { Message } from '@ai-sdk/react';
+import { AppMessage } from '@/types/messages';
 
 interface ThreadDataState {
   threads: Thread[];
@@ -10,8 +10,8 @@ interface ThreadDataState {
   addThread: (thread: Thread) => void;
   addThreads: (threads: Thread[]) => void;
   removeThread: (threadId: string) => void;
-  updateThreadMessages: (threadId: string, messages: Message[]) => void;
-  addMessageToThread: (threadId: string, message: Message) => void;
+  updateThreadMessages: (threadId: string, messages: AppMessage[]) => void;
+  addMessageToThread: (threadId: string, message: AppMessage) => void;
   setServerChatId: (threadId: string, serverChatId: string) => void;
   setThreadTitle: (threadId: string, title: string) => void;
   clear: () => void;

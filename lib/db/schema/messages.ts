@@ -2,6 +2,7 @@ import { index, pgTable, text, varchar, timestamp, json } from 'drizzle-orm/pg-c
 import { sql } from 'drizzle-orm';
 import { chats } from './chats';
 import { ulid } from 'ulid';
+import { AppMessage } from '@/types/messages';
 
 export const messages = pgTable(
   'messages',
@@ -33,14 +34,13 @@ export const messages = pgTable(
 );
 
 // Types
-export type Message = typeof messages.$inferSelect;
-export type MessageWithoutContext = Omit<Message, 'chatId' | 'userId'>;
+// export type MessageWithoutContext = Omit<Message, 'chatId' | 'userId'>;
 export type NewMessageParams = {
   chatId: string;
   userId: string;
   content: string;
-  parts?: any[]; // Optional - some messages might not have complex parts
-  experimental_attachments?: any[]; // Optional - attachmenty pro zprávu
+  parts?: AppMessage['parts'] | null;
+  experimental_attachments?: AppMessage['experimental_attachments'] | null;
   role: 'user' | 'assistant' | 'system';
   metadata?: any;
 }; 

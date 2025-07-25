@@ -1,3 +1,6 @@
+// Exporty files
+export * from './files';
+
 // Exporty embeddings
 export * from './embeddings';
 

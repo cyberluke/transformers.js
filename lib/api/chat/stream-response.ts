@@ -4,7 +4,10 @@ import { Writer } from '@/types/server';
 
 interface StreamResponseConfig {
   chatId: string;
-  memories: any[];
+  memories: {
+    results: any[];
+    relations: any[];
+  };
   result: any;
   messages: any[];
   userId: string;
@@ -23,9 +26,12 @@ export const createChatStreamResponse = (config: StreamResponseConfig) => {
         type: "chat-id",
         chatId,
       });
+
+      console.log(memories, "memories");
       
       // Odeslání existujících memories
-      if (memories.length > 0) {
+      if (memories.results.length > 0) {
+        console.log("SENDING MEMORIES");
         writer.writeMessageAnnotation({
           type: "mem0-get",
           memories,
@@ -49,5 +55,9 @@ export const createChatStreamResponse = (config: StreamResponseConfig) => {
 
       console.log("ADDED MEMORIES");
     },
+    onError: (error) => {
+      console.error("Error in createChatStreamResponse:", error);
+      return "Error in createChatStreamResponse";
+    }
   });
 }; 

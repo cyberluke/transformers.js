@@ -1,11 +1,12 @@
 import { db } from '@/lib/db';
-import { messages, Message, MessageWithoutContext, NewMessageParams } from '@/lib/db/schema/messages';
+import { messages, NewMessageParams } from '@/lib/db/schema/messages';
 import { chats } from '@/lib/db/schema/chats';
 import { eq, desc, and, lt } from 'drizzle-orm';
 import { getChat } from './chats';
+import { AppMessage } from '@/types/messages';
 
 // Vytvoření nové zprávy
-export const createMessage = async (input: NewMessageParams): Promise<Message> => {
+export const createMessage = async (input: NewMessageParams) => {
   try {
     // Ověříme, že chat existuje a uživatel k němu má přístup
     const chat = await getChat(input.chatId, input.userId);
@@ -36,11 +37,7 @@ export const getChatMessagesWithPagination = async (
   userId: string,
   cursor?: string, // ULID cursor - pokud undefined, načte nejnovější
   limit: number = 10
-): Promise<{
-  messages: MessageWithoutContext[];
-  nextCursor: string | null;
-  hasMore: boolean;
-}> => {
+) => {
   try {
     // Ověříme přístup k chatu
     const chat = await getChat(chatId, userId);
@@ -76,7 +73,7 @@ export const getChatMessagesWithPagination = async (
     const nextCursor = hasMore ? messagesList[messagesList.length - 1].id : null;
 
     return {
-      messages: messagesList.reverse(), // Reverse pro chronologické pořadí (nejstarší první)
+      messages: messagesList.reverse() as AppMessage[], // Reverse pro chronologické pořadí (nejstarší první)
       nextCursor,
       hasMore,
     };
@@ -89,7 +86,7 @@ export const getChatMessagesWithPagination = async (
 export const getMessage = async (
   messageId: string,
   userId: string
-): Promise<Message | null> => {
+) => {
   try {
     const [message] = await db
       .select()
@@ -112,7 +109,7 @@ export const getMessage = async (
 export const deleteMessage = async (
   messageId: string,
   userId: string
-): Promise<boolean> => {
+) => {
   try {
     const message = await getMessage(messageId, userId);
     if (!message) {
@@ -137,7 +134,7 @@ export const deleteMessage = async (
 // Hromadné vytvoření zpráv (pro import konverzací)
 export const createMessages = async (
   messagesData: NewMessageParams[]
-): Promise<Message[]> => {
+) => {
   try {
     if (messagesData.length === 0) return [];
 

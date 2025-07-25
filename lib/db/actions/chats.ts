@@ -13,7 +13,7 @@ export const createChat = async (input: NewChatParams): Promise<Chat> => {
       })
       .returning();
 
-    return chat;
+    return chat as Chat;
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : 'Failed to create chat');
   }
@@ -57,7 +57,7 @@ export const getUserChatsWithPagination = async (
     const nextCursor = hasMore ? chatsList[chatsList.length - 1].id : null;
 
     return {
-      chats: chatsList,
+      chats: chatsList as ChatWithoutUserId[],
       nextCursor,
       hasMore,
     };
@@ -83,7 +83,7 @@ export const getChat = async (chatId: string, userId: string): Promise<Chat | nu
       chat.userId === userId || 
       (chat.metadata && (chat.metadata as any)?.shared === true);
 
-    return hasAccess ? chat : null;
+    return hasAccess ? chat as Chat : null;
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : 'Failed to get chat');
   }
@@ -111,7 +111,7 @@ export const updateChat = async (
       .where(eq(chats.id, chatId))
       .returning();
 
-    return updatedChat;
+    return updatedChat as Chat;
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : 'Failed to update chat');
   }
@@ -165,14 +165,14 @@ export const unshareChat = async (chatId: string, userId: string): Promise<Chat 
 };
 
 // Získání všech sdílených chatů (veřejné chaty)
-export const getSharedChats = async (): Promise<Chat[]> => {
-  try {
-    return await db
-      .select()
-      .from(chats)
-      .where(sql`${chats.metadata}->>'shared' = 'true'`)
-      .orderBy(desc(chats.updatedAt));
-  } catch (error) {
-    throw new Error(error instanceof Error ? error.message : 'Failed to get shared chats');
-  }
-}; 
+// export const getSharedChats = async (): Promise<Chat[]> => {
+//   try {
+//     return await db
+//       .select()
+//       .from(chats)
+//       .where(sql`${chats.metadata}->>'shared' = 'true'`)
+//       .orderBy(desc(chats.updatedAt));
+//   } catch (error) {
+//     throw new Error(error instanceof Error ? error.message : 'Failed to get shared chats');
+//   }
+// }; 

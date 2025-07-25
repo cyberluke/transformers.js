@@ -16,6 +16,8 @@ interface ChatLayoutProps {
   status: string;
   isDetailed: boolean;
   setIsDetailed: (value: boolean) => void;
+  selectedAgent: string | null;
+  onAgentSelect: (agentId: string) => void;
 }
 
 export function ChatLayout({
@@ -24,7 +26,9 @@ export function ChatLayout({
   handleFormSubmit,
   status,
   isDetailed,
-  setIsDetailed
+  setIsDetailed,
+  selectedAgent,
+  onAgentSelect
 }: ChatLayoutProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { fingerprintData } = useFingerprint();
@@ -61,6 +65,8 @@ export function ChatLayout({
               status={status}
               isDetailed={isDetailed}
               setIsDetailed={setIsDetailed}
+              selectedAgent={selectedAgent}
+              onAgentSelect={onAgentSelect}
             />
           ) : (
             /* Messages View */

@@ -9,6 +9,7 @@ import { useAttachments } from '@/hooks/useAttachments';
 
 export default function Page() {
   const [isDetailed, setIsDetailed] = useState(false);
+  const [selectedAgent, setSelectedAgent] = useState<string | null>(null);
   
   const { 
     currentThread, 
@@ -57,13 +58,6 @@ export default function Page() {
 
   const { messages, input, handleInputChange, handleSubmit, status, setMessages, data } = useChat({
     api: '/api/chat',
-    body: {
-      customData: {
-        fingerprint: fingerprintData?.requestId,
-        chatId: currentThread?.serverChatId, // Pouze server-potvrzené chat ID
-        detailed: isDetailed,
-      },
-    },
     id: currentThreadId || undefined,
     experimental_prepareRequestBody({ messages }) {
       return { 
@@ -72,6 +66,7 @@ export default function Page() {
           fingerprint: fingerprintData?.requestId,
           chatId: currentThread?.serverChatId, // Pouze server-potvrzené chat ID
           detailed: isDetailed,
+          agentId: selectedAgent,
         }
       };
     },
@@ -131,6 +126,11 @@ export default function Page() {
     }
   };
 
+  const handleAgentSelect = (agentId: string) => {
+    setSelectedAgent(agentId);
+    console.log('Selected agent:', agentId);
+  };
+
   return (
     <ChatLayout
       input={input}
@@ -139,6 +139,8 @@ export default function Page() {
       status={status}
       isDetailed={isDetailed}
       setIsDetailed={setIsDetailed}
+      selectedAgent={selectedAgent}
+      onAgentSelect={handleAgentSelect}
     />
   );
 }
