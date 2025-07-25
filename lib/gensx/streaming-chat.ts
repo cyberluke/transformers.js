@@ -37,7 +37,12 @@ export const StreamingChat = gensx.Workflow(
       maxSteps: 5,
       toolCallStreaming: true,
       model: agent.chatModel,
-      // tools: tools,
+
+      topP: agent.params?.top_p,
+      temperature: agent.params?.temperature,
+      presencePenalty: agent.params?.presence_penalty,
+      frequencyPenalty: agent.params?.frequency_penalty,
+      
       experimental_repairToolCall: async ({
         toolCall,
         tools,
