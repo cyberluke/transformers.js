@@ -59,14 +59,14 @@ export const findRelevantContent = async (userQuery: string, userId: string, ass
   let whereCondition;
   if (assistantId) {
     // Pokud máme assistantId, hledáme navíc i embeddings pro konkrétního assistanta
-    const userAssistantEmbeddings = and(
-      eq(embeddings.userId, userId),
+    const assistantEmbeddings = and(
+      isNull(embeddings.userId),
       eq(embeddings.assistantId, assistantId)
     );
     
     whereCondition = and(
       similarityCondition,
-      or(userAssistantEmbeddings, userGeneralEmbeddings, globalEmbeddings)
+      or(assistantEmbeddings, userGeneralEmbeddings, globalEmbeddings)
     );
   } else {
     // Bez assistantId hledáme pouze obecné embeddings

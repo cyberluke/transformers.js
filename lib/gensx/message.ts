@@ -9,12 +9,12 @@ export const HandleChatMessage = gensx.Workflow(
     userMessage,
     chatId, 
     userId,
-    assistentId,
+    agentId,
   }: { 
     userMessage: AppMessage,
     chatId: string, 
     userId: string, 
-    assistentId?: string,
+    agentId?: string,
   }) => {
     // Vytvoříme zprávu v databázi
     const message = await createMessage({
@@ -35,7 +35,7 @@ export const HandleChatMessage = gensx.Workflow(
         embeddingResults = await processAttachmentsForEmbeddings(
           userMessage.experimental_attachments as any, // TODO: fix types
           userId,
-          assistentId
+          agentId
         );
         
         console.log('Výsledky zpracování embeddingů:', embeddingResults);

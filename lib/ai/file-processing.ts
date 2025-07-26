@@ -27,12 +27,17 @@ export interface FileProcessingResult {
 // Zpracování jednoho souboru (helper funkce)
 async function processFileWithEmbeddings(
   attachment: ExperimentalAttachment,
-  userId: string,
-  assistantId?: string
+  userId?: string,
+  agentId?: string
 ): Promise<FileProcessingResult> {
   let fileId: string | undefined;
   
   try {
+    // Ověříme, že je poskytnut minimálně jeden z parametrů
+    if (!userId && !agentId) {
+      throw new Error('Musí být poskytnut minimálně userId nebo agentId');
+    }
+
     // Zkontrolujeme, zda je content type podporovaný pro embeddings
     if (!SUPPORTED_CONTENT_TYPES.includes(attachment.contentType)) {
       console.log(`Přeskakuji soubor ${attachment.name} - nepodporovaný typ: ${attachment.contentType}`);
@@ -61,7 +66,7 @@ async function processFileWithEmbeddings(
       fileSize: blob.size,
       sourceUrl: attachment.url,
       userId: userId,
-      assistantId: assistantId,
+      assistantId: agentId,
       status: 'processing'
     });
     fileId = file.id;
@@ -78,7 +83,7 @@ async function processFileWithEmbeddings(
           pageNumber: page.pageNumber,
           content: page.content,
           userId: userId,
-          assistantId: assistantId
+          assistantId: agentId
         });
         
         if (embeddingResult.success) {
@@ -94,7 +99,7 @@ async function processFileWithEmbeddings(
     await Promise.all(pagePromises);
     
     // 6. Updatujeme file na completed
-    await updateFile(file.id, userId, {
+    await updateFile(file.id, {
       status: 'completed',
       pageCount: tikaResult.pageCount,
       metadata: tikaResult.metadata
@@ -116,7 +121,7 @@ async function processFileWithEmbeddings(
     // Pokud se file vytvořil, označíme ho jako error
     if (fileId) {
       try {
-        await updateFile(fileId, userId, {
+        await updateFile(fileId, {
           status: 'error'
         });
       } catch (updateError) {
@@ -135,14 +140,19 @@ async function processFileWithEmbeddings(
 // Hlavní funkce pro zpracování všech attachmentů paralelně
 export async function processAttachmentsForEmbeddings(
   attachments: ExperimentalAttachment[],
-  userId: string,
-  assistantId?: string
+  userId?: string,
+  agentId?: string
 ): Promise<FileProcessingResult[]> {
+  // Ověříme, že je poskytnut minimálně jeden z parametrů
+  if (!userId && !agentId) {
+    throw new Error('Musí být poskytnut minimálně userId nebo agentId');
+  }
+
   console.log(`Začínám paralelní zpracování ${attachments.length} příloh...`);
   
   // Vytvoříme promise pro každý attachment
   const attachmentPromises = attachments.map(attachment => 
-    processFileWithEmbeddings(attachment, userId, assistantId)
+    processFileWithEmbeddings(attachment, userId, agentId)
   );
   
   // Čekáme na dokončení všech attachmentů (allSettled = nepřeruší se při chybě jednoho)

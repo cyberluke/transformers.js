@@ -7,6 +7,11 @@ import { eq } from 'drizzle-orm';
 // Vytvoření nového file záznamu
 export const createFile = async (input: NewFileParams): Promise<File> => {
   try {
+    // Ověříme, že je poskytnut minimálně userId nebo assistantId
+    if (!input.userId && !input.assistantId) {
+      throw new Error('Musí být poskytnut minimálně userId nebo assistantId');
+    }
+
     const [file] = await db
       .insert(files)
       .values(input)
@@ -24,7 +29,6 @@ export const createFile = async (input: NewFileParams): Promise<File> => {
 // Update file (status, pageCount, metadata)
 export const updateFile = async (
   fileId: string,
-  userId: string,
   updates: UpdateFileParams
 ): Promise<File> => {
   try {
@@ -48,7 +52,7 @@ export const updateFile = async (
 };
 
 // Získání file podle ID
-export const getFileById = async (fileId: string, userId: string): Promise<File | null> => {
+export const getFileById = async (fileId: string): Promise<File | null> => {
   try {
     const [file] = await db
       .select()

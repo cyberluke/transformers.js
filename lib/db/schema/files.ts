@@ -25,7 +25,7 @@ export const files = pgTable(
     fileSize: integer('file_size').notNull(), // v bytes
     sourceUrl: text('source_url'), // původní URL odkud se stáhl
     pageCount: integer('page_count').default(0),
-    userId: varchar('user_id', { length: 191 }).notNull(),
+    userId: varchar('user_id', { length: 191 }),
     assistantId: varchar('assistant_id', { length: 191 }),
     status: varchar('status', { length: 20 }).default('processing'), // processing, completed, error
     metadata: json('metadata'), // extra metadata z Tiky
@@ -54,7 +54,7 @@ export type NewFileParams = {
   fileSize: number;
   sourceUrl?: string;
   pageCount?: number;
-  userId: string;
+  userId?: string;
   assistantId?: string;
   status?: string;
   metadata?: FileMetadata;

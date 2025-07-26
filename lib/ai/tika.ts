@@ -96,7 +96,6 @@ export async function uploadToTikaFromBlob(blob: Blob, sourceUrl?: string): Prom
     }
 
     const tikaData = await tikaResponse.json();
-    console.log('Tika response:', JSON.stringify(tikaData, null, 2));
     
     return parseTikaResponse(tikaData, blob.size, sourceUrl, 'Blob upload');
 
