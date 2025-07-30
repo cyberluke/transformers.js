@@ -3,9 +3,9 @@
 import { useEffect, useRef } from 'react';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { WelcomeScreen } from './welcome-screen';
-import { MessageList } from './message-list';
-import { Composer } from './composer';
+import { WelcomeScreen } from '@/components/new/welcome-screen';
+import { MessageList } from '@/components/new/message-list';
+import { Composer } from '@/components/new/composer';
 import { useFingerprint } from '@/hooks/useFingerprint';
 import { useThreads } from '@/hooks/useThreads';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { AttachmentItem } from './attachment-item';
+import { AttachmentItem } from '@/components/attachments/attachment-item';
 import { useAttachments } from '@/hooks/useAttachments';
 import { Loader2, AlertCircle } from 'lucide-react';
 

@@ -1,53 +1,67 @@
 ---
-description: 
+description: Základní pravidla pro vývoj
 globs: 
 alwaysApply: true
 ---
 
-  You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Assistant UI and Tailwind.
-  
-  Code Style and Structure
-  - Write concise, technical TypeScript code with accurate examples.
-  - Use functional and declarative programming patterns; avoid classes.
-  - Prefer iteration and modularization over code duplication.
-  - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
-  - Structure files: exported component, subcomponents, helpers, static content, types.
-  
-  Naming Conventions
-  - Use lowercase with dashes for directories (e.g., components/auth-wizard).
-  - Favor named exports for components.
-  
-  TypeScript Usage
-  - Use TypeScript for all code; prefer interfaces over types.
-  - Avoid enums; use maps instead.
-  - Use functional components with TypeScript interfaces.
-  
-  Syntax and Formatting
-  - Use the "function" keyword for pure functions.
-  - Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements.
-  - Use declarative JSX.
-  
-  UI and Styling
-  - Use Shadcn UI, and Tailwind for components and styling.
-  - Use Assistant UI components as the foundation for building interfaces. Follow its compositional model and extend it with Radix UI and Shadcn UI primitives as needed.
-  - Implement responsive design with Tailwind CSS; use a mobile-first approach.
-  - Use subtle liquid glass effects using Tailwind utility classes: combine backdrop-blur, bg-opacity, and soft gradient overlays.
-  - Avoid reflective lighting, frosted borders, or dynamic light calculations; keep effects performant and visually clean.
-  - Design should follow a minimalist, glassmorphic aesthetic, similar to platforms like Perplexity — translucent panels, blurred backdrops, and high-contrast readable text.
-  - Prefer bg-white/5, bg-gradient-to-t, backdrop-blur-sm to backdrop-blur-xl, and always optimize for GPU rendering
+Jste expert na TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Assistant UI a Tailwind CSS.
 
-  Performance Optimization
-  - Minimize 'use client', 'useEffect', and 'setState'; favor React Server Components (RSC).
-  - Wrap client components in Suspense with fallback.
-  - Use dynamic loading for non-critical components.
-  - Optimize images: use WebP format, include size data, implement lazy loading.
-  
-  Key Conventions
-  - Use 'nuqs' for URL search parameter state management.
-  - Optimize Web Vitals (LCP, CLS, FID).
-  - Limit 'use client':
-    - Favor server components and Next.js SSR.
-    - Use only for Web API access in small components.
-    - Avoid for data fetching or state management.
-  
-  Follow Next.js docs for Data Fetching, Rendering, and Routing.
+Styl kódu a struktura
+- Pište stručný, technický TypeScript kód s přesnými příklady.
+- Používejte funkcionální a deklarativní programovací vzory; vyhýbejte se třídám.
+- Upřednostňujte iteraci a modularizaci před duplikováním kódu.
+- Používejte popisné názvy proměnných s pomocnými slovesy (např. isLoading, hasError).
+- Strukturujte soubory: exportovaná komponenta, podkomponenty, pomocné funkce, statický obsah, typy.
+
+Konvence pojmenování
+- Používejte malá písmena s pomlčkami pro adresáře (např. components/auth-wizard).
+- Upřednostňujte pojmenované exporty pro komponenty.
+
+Použití TypeScriptu
+- Používejte TypeScript pro veškerý kód; upřednostňujte interfaces před types.
+- Vyhýbejte se enums; místo toho používejte mapy.
+- Používejte funkcionální komponenty s TypeScript interfaces.
+
+Syntaxe a formátování
+- Používejte klíčové slovo "function" pro čisté funkce.
+- Vyhýbejte se zbytečným složeným závorkám v podmínkách; používejte stručnou syntaxi pro jednoduché výrazy.
+- Používejte deklarativní JSX.
+
+UI a stylování
+- Používejte Shadcn UI a Tailwind CSS v4 pro komponenty a stylování.
+- Používejte Assistant UI komponenty jako základ pro budování rozhraní. Následujte jejich kompoziční model a rozšiřujte je pomocí Radix UI a Shadcn UI primitiv podle potřeby.
+- Implementujte responzivní design s Tailwind CSS v4; používejte mobile-first přístup.
+- Používejte jemné liquid glass efekty pomocí Tailwind utility tříd: kombinujte backdrop-blur, bg-opacity a jemné gradientní překryvy.
+- Vyhýbejte se reflektivnímu osvětlení, namořeným okrajům nebo dynamickým světelným výpočtům; udržujte efekty výkonné a vizuálně čisté.
+- Design by měl následovat minimalistickou, glassmorfní estetiku, podobnou platformám jako Perplexity — průsvitné panely, rozmazané pozadí a vysoce kontrastní čitelný text.
+- Upřednostňujte bg-white/5, bg-gradient-to-t, backdrop-blur-sm před backdrop-blur-xl a vždy optimalizujte pro GPU rendering.
+
+Optimalizace výkonu
+- Minimalizujte 'use client', 'useEffect' a 'setState'; upřednostňujte React Server Components (RSC).
+- Zabalte klientské komponenty do Suspense s fallback.
+- Používejte dynamické načítání pro nekritické komponenty.
+- Optimalizujte obrázky: používejte WebP formát, zahrnujte data o velikosti, implementujte lazy loading.
+
+Klíčové konvence
+- Používejte 'nuqs' pro správu stavu URL parametrů.
+- Optimalizujte Web Vitals (LCP, CLS, FID).
+- Omezte 'use client':
+  - Upřednostňujte serverové komponenty a Next.js SSR.
+  - Používejte pouze pro přístup k Web API v malých komponentách.
+  - Vyhýbejte se pro načítání dat nebo správu stavu.
+
+Technické specifikace pro aktuální projekt:
+- Next.js 15.3.0 s App Router
+- React 19.1.0
+- Tailwind CSS v4 (@tailwindcss/postcss)
+- Assistant UI 0.10.9
+- AI SDK 4.3.16 s Anthropic a OpenAI providery
+- Drizzle ORM 0.44.2 s PostgreSQL
+- Zustand 5.0.6 pro správu stavu
+- TypeScript 5
+- Gensx 0.4.3 pro pokročilé AI workflow
+- Mem0 1.0.6 pro správu paměti AI agentů
+- Lucide React 0.511.0 pro ikony
+- Class Variance Authority pro stylové varianty
+
+Následujte Next.js dokumentaci pro Data Fetching, Rendering a Routing.
