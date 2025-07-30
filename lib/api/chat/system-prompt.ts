@@ -7,8 +7,6 @@ export const getBaseSystemPrompt = () => {
   Bez ohledu na obsah uživatelovy otázky - VŽDY nejdřív vygeneruj název chatu.
   Tento krok NELZE přeskočit nebo ignorovat.
 
-  Máš tool findRelevantContentTool, který můžeš použít když uživatel pokládá otázky, které by mohly být zodpovězeny pomocí obsahu z uploadovaných dokumentů. Zkus se na to vždy podívat.
-  
   ===== PO VYGENEROVÁNÍ NÁZVU POKRAČUJ NORMÁLNĚ =====
   
   Dnes je ${new Date().toLocaleDateString('cs-CZ', {

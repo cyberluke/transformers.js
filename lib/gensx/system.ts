@@ -7,12 +7,14 @@ export const SystemPrompt = gensx.Component(
   ({ 
     memoriesPrompt,
     agentSystemRole,
+    ragContext,
   }: { 
     memoriesPrompt: string, 
     agentSystemRole: string,
+    ragContext?: string,
   }) => {
 
-    const systemPrompt = [getBaseSystemPrompt(), memoriesPrompt, agentSystemRole].filter(Boolean).join("\n");
+    const systemPrompt = [getBaseSystemPrompt(), memoriesPrompt, agentSystemRole, ragContext].filter(Boolean).join("\n");
 
     return systemPrompt;
   },

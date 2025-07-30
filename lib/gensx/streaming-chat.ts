@@ -5,7 +5,7 @@ import { createFinishHandler } from "../api/chat/finish-handler";
 import { RepairArgs } from "./repair";
 import { AgentData } from "@/types/agent";
 import { SystemPrompt } from "./system";
-import { findRelevantContentTool } from "../tools/find-relevant-content";
+
 import { generateChatTitleTool } from "../tools/chat-title";
 import { searchWebTool } from "../tools/search-web";
 import { WriterRef } from "@/types/server";
@@ -19,6 +19,7 @@ export const StreamingChat = gensx.Workflow(
     messages,
     agent,
     memoriesPrompt,
+    ragContext,
     writerRef,
   }: { 
     messages: AppMessage[],
@@ -26,12 +27,14 @@ export const StreamingChat = gensx.Workflow(
     userId: string, 
     agent: AgentData,
     memoriesPrompt: string,
+    ragContext?: string,
     writerRef: WriterRef
   }) => {
     const result = streamText({
       system: SystemPrompt({
         memoriesPrompt: memoriesPrompt,
         agentSystemRole: agent.systemRole || "",
+        ragContext: ragContext,
       }),
       messages: messages,
       maxSteps: 5,
@@ -68,7 +71,6 @@ export const StreamingChat = gensx.Workflow(
       tools: {
         generateChatTitle: generateChatTitleTool(writerRef, chatId, userId), // dodelat aby se nerunovalo pokud uz existuje
         searchWeb: searchWebTool(),
-        findRelevantContent: findRelevantContentTool(userId, agent.id || undefined),
       }
     });
 

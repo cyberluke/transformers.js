@@ -8,6 +8,7 @@ import { createChatStreamResponse } from "../api/chat/stream-response";
 import { AppMessage } from "@/types/messages";
 import { HandleChatMessage } from "./message";
 import { SelectAgent } from "./agent";
+import { RAGWorkflow } from "./relevantContent";
 
 export const ChatWorkflow = gensx.Workflow(
   "ChatWorkflow",
@@ -45,11 +46,18 @@ export const ChatWorkflow = gensx.Workflow(
       userId: userId,
     });
 
+    // RAG workflow - najdi relevantní obsah z dokumentů
+    const { ragContext } = await RAGWorkflow({
+      messages: messages,
+      userId: userId,
+      assistantId: agent.id,
+    });
+
     await HandleChatMessage({
       userMessage,
       chatId: chat.id,
       userId,
-      assistentId: agent.id,
+      agentId: agent.id,
     });
 
     let writerRef: WriterRef = { value: null };
@@ -60,6 +68,7 @@ export const ChatWorkflow = gensx.Workflow(
       userId,
       agent,
       memoriesPrompt,
+      ragContext,
       writerRef,
     });
 
