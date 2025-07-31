@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import { Upload, FileText, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { AgentSelector } from '@/components/agent-selector';
+import { AgentSelector } from '@/components/sections/chat-inset/welcome';
 import { validateFile } from '@/types/attachments';
 
 interface UploadResult {

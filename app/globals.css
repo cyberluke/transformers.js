@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --sidebar-width: 16rem;
-    --sidebar-width-mobile: 18rem; 
-    --sidebar-width-icon: 3rem;
-  }
+@theme {
+  --sidebar-width: 16rem;
+  --sidebar-width-mobile: 18rem;
+  --sidebar-width-icon: 3rem;
+  
+  --text-shadow-emerald: var(--color-emerald-700) 1px 0 10px;
 }

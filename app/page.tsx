@@ -2,7 +2,7 @@
 
 import { useChat } from '@ai-sdk/react';
 import { useState, useEffect, useRef } from 'react';
-import { ChatLayout } from '@/components/new';
+import { ChatLayout } from '@/components/sections';
 import { useThreads } from '@/hooks/useThreads';
 import { useFingerprint } from '../hooks/useFingerprint';
 import { useAttachments } from '@/hooks/useAttachments';

@@ -24,7 +24,7 @@ export function SearchResultItem({ result, index }: SearchResultItemProps) {
       href={result.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block p-3 rounded-lg border bg-background hover:bg-muted/50 transition-colors"
+      className="group block p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-200"
     >
       {result.imgType === 'image' && result.image ? (
         <SearchResultWithImage result={result} />

@@ -24,12 +24,23 @@ function TooltipTrigger({ ...props }: React.ComponentProps<typeof TooltipPrimiti
 function TooltipContent({ className, sideOffset = 0, children, ...props }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
   return (
     <TooltipPrimitive.Portal>
-      <TooltipPrimitive.Content data-slot="tooltip-content" sideOffset={sideOffset} className={cn("bg-primary text-primary-foreground animate-in fade-in-0 zoom-in-95 radix-state-closed:animate-out radix-state-closed:fade-out-0 radix-state-closed:zoom-out-95 radix-side-bottom:slide-in-from-top-2 radix-side-left:slide-in-from-right-2 radix-side-right:slide-in-from-left-2 radix-side-top:slide-in-from-bottom-2 z-50 w-fit origin-radix-tooltip rounded-md px-3 py-1.5 text-xs text-balance", className)} {...props}>
+      <TooltipPrimitive.Content 
+        data-slot="tooltip-content" 
+        sideOffset={sideOffset} 
+        className={cn(
+          "bg-black/90 text-white backdrop-blur-sm border border-white/10",
+          "animate-in fade-in-0 zoom-in-95 radix-state-closed:animate-out radix-state-closed:fade-out-0 radix-state-closed:zoom-out-95",
+          "radix-side-bottom:slide-in-from-top-2 radix-side-left:slide-in-from-right-2 radix-side-right:slide-in-from-left-2 radix-side-top:slide-in-from-bottom-2",
+          "z-50 w-fit origin-radix-tooltip rounded-md px-3 py-1.5 text-xs text-balance",
+          className
+        )} 
+        {...props}
+      >
         {children}
-        <TooltipPrimitive.Arrow className="bg-primary fill-primary z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
+        <TooltipPrimitive.Arrow className="fill-black/90 z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45" />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
   );
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }; 

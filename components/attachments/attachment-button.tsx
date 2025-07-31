@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { PaperclipIcon, Loader2 } from 'lucide-react';
 import { useAttachments } from '@/hooks/useAttachments';
 import { ALLOWED_FILE_TYPES } from '@/types/attachments';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip/';
 
 interface AttachmentButtonProps {
   disabled?: boolean;
@@ -75,7 +75,7 @@ export function AttachmentButton({ disabled = false, className }: AttachmentButt
             {isUploading ? (
               <Loader2 className="!size-4.5 animate-spin" />
             ) : (
-              <PaperclipIcon className="!size-4.5" />
+              <PaperclipIcon className="!size-4.5 text-white/50" />
             )}
           </button>
         </TooltipTrigger>

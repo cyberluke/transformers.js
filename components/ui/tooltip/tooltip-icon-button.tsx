@@ -7,7 +7,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from './tooltip';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -41,4 +41,4 @@ export const TooltipIconButton = forwardRef<
   );
 });
 
-TooltipIconButton.displayName = 'TooltipIconButton';
+TooltipIconButton.displayName = 'TooltipIconButton'; 

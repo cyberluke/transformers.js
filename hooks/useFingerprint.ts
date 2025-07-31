@@ -24,7 +24,7 @@ export function useFingerprint() {
     try {
       const service = getFingerprintService();
       await service.initialize(); // Service handles singleton logic
-      const data = await service.getFingerprint();
+      const data = await service.getFingerprintData();
       setFingerprintData(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Fingerprint error');

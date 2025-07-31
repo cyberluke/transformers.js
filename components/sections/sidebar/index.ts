@@ -9,4 +9,6 @@ export {
   SIDEBAR_COOKIE_NAME,
   SIDEBAR_COOKIE_MAX_AGE,
   SIDEBAR_KEYBOARD_SHORTCUT,
-} from "./sidebar-provider"; 
+} from "./sidebar-provider";
+
+export { SidebarInsetWrapper } from "./sidebar-inset"; 

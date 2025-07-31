@@ -6,7 +6,7 @@ import { CheckIcon, CopyIcon } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { cn } from '@/lib/utils';
-import { TooltipIconButton } from '@/components/new/tooltip-icon-button';
+import { TooltipIconButton } from '@/components/ui/tooltip/';
 
 interface MarkdownRendererProps {
   content: string;
@@ -39,8 +39,8 @@ const CodeHeader: FC<{ language: string; code: string }> = ({ language, code }) 
   };
 
   return (
-    <div className="flex items-center justify-between gap-4 rounded-t-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white">
-      <span className="lowercase [&>span]:text-xs">{language}</span>
+    <div className="flex items-center justify-between gap-4 rounded-t-lg bg-black/80 backdrop-blur-sm border-b border-white/10 px-4 py-2 text-sm font-semibold text-white">
+      <span className="lowercase [&>span]:text-xs text-white/80">{language}</span>
       <TooltipIconButton tooltip="Copy" onClick={onCopy}>
         {!isCopied && <CopyIcon />}
         {isCopied && <CheckIcon />}
@@ -58,7 +58,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
         h1: ({ className, ...props }) => (
           <h1
             className={cn(
-              'mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight last:mb-0',
+              'mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight last:mb-0 text-white',
               className
             )}
             {...props}
@@ -67,7 +67,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
         h2: ({ className, ...props }) => (
           <h2
             className={cn(
-              'mb-4 mt-8 scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0 last:mb-0',
+              'mb-4 mt-8 scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0 last:mb-0 text-white',
               className
             )}
             {...props}
@@ -76,7 +76,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
         h3: ({ className, ...props }) => (
           <h3
             className={cn(
-              'mb-4 mt-6 scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0 last:mb-0',
+              'mb-4 mt-6 scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0 last:mb-0 text-white',
               className
             )}
             {...props}
@@ -85,7 +85,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
         h4: ({ className, ...props }) => (
           <h4
             className={cn(
-              'mb-4 mt-6 scroll-m-20 text-xl font-semibold tracking-tight first:mt-0 last:mb-0',
+              'mb-4 mt-6 scroll-m-20 text-xl font-semibold tracking-tight first:mt-0 last:mb-0 text-white',
               className
             )}
             {...props}
@@ -94,7 +94,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
         h5: ({ className, ...props }) => (
           <h5
             className={cn(
-              'my-4 text-lg font-semibold first:mt-0 last:mb-0',
+              'my-4 text-lg font-semibold first:mt-0 last:mb-0 text-white',
               className
             )}
             {...props}
@@ -102,20 +102,20 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
         ),
         h6: ({ className, ...props }) => (
           <h6
-            className={cn('my-4 font-semibold first:mt-0 last:mb-0', className)}
+            className={cn('my-4 font-semibold first:mt-0 last:mb-0 text-white', className)}
             {...props}
           />
         ),
         p: ({ className, ...props }) => (
           <p
-            className={cn('mb-5 mt-5 leading-7 first:mt-0 last:mb-0', className)}
+            className={cn('mb-5 mt-5 leading-7 first:mt-0 last:mb-0 text-white/90', className)}
             {...props}
           />
         ),
         a: ({ className, ...props }) => (
           <a
             className={cn(
-              'text-primary font-medium underline underline-offset-4',
+              'text-blue-300 font-medium underline underline-offset-4 hover:text-blue-200 transition-colors',
               className
             )}
             {...props}
@@ -123,29 +123,29 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
         ),
         blockquote: ({ className, ...props }) => (
           <blockquote
-            className={cn('border-l-2 pl-6 italic', className)}
+            className={cn('border-l-2 border-white/30 pl-6 italic bg-white/5 backdrop-blur-sm rounded-r-lg py-2 my-4 text-white/90', className)}
             {...props}
           />
         ),
         ul: ({ className, ...props }) => (
           <ul
-            className={cn('my-5 ml-6 list-disc [&>li]:mt-2', className)}
+            className={cn('my-5 ml-6 list-disc [&>li]:mt-2 text-white/90 [&>li]:text-white/90', className)}
             {...props}
           />
         ),
         ol: ({ className, ...props }) => (
           <ol
-            className={cn('my-5 ml-6 list-decimal [&>li]:mt-2', className)}
+            className={cn('my-5 ml-6 list-decimal [&>li]:mt-2 text-white/90 [&>li]:text-white/90', className)}
             {...props}
           />
         ),
         hr: ({ className, ...props }) => (
-          <hr className={cn('my-5 border-b', className)} {...props} />
+          <hr className={cn('my-5 border-b border-white/20', className)} {...props} />
         ),
         table: ({ className, ...props }) => (
           <table
             className={cn(
-              'my-5 w-full border-separate border-spacing-0 overflow-y-auto',
+              'my-5 w-full border-separate border-spacing-0 overflow-y-auto bg-white/5 backdrop-blur-sm rounded-lg border border-white/10',
               className
             )}
             {...props}
@@ -154,7 +154,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
         th: ({ className, ...props }) => (
           <th
             className={cn(
-              'bg-muted px-4 py-2 text-left font-bold first:rounded-tl-lg last:rounded-tr-lg [&[align=center]]:text-center [&[align=right]]:text-right',
+              'bg-white/10 backdrop-blur-sm border-b border-white/10 px-4 py-2 text-left font-bold text-white first:rounded-tl-lg last:rounded-tr-lg [&[align=center]]:text-center [&[align=right]]:text-right',
               className
             )}
             {...props}
@@ -163,7 +163,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
         td: ({ className, ...props }) => (
           <td
             className={cn(
-              'border-b border-l px-4 py-2 text-left last:border-r [&[align=center]]:text-center [&[align=right]]:text-right',
+              'border-b border-white/10 px-4 py-2 text-left text-white/90 [&[align=center]]:text-center [&[align=right]]:text-right',
               className
             )}
             {...props}
@@ -190,11 +190,11 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
           const language = codeElement?.props?.className?.replace('language-', '') || 'text';
           
           return (
-            <div className="my-5">
+            <div className="my-5 bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg">
               <CodeHeader language={language} code={code} />
               <pre
                 className={cn(
-                  'overflow-x-auto rounded-b-lg bg-black p-4 text-white m-0',
+                  'overflow-x-auto rounded-b-lg bg-transparent p-4 text-white m-0',
                   className
                 )}
                 {...props}
@@ -210,8 +210,8 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
           return (
             <code
               className={cn(
-                !isInline && 'bg-transparent',
-                isInline && 'bg-muted rounded border font-semibold px-1',
+                !isInline && 'bg-transparent text-white',
+                isInline && 'bg-white/20 backdrop-blur-sm rounded border border-white/30 font-semibold px-1 text-white',
                 className
               )}
               {...props}
