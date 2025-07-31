@@ -4,6 +4,8 @@ import { ArrowRightIcon } from "lucide-react";
 import { AttachmentButton, AttachmentList } from "@/components/attachments";
 import { GlassmorphicButton } from "@/components/ui/buttons";
 import { GlassmorphicContainer } from "@/components/ui/containers";
+import { useKeyBindings } from "@/hooks/useKeyBindings";
+import { useRef } from "react";
 
 interface ComposerProps {
   input: string;
@@ -13,6 +15,33 @@ interface ComposerProps {
 }
 
 export function Composer({ input, handleInputChange, handleFormSubmit, status }: ComposerProps) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  
+  const handleSubmit = () => {
+    if (status === 'ready' && input.trim()) {
+      const event = new Event('submit', { bubbles: true, cancelable: true });
+      handleFormSubmit(event as unknown as React.FormEvent);
+    }
+  };
+
+  useKeyBindings({
+    bindings: [
+      {
+        key: 'Enter',
+        action: handleSubmit,
+        disabled: status !== 'ready' || !input.trim(),
+        preventDefault: true,
+        // Pouze Enter bez dalších modifikátorů
+        ctrlKey: false,
+        shiftKey: false,
+        altKey: false,
+        metaKey: false
+      }
+    ],
+    target: textareaRef.current,
+    deps: [status, input]
+  });
+
   return (
     <div className="sticky bottom-0 mt-3 flex w-full max-w-2xl flex-col items-center justify-end rounded-t-lg bg-transparent pb-4">
       <GlassmorphicContainer 
@@ -21,6 +50,7 @@ export function Composer({ input, handleInputChange, handleFormSubmit, status }:
       >
         <form onSubmit={handleFormSubmit} className="flex flex-col">
           <textarea
+            ref={textareaRef}
             value={input}
             onChange={handleInputChange}
             rows={1}
