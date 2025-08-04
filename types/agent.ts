@@ -23,9 +23,11 @@ export interface AgentData {
   
   // Chat konfigurace (jen vybrané)
   chatConfig: {
-    searchMode: "off" | "on";
+    searchMode: boolean;
     historyCount: number;
     enableReasoning: boolean;
+    enableRAG: boolean;
+    enableMemories: boolean;
   };
   
   // Úvodní zprávy

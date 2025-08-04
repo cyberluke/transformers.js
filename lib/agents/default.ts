@@ -11,9 +11,11 @@ export const defaultAgent: AgentData = {
   params: null,
   systemRole: null,
   chatConfig: {
-    searchMode: "on",
+    searchMode: true,
     historyCount: 10,
     enableReasoning: false,
+    enableRAG: true,
+    enableMemories: true,
   },
   openingMessage: null,
   openingQuestions: null,

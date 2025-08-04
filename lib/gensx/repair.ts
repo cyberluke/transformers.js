@@ -1,4 +1,4 @@
-import { generateObject, generateText } from "@gensx/vercel-ai";
+import { generateObject } from "@gensx/vercel-ai";
 import * as gensx from "@gensx/core";
 import { openai } from "@ai-sdk/openai";
 import z from "zod";

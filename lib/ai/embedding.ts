@@ -42,8 +42,7 @@ export const findRelevantContent = async (userQuery: string, userId: string, ass
     userQueryEmbedded,
   )})`;
   
-  // Základní podmínka - podobnost musí být vyšší než 0.3
-  const similarityCondition = gt(similarity, 0.3);
+  const similarityCondition = gt(similarity, 0.4);
   
   // Společné podmínky pro embeddings
   const userGeneralEmbeddings = and(

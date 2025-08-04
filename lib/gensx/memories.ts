@@ -22,11 +22,11 @@ export const Memories = gensx.Component(
     }
 
     const {memories, systemMessage} = await retrieveMemories(messages, config);
-    const memoriesPrompt = [SYSTEM_HIGHLIGHT_PROMPT, systemMessage].filter(Boolean).join("\n");
+    const prompt = [SYSTEM_HIGHLIGHT_PROMPT, systemMessage].filter(Boolean).join("\n");
 
     return {
       memories,
-      memoriesPrompt,
+      prompt,
     };
   },
 );

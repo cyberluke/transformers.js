@@ -19,6 +19,7 @@ export const FindRelevantContent = gensx.Component(
     
     try {
       const relevantContent = await findRelevantContent(query, userId, assistantId);
+      console.log("Relevant content length:", relevantContent.length);
       
       if (relevantContent.length === 0) {
         return {
@@ -28,15 +29,10 @@ export const FindRelevantContent = gensx.Component(
         };
       }
       
-      const formattedContent = relevantContent.map((item, index) => {
-        return `**Relevantní obsah ${index + 1}** (podobnost: ${(item.similarity * 100).toFixed(1)}%):\n${item.name}`;
-      });
-      
       return {
         success: true,
         message: `Našel jsem ${relevantContent.length} relevantních úryvků z uploadovaných dokumentů:`,
-        content: relevantContent,
-        formattedContent: formattedContent.join('\n\n')
+        content: relevantContent
       };
       
     } catch (error) {
@@ -76,7 +72,7 @@ export const RAGWorkflow = gensx.Workflow(
 
     try {
       // Query rewriting pomocí generateText
-      const { text: rewrittenQuery } = await generateText({
+      const { text: rewrittenQuery, usage } = await generateText({
         model: openai('gpt-4o-mini'),
         prompt: `
 Máš k dispozici konverzaci mezi uživatelem a asistentem. Tvým úkolem je přepsat poslední uživatelskou zprávu na optimální vyhledávací dotaz pro sémantické vyhledávání v dokumentech.
@@ -94,6 +90,7 @@ Vrať jen přepsaný dotaz, nic víc:
 
       console.log("Original query:", lastUserMessage.content);
       console.log("Rewritten query:", rewrittenQuery);
+      console.log("Usage RAG:", usage);
 
       // Najdi relevantní obsah
       const contentResult = await FindRelevantContent({
@@ -133,7 +130,7 @@ INSTRUKCE: Při odpovědi využij výše uvedené informace z dokumentů, pokud 
         success: true,
         message: `Nalezen relevantní obsah z ${contentResult.content.length} dokumentů`,
         rewrittenQuery: rewrittenQuery.trim(),
-        foundContent: contentResult.content
+        // foundContent: contentResult.content
       };
 
     } catch (error) {

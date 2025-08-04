@@ -7,7 +7,7 @@ import { AgentData } from "@/types/agent";
 import { SystemPrompt } from "./system";
 
 import { generateChatTitleTool } from "../tools/chat-title";
-import { searchWebTool } from "../tools/search-web";
+import { searchWebTool } from "@/lib/tools/search-web/backend";
 import { WriterRef } from "@/types/server";
 import { AppMessage } from "@/types/messages";
 
@@ -30,6 +30,8 @@ export const StreamingChat = gensx.Workflow(
     ragContext?: string,
     writerRef: WriterRef
   }) => {
+    // https://s4.nanotrik.ai/attachments/2025-07-30/01K1EA90K28RZRKD6A19NNN8GE.pdf
+
     const result = streamText({
       system: SystemPrompt({
         memoriesPrompt: memoriesPrompt,
@@ -37,6 +39,24 @@ export const StreamingChat = gensx.Workflow(
         ragContext: ragContext,
       }),
       messages: messages,
+      // messages: [
+      //   {
+      //     role: 'user',
+      //     content: [
+      //       { type: 'text', text: 'What is the file about?' },
+      //       // {
+      //       //   type: 'file',
+      //       //   mimeType: 'application/pdf',
+      //       //   data: "https://s4.nanotrik.ai/attachments/2025-07-30/01K1EA90K28RZRKD6A19NNN8GE.pdf"
+      //       // },
+      //       {
+      //         type: 'image',
+      //         // mimeType: 'application/pdf',
+      //         image: "https://s4.nanotrik.ai/attachments/2025-07-30/01K1EA90K28RZRKD6A19NNN8GE.pdf"
+      //       },
+      //     ],
+      //   },
+      // ],
       maxSteps: 5,
       toolCallStreaming: true,
       model: agent.chatModel,

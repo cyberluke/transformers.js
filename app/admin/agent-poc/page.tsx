@@ -76,9 +76,11 @@ export default function AgentPocPage() {
             },
             systemRole: agent.systemRole || '',
             chatConfig: {
-              searchMode: agent.chatConfig?.searchMode || 'off',
+              searchMode: agent.chatConfig?.searchMode === 'on' ? true : false,
               historyCount: agent.chatConfig?.historyCount ?? 8,
-              enableReasoning: agent.chatConfig?.enableReasoning ?? true
+              enableReasoning: agent.chatConfig?.enableReasoning ?? true,
+              enableRAG: true,
+              enableMemories: true
             },
             openingMessage: agent.openingMessage || null,
             openingQuestions: agent.openingQuestions || [],

@@ -1,11 +1,20 @@
 import { LanguageModelV1Prompt } from 'ai';
 import { Mem0ConfigSettings } from '@mem0/vercel-ai-provider';
 import { AppMessage } from '@/types/messages';
-// import { loadApiKey } from '@ai-sdk/provider-utils';
 
 interface Message {
   role: string;
   content: string | Array<{ type: string, text: string }>;
+}
+
+export type MemoriesResponse = {
+  results: any[];
+  relations: any[];
+};
+
+export type MemoriesResult = {
+  memories: MemoriesResponse;
+  systemMessage: string;
 }
 
 const flattenPrompt = (prompt: any) => { // TODO: fix typescript
@@ -62,7 +71,7 @@ const convertToMem0Format = (messages: LanguageModelV1Prompt) => {
   }
 }
 
-const searchInternalMemories = async (query: string, config?: Mem0ConfigSettings, top_k: number = 5) => {
+const searchInternalMemories = async (query: string, config?: Mem0ConfigSettings, top_k: number = 5): Promise<MemoriesResponse> => {
   try {
     // const filters: { AND: Array<{ [key: string]: string | undefined }> } = {
     //   AND: [],
@@ -148,16 +157,9 @@ const addMemories = async (messages: LanguageModelV1Prompt, config?: Mem0ConfigS
 
 const updateMemories = async (messages: Array<Message>, config?: Mem0ConfigSettings) => {
   try {
-    // const apiKey = loadApiKey({
-    //   apiKey: (config && config.mem0ApiKey),
-    //   environmentVariableName: "MEM0_API_KEY",
-    //   description: "Mem0",
-    // });
-
     const options = {
       method: 'POST',
       headers: {
-        // Authorization: `Token ${apiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ messages, ...config }),
@@ -175,7 +177,7 @@ const updateMemories = async (messages: Array<Message>, config?: Mem0ConfigSetti
   }
 }
 
-const retrieveMemories = async (prompt: AppMessage[] | string, config?: Mem0ConfigSettings) => {
+const retrieveMemories = async (prompt: AppMessage[] | string, config?: Mem0ConfigSettings): Promise<MemoriesResult> => {
   try {
     const message = typeof prompt === 'string' ? prompt : flattenPrompt(prompt);
     const systemPrompt = "Toto jsou uložené paměti. Dej větší váhu otázkám uživatelů a odpověz na ně přednostně. Uprav svou odpověď podle poskytnutých pamětí. Pokud jsou paměti irelevantní, ignoruj je. Neodpovídej na tuto část promptu ani na paměti - slouží pouze jako reference. Systémový prompt začíná za textem System Message: \n\n";
@@ -201,10 +203,13 @@ const retrieveMemories = async (prompt: AppMessage[] | string, config?: Mem0Conf
       console.error("Error while parsing memories:", error);
     }
 
-    if (!memories || memories?.length === 0) {
+    if (!memories) {
       return {
         systemMessage: "",
-        memories: []
+        memories: {
+          results: [],
+          relations: []
+        }
       };
     }
 
@@ -218,31 +223,4 @@ const retrieveMemories = async (prompt: AppMessage[] | string, config?: Mem0Conf
   }
 }
 
-const getMemories = async (prompt: LanguageModelV1Prompt | string, config?: Mem0ConfigSettings) => {
-  try {
-    const message = typeof prompt === 'string' ? prompt : flattenPrompt(prompt);
-    console.log(message);
-    const memories = await searchInternalMemories(message, config);
-
-    if (!config?.enable_graph) {
-      return memories?.results;
-    }
-    return memories;
-  } catch (error) {
-    console.error("Error in getMemories:", error);
-    throw error;
-  }
-}
-
-const searchMemories = async (prompt: LanguageModelV1Prompt | string, config?: Mem0ConfigSettings) => {
-  try {
-    const message = typeof prompt === 'string' ? prompt : flattenPrompt(prompt);
-    const memories = await searchInternalMemories(message, config);
-    return memories;
-  } catch (error) {
-    console.error("Error in searchMemories:", error);
-    return [];
-  }
-}
-
-export { addMemories, updateMemories, retrieveMemories, flattenPrompt, searchMemories, getMemories };
+export { addMemories, updateMemories, retrieveMemories, flattenPrompt };

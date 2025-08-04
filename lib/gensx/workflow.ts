@@ -1,5 +1,4 @@
 import * as gensx from "@gensx/core";
-import { AgentData } from "@/types/agent";
 import { Memories } from "./memories";
 import { HandleChatInit } from "./chat";
 import { StreamingChat } from "./streaming-chat";
@@ -9,6 +8,7 @@ import { AppMessage } from "@/types/messages";
 import { HandleChatMessage } from "./message";
 import { SelectAgent } from "./agent";
 import { RAGWorkflow } from "./relevantContent";
+import { MemoriesResponse } from "../server/mem0/mem0-utils";
 
 export const ChatWorkflow = gensx.Workflow(
   "ChatWorkflow",
@@ -41,17 +41,32 @@ export const ChatWorkflow = gensx.Workflow(
       detailed: false,
     });
 
-    const { memories, memoriesPrompt } = await Memories({
-      messages: messages,
-      userId: userId,
-    });
+    const memories = {
+      prompt: "",
+      data: {} as MemoriesResponse
+    };
+
+    if (agent.chatConfig.enableMemories) {
+      const memoriesResult = await Memories({
+        messages: messages,
+        userId: userId,
+      });
+
+      memories.prompt = memoriesResult.prompt;
+      memories.data = memoriesResult.memories;
+    }
 
     // RAG workflow - najdi relevantní obsah z dokumentů
-    const { ragContext } = await RAGWorkflow({
-      messages: messages,
-      userId: userId,
-      assistantId: agent.id,
-    });
+    let ragContext: string | undefined;
+    if (agent.chatConfig.enableRAG) {
+      const ragResult = await RAGWorkflow({
+        messages: messages,
+        userId: userId,
+        assistantId: agent.id,
+      });
+
+      ragContext = ragResult.ragContext;
+    }
 
     await HandleChatMessage({
       userMessage,
@@ -67,17 +82,18 @@ export const ChatWorkflow = gensx.Workflow(
       chatId: chat.id,
       userId,
       agent,
-      memoriesPrompt,
+      memoriesPrompt: memories.prompt,
       ragContext,
       writerRef,
     });
 
     return createChatStreamResponse({
       chatId: chat.id,
-      memories,
+      memories: memories.data,
       result,
       messages,
       userId: userId,
+      agent,
       writerRef,
     });
   },

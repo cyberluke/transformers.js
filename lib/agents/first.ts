@@ -55,9 +55,11 @@ export const labyrintAgent: AgentData = {
 *   Při citování externích zdrojů používejte standardní citační formáty.
 * Používejte markdown syntax.`,
   chatConfig: {
-    searchMode: "off",
+    searchMode: true,
     historyCount: 8,
-    enableReasoning: true
+    enableReasoning: true,
+    enableRAG: false,
+    enableMemories: true
   },
   openingMessage: null,
   openingQuestions: [],

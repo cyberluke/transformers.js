@@ -41,7 +41,7 @@ export function SearchResultWithImage({ result }: SearchResultWithImageProps) {
             {new URL(result.url).hostname}
           </span>
           <span className="text-xs bg-blue-400/20 text-blue-300 px-1.5 py-0.5 rounded backdrop-blur-sm">
-            {Math.round(result.score)}%
+            {Math.round(result.score * 100)}%
           </span>
         </div>
       </div>
