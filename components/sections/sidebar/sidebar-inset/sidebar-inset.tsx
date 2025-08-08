@@ -1,4 +1,4 @@
-import { SidebarTrigger } from "@/components/ui/sidebar"
+
 import { cn } from "@/lib/utils"
 import { GetResult } from "@fingerprintjs/fingerprintjs-pro";
 import Image from "next/image";
@@ -17,21 +17,12 @@ function SidebarInset({ className, fingerprintData, children, ...props }: Sideba
       )} 
       {...props}
     >
-        <Image
-            src="/assets/images/background-beach.jpg"
-            alt="Obrázek na pozadí z Unsplash"
-            fill
-            priority
-            className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/30" />
-      <header className="relative z-10 flex h-16 shrink-0 items-center gap-2 border-b border-white/20 bg-black/10 px-4 text-white backdrop-blur-xs">
-        <SidebarTrigger />
+      <header className="relative z-20 flex h-16 shrink-0 items-center gap-2 border-b border-white/10 bg-white/5 px-4 text-white backdrop-blur-md">
         <div className="flex items-center gap-2">
           <p>Dev: {fingerprintData?.visitorId}</p>
         </div>
       </header>
-      <div className="relative z-10 flex h-full w-full flex-col box-border">
+      <div className="relative z-20 flex h-full w-full flex-col box-border">
         {children}
       </div>
     </main>

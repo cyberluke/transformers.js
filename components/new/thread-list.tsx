@@ -49,15 +49,15 @@ export function ThreadList() {
       {/* New Thread Button */}
       <Button 
         onClick={handleNewThread}
-        className="flex items-center justify-start gap-2 rounded-xl px-3 py-3 text-start bg-gradient-to-r from-gray-100/90 to-gray-200/80 backdrop-blur-sm border border-gray-300/50 hover:from-gray-200/90 hover:to-gray-300/80 hover:border-gray-400/60 transition-all duration-200 shadow-lg hover:shadow-xl text-gray-800 font-medium"
+        className="flex items-center justify-start gap-2 rounded-xl px-3 py-4 text-start bg-black/30 backdrop-blur-lg border border-white/20 hover:bg-black/40 hover:border-white/30 transition-all duration-200 shadow-lg hover:shadow-xl text-white font-medium group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2"
         variant="ghost"
       >
-        <PlusIcon className="h-4 w-4" />
-        Nový chat
+        <PlusIcon className="h-4 w-4 flex-shrink-0" />
+        <span className="group-data-[collapsible=icon]:hidden">Nový chat</span>
       </Button>
 
-      {/* Thread List */}
-      <div className="space-y-2">
+      {/* Thread List - skryté v collapsed módu */}
+      <div className="space-y-2 group-data-[collapsible=icon]:hidden">
         {threads.map((thread) => (
           <div
             key={thread.id}
@@ -66,7 +66,7 @@ export function ThreadList() {
               "group relative flex items-center gap-3 rounded-xl px-3 py-3 cursor-pointer transition-all duration-200 border",
               currentThreadId === thread.id 
                 ? "bg-gradient-to-r from-blue-500/80 to-blue-600/70 backdrop-blur-lg border-blue-400/60 shadow-lg shadow-blue-500/30 text-white" 
-                : "bg-white/5 backdrop-blur-sm border-white/10 text-gray-800 hover:bg-white/10 hover:border-white/20 hover:text-gray-900 hover:shadow-lg"
+                : "bg-black/20 backdrop-blur-lg border-white/15 text-white/90 hover:bg-black/30 hover:border-white/25 hover:text-white hover:shadow-lg"
             )}
           >
             <MessageSquareIcon className="h-4 w-4 flex-shrink-0 opacity-80" />
@@ -82,7 +82,7 @@ export function ThreadList() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 hover:bg-red-500/20 hover:text-red-400 transition-all duration-200 rounded-lg"
+                className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 hover:bg-red-500/30 hover:text-red-300 backdrop-blur-sm transition-all duration-200 rounded-lg border border-red-400/20"
                 onClick={(e) => handleDeleteThread(thread.id, e)}
               >
                 <TrashIcon className="h-3 w-3" />
@@ -101,17 +101,17 @@ export function ThreadList() {
           <Button
             onClick={handleLoadMore}
             disabled={isLoading}
-            className="flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-start bg-gradient-to-r from-green-100/90 to-green-200/80 backdrop-blur-sm border border-green-300/50 hover:from-green-200/90 hover:to-green-300/80 hover:border-green-400/60 transition-all duration-200 shadow-lg hover:shadow-xl text-green-800 font-medium disabled:opacity-50"
+            className="flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-start bg-black/30 backdrop-blur-lg border border-white/20 hover:bg-black/40 hover:border-white/30 transition-all duration-200 shadow-lg hover:shadow-xl text-white font-medium disabled:opacity-50 group-data-[collapsible=icon]:px-2"
             variant="ghost"
           >
-            <RefreshCwIcon className={cn("h-4 w-4", isLoading && "animate-spin")} />
-            {isLoading ? 'Načítání...' : 'Načíst více'}
+            <RefreshCwIcon className={cn("h-4 w-4 flex-shrink-0", isLoading && "animate-spin")} />
+            <span className="group-data-[collapsible=icon]:hidden">{isLoading ? 'Načítání...' : 'Načíst více'}</span>
           </Button>
         )}
       </div>
 
       {threads.length === 0 && (
-        <div className="text-sm text-gray-600 px-3 py-8 text-center bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
+        <div className="text-sm text-white/80 px-3 py-8 text-center bg-black/20 backdrop-blur-lg rounded-xl border border-white/15 group-data-[collapsible=icon]:hidden">
           Žádné chaty zatím
         </div>
       )}

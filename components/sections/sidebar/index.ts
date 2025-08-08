@@ -11,4 +11,5 @@ export {
   SIDEBAR_KEYBOARD_SHORTCUT,
 } from "./sidebar-provider";
 
-export { SidebarInsetWrapper } from "./sidebar-inset"; 
+export { SidebarInsetWrapper } from "./sidebar-inset";
+export { AppSidebarContent, SidebarOpenButton } from "./sidebar-content"; 

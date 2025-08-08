@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
+import { SidebarProvider, AppSidebarContent } from "@/components/sections/sidebar";
 import { useFingerprint } from '@/hooks/useFingerprint';
 import { useThreads } from '@/hooks/useThreads';
 import { SidebarInsetWrapper, ChatContent } from "@/components/sections";
@@ -43,7 +42,7 @@ export function ChatLayout({
 
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebarContent />
       <SidebarInsetWrapper fingerprintData={fingerprintData}>
         <ChatContent
           messages={messages}
