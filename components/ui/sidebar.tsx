@@ -11,18 +11,11 @@ import { Button } from "@/components/ui/button";
 
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip/";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip/";
 import { 
   SidebarProvider,
   useSidebar,
-  SidebarContext,
-  type SidebarContextProps,
-  SIDEBAR_WIDTH,
   SIDEBAR_WIDTH_MOBILE,
-  SIDEBAR_WIDTH_ICON,
-  SIDEBAR_COOKIE_NAME,
-  SIDEBAR_COOKIE_MAX_AGE,
-  SIDEBAR_KEYBOARD_SHORTCUT,
 } from "@/components/sections/sidebar";
 
 function Sidebar({
