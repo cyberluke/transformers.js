@@ -1,0 +1,217 @@
+---
+alwaysApply: true
+---
+
+# Architektura a State Management
+
+## State Management s Zustand
+**KRITICKY DŮLEŽITÉ**: Používejte VÝHRADNĚ Zustand pro veškerý state management. NIKDY nepoužívejte useContext pro sdílení stavu mezi komponenty.
+
+### Zustand - Základní principy
+```tsx
+// ✅ Správně - Zustand store
+import { create } from 'zustand'
+
+interface UserStore {
+  user: User | null
+  setUser: (user: User | null) => void
+  isLoading: boolean
+  setIsLoading: (loading: boolean) => void
+}
+
+export const useUserStore = create<UserStore>((set) => ({
+  user: null,
+  setUser: (user) => set({ user }),
+  isLoading: false,
+  setIsLoading: (isLoading) => set({ isLoading }),
+}))
+
+// Použití v komponentě
+function UserProfile() {
+  const { user, setUser, isLoading } = useUserStore()
+  // ...
+}
+```
+
+### Zustand store patterns
+```tsx
+// Složitější store s devtools a persist
+import { create } from 'zustand'
+import { devtools, persist } from 'zustand/middleware'
+
+interface AppStore {
+  theme: 'light' | 'dark'
+  sidebar: {
+    isOpen: boolean
+    width: number
+  }
+  toggleSidebar: () => void
+  setTheme: (theme: 'light' | 'dark') => void
+}
+
+export const useAppStore = create<AppStore>()(
+  devtools(
+    persist(
+      (set) => ({
+        theme: 'light',
+        sidebar: {
+          isOpen: true,
+          width: 280,
+        },
+        toggleSidebar: () =>
+          set((state) => ({
+            sidebar: { ...state.sidebar, isOpen: !state.sidebar.isOpen }
+          })),
+        setTheme: (theme) => set({ theme }),
+      }),
+      { name: 'app-store' }
+    )
+  )
+)
+```
+
+### Co NIKDY nedělat
+```tsx
+// ❌ ŠPATNĚ - useContext pro state
+const UserContext = createContext()
+
+// ❌ ŠPATNĚ - Provider pattern pro sdílený stav
+function UserProvider({ children }) {
+  const [user, setUser] = useState()
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  )
+}
+```
+
+## React Server Components (RSC) optimalizace
+- Minimalizujte `'use client'`, `useEffect` a `setState`.
+- Upřednostňujte React Server Components (RSC) všude, kde je to možné.
+- Zabalte klientské komponenty do Suspense s fallback.
+- Používejte dynamické načítání pro nekritické komponenty.
+
+### Client Components pravidla
+```tsx
+// ✅ Správně - malá, cílená client komponenta
+'use client'
+import { useUserStore } from '@/lib/stores/user-store'
+
+function UserButton() {
+  const { user } = useUserStore()
+  return <Button>{user?.name}</Button>
+}
+
+// ❌ Špatně - velká komponenta s 'use client'
+'use client'
+function EntirePage() {
+  // Celá stránka jako client component
+}
+```
+
+### Omezte 'use client'
+- Upřednostňujte serverové komponenty a Next.js SSR.
+- Používejte pouze pro přístup k Web API v malých komponentách.
+- Vyhýbejte se pro načítání dat nebo správu stavu.
+- Data fetchujte na serveru, stav předávejte props.
+
+## Optimalizace výkonu
+- Optimalizujte obrázky: používejte WebP formát, zahrnujte data o velikosti, implementujte lazy loading.
+- Používejte 'nuqs' pro správu stavu URL parametrů.
+- Optimalizujte Web Vitals (LCP, CLS, FID).
+- Implementujte proper code splitting pomocí dynamic imports.
+
+### Data fetching patterns
+```tsx
+// ✅ Server Component - data fetching
+async function UserList() {
+  const users = await fetchUsers()
+  return (
+    <div>
+      {users.map(user => (
+        <UserCard key={user.id} user={user} />
+      ))}
+    </div>
+  )
+}
+
+// ✅ Client Component - pouze pro interaktivitu
+'use client'
+function UserCard({ user }: { user: User }) {
+  const { addToFavorites } = useFavoritesStore()
+  return (
+    <Card>
+      <Button onClick={() => addToFavorites(user.id)}>
+        Add to favorites
+      </Button>
+    </Card>
+  )
+}
+```
+
+## Technické specifikace projektu
+- **Next.js 15.3.0** s App Router
+- **React 19.1.0**
+- **Tailwind CSS v4.1** (@tailwindcss/postcss)
+- **~~Assistant UI 0.10.9~~** - **ZAKÁZÁNO** - nahradit custom komponenty
+- **AI SDK 4.3.16** s Anthropic a OpenAI providery
+- **Drizzle ORM 0.44.2** s PostgreSQL
+- **Zustand 5.0.6** pro správu stavu
+- **TypeScript 5**
+- **Gensx 0.4.3** pro pokročilé AI workflow
+- **Mem0 1.0.6** pro správu paměti AI agentů
+- **Lucide React 0.511.0** pro ikony
+- **Class Variance Authority** pro stylové varianty
+
+## Architektonické vzory
+- Následujte Next.js dokumentaci pro Data Fetching, Rendering a Routing.
+- Používejte compound pattern pro složité komponenty.
+- Implementujte proper error boundaries.
+- Využívejte Suspense pro loading states.
+- Preferujte composition over inheritance.
+
+## Assistant UI - Kompletní odstranění
+**KRITICKY DŮLEŽITÉ**: NIKDY nepoužívejte Assistant UI komponenty. Kompletně je nahraďte custom řešeními.
+
+### Co nahradit
+```tsx
+// ❌ ZAKÁZÁNO - Assistant UI komponenty
+import { Thread, Message, Composer } from '@ai-sdk/ui-utils'
+
+// ✅ SPRÁVNĚ - Custom komponenty s Shadcn UI
+import { ChatThread } from '@/components/sections/chat-inset/conversation'
+import { MessageList } from '@/components/new/message-list' 
+import { Composer } from '@/components/sections/chat-inset/conversation/composer'
+```
+
+### Náhradní strategie
+- **Thread** → Custom `MessageList` + `ThreadList` komponenty
+- **Message** → Custom `MessageItem` s proper type safety
+- **Composer** → Custom input s AI integration přes AI SDK
+- **Všechny Assistant UI hooks** → Custom hooks s Zustand stores
+
+### Architektonická náhrada
+```tsx
+// Místo Assistant UI Thread
+export function ChatThread() {
+  const { messages, isLoading } = useChatStore()
+  const { sendMessage } = useMessageActions()
+  
+  return (
+    <div className="flex flex-col h-full">
+      <MessageList messages={messages} />
+      <Composer onSend={sendMessage} disabled={isLoading} />
+    </div>
+  )
+}
+```
+
+## File organizace podle složitosti
+```
+lib/stores/           # Všechny Zustand stores
+├── user-store.ts     # User state
+├── app-store.ts      # App-wide settings
+├── chat-store.ts     # Chat specific state (místo Assistant UI)
+└── index.ts          # Re-exports
+```

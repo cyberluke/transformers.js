@@ -1,0 +1,62 @@
+---
+alwaysApply: true
+---
+# Základní vývojová pravidla
+Jste expert na TypeScript, Node.js, Next.js App Router, React, Shadcn UI a Tailwind CSS.
+
+**ZAKÁZÁNO**: Nepoužívejte Assistant UI - nahraďte vlastními komponentami s Shadcn UI a Radix UI.
+
+## Styl kódu a struktura
+- Pište stručný, technický TypeScript kód s přesnými příklady.
+- Používejte funkcionální a deklarativní programovací vzory; vyhýbejte se třídám.
+- Upřednostňujte iteraci a modularizaci před duplikováním kódu.
+- Používejte popisné názvy proměnných s pomocnými slovesy (např. isLoading, hasError).
+- Strukturujte soubory: exportovaná komponenta, podkomponenty, pomocné funkce, statický obsah, typy.
+
+## Konvence pojmenování
+- Používejte malá písmena s pomlčkami pro adresáře (např. components/auth-wizard).
+- Upřednostňujte pojmenované exporty pro komponenty.
+
+### Konvence pojmenování složek
+- **Základní složky**: kebab-case (např. `user-profile`, `chat-layout`, `auth-wizard`)
+- **Komponenty sections**: Použijte funkční skupiny s `-inset` příponou pro content wrappery:
+  - `sidebar/` - obsahuje `sidebar-provider.tsx`, `sidebar-inset/` 
+  - `chat-inset/` - obsahuje chat content komponenty
+  - `layout-inset/` - obsahuje layout wrappery
+- **Organizace komponent**:
+  - Hlavní komponenta: `komponenta.tsx` (např. `sidebar.tsx`)
+  - Podkomponenty: `komponenta/pod-komponenta/` (např. `sidebar/sidebar-inset/`)
+  - Index exporty: vždy `index.ts` s named exporty
+- **Typy složek**:
+  - `components/ui/` - základní UI primitiva
+  - `components/sections/` - kompozitní layout komponenty 
+  - `components/new/` - nové experimentální komponenty
+  - `lib/` - utility a služby
+  - `hooks/` - React hooks
+  - `types/` - TypeScript definice
+
+### Strukturální pravidla
+- Každá složka musí mít `index.ts` s exporty
+- Podobné komponenty grupujte do jedné složky
+- Používejte podsložky pro varianty (např. `sidebar/sidebar-inset/`)
+- Zachovejte konzistenci v celém projektu
+
+## Použití TypeScriptu
+- Používejte TypeScript pro veškerý kód; upřednostňujte types před interface.
+- Vyhýbejte se enums; místo toho používejte mapy.
+- Používejte funkcionální komponenty s TypeScript interfaces.
+- Definujte všechny props s přesnými typy.
+- Používejte generics pro znovupoužitelné komponenty.
+
+## Syntaxe a formátování
+- Používejte klíčové slovo "function" pro čisté funkce.
+- Vyhýbejte se zbytečným složeným závorkám v podmínkách; používejte stručnou syntaxi pro jednoduché výrazy.
+- Používejte deklarativní JSX.
+- Preferujte arrow functions pro krátké inline funkce.
+- Používejte const assertions tam, kde je to vhodné.
+
+## Import a export konvence
+- Upřednostňujte named imports před default imports.
+- Organizujte importy: externí knihovny, interní komponenty, typy.
+- Používejte absolutní cesty s aliasy definovanými v tsconfig.json.
+- Vždy exportujte komponenty jako named exports z index.ts souborů.

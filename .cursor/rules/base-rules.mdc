@@ -2,178 +2,50 @@
 alwaysApply: true
 ---
 
-# Základní pravidla pro vývoj
-Jste expert na TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Assistant UI a Tailwind CSS.
+# Přehled vývojových pravidel
 
-## Styl kódu a struktura
-- Pište stručný, technický TypeScript kód s přesnými příklady.
-- Používejte funkcionální a deklarativní programovací vzory; vyhýbejte se třídám.
-- Upřednostňujte iteraci a modularizaci před duplikováním kódu.
-- Používejte popisné názvy proměnných s pomocnými slovesy (např. isLoading, hasError).
-- Strukturujte soubory: exportovaná komponenta, podkomponenty, pomocné funkce, statický obsah, typy.
+Tato pravidla jsou rozdělena do tří specializovaných souborů pro lepší přehlednost:
 
-## Konvence pojmenování
-- Používejte malá písmena s pomlčkami pro adresáře (např. components/auth-wizard).
-- Upřednostňujte pojmenované exporty pro komponenty.
+## 📋 Struktura pravidel
 
-### Konvence pojmenování složek
-- **Základní složky**: kebab-case (např. `user-profile`, `chat-layout`, `auth-wizard`)
-- **Komponenty sections**: Použijte funkční skupiny s `-inset` příponou pro content wrappery:
-  - `sidebar/` - obsahuje `sidebar-provider.tsx`, `sidebar-inset/` 
-  - `chat-inset/` - obsahuje chat content komponenty
-  - `layout-inset/` - obsahuje layout wrappery
-- **Organizace komponent**:
-  - Hlavní komponenta: `komponenta.tsx` (např. `sidebar.tsx`)
-  - Podkomponenty: `komponenta/pod-komponenta/` (např. `sidebar/sidebar-inset/`)
-  - Index exporty: vždy `index.ts` s named exporty
-- **Typy složek**:
-  - `components/ui/` - základní UI primitiva
-  - `components/sections/` - kompozitní layout komponenty 
-  - `components/new/` - nové experimentální komponenty
-  - `lib/` - utility a služby
-  - `hooks/` - React hooks
-  - `types/` - TypeScript definice
+### 1. **core-development.mdc** - Základní vývojová pravidla
+- TypeScript konvence a best practices
+- Konvence pojmenování a struktury projektů
+- Import/export patterns
+- Základní syntaxe a formátování
 
-### Strukturální pravidla
-- Každá složka musí mít `index.ts` s exporty
-- Podobné komponenty grupujte do jedné složky
-- Používejte podsložky pro varianty (např. `sidebar/sidebar-inset/`)
-- Zachovejte konzistenci v celém projektu
+### 2. **ui-styling.mdc** - UI a stylování
+- **Tailwind CSS v4.1** - specifické pokyny pro novou verzi
+- Glassmorfní design a moderní UI
+- Responzivní design s container queries
+- **ZÁKAZ Assistant UI** - pouze Shadcn UI a custom komponenty
+- Optimalizace výkonu pro UI
 
-## Použití TypeScriptu
-- Používejte TypeScript pro veškerý kód; upřednostňujte interfaces před types.
-- Vyhýbejte se enums; místo toho používejte mapy.
-- Používejte funkcionální komponenty s TypeScript interfaces.
+### 3. **architecture.mdc** - Architektura a state management
+- **ZUSTAND** - výhradní použití pro state management
+- **ZÁKAZ useContext** pro sdílení stavu
+- React Server Components optimalizace
+- Performance patterns a best practices
 
-## Syntaxe a formátování
-- Používejte klíčové slovo "function" pro čisté funkce.
-- Vyhýbejte se zbytečným složeným závorkám v podmínkách; používejte stručnou syntaxi pro jednoduché výrazy.
-- Používejte deklarativní JSX.
+## 🎯 Klíčové změny a důrazy
 
-## UI a stylování
-- Používejte Shadcn UI a Tailwind CSS v4 pro komponenty a stylování.
-- Používejte Assistant UI komponenty jako základ pro budování rozhraní. Následujte jejich kompoziční model a rozšiřujte je pomocí Radix UI a Shadcn UI primitiv podle potřeby.
-- Implementujte responzivní design s Tailwind CSS v4; používejte mobile-first přístup.
-- Používejte jemné liquid glass efekty pomocí Tailwind utility tříd: kombinujte backdrop-blur, bg-opacity a jemné gradientní překryvy.
-- Vyhýbejte se reflektivnímu osvětlení, namořeným okrajům nebo dynamickým světelným výpočtům; udržujte efekty výkonné a vizuálně čisté.
-- Design by měl následovat minimalistickou, glassmorfní estetiku, podobnou platformám jako Perplexity — průsvitné panely, rozmazané pozadí a vysoce kontrastní čitelný text.
-- Upřednostňujte bg-white/5, bg-gradient-to-t, backdrop-blur-sm před backdrop-blur-xl a vždy optimalizujte pro GPU rendering.
+### State Management - KRITICKY DŮLEŽITÉ
+- **Používejte VÝHRADNĚ Zustand** pro veškerý state management
+- **NIKDY nepoužívejte useContext** pro sdílení stavu mezi komponenty
+- Všechny stores musí být v `lib/stores/` adresáři
 
-## Optimalizace výkonu
-- Minimalizujte 'use client', 'useEffect' a 'setState'; upřednostňujte React Server Components (RSC).
-- Zabalte klientské komponenty do Suspense s fallback.
-- Používejte dynamické načítání pro nekritické komponenty.
-- Optimalizujte obrázky: používejte WebP formát, zahrnujte data o velikosti, implementujte lazy loading.
+### Tailwind CSS v4.1
+- Nové **container queries** (`@container`, `@sm:`, `@lg:`)
+- Vylepšené **backdrop efekty** a **shadow systémy**
+- Modernizované **gradient syntaxe**
+- **Animace v4.1** (`animate-in`, `slide-in-from-*`)
 
-## Klíčové konvence
-- Používejte 'nuqs' pro správu stavu URL parametrů.
-- Optimalizujte Web Vitals (LCP, CLS, FID).
-- Omezte 'use client':
-  - Upřednostňujte serverové komponenty a Next.js SSR.
-  - Používejte pouze pro přístup k Web API v malých komponentách.
-  - Vyhýbejte se pro načítání dat nebo správu stavu.
+### Projekt specifika
+- **Next.js 15.3.0** s App Router
+- **React 19.1.0**
+- **Tailwind CSS v4.1**
+- **Zustand 5.0.6** pro state management
+- **~~Assistant UI 0.10.9~~** - **ZAKÁZÁNO** - nahradit custom komponenty
 
-## Technické specifikace pro aktuální projekt:
-- Next.js 15.3.0 s App Router
-- React 19.1.0
-- Tailwind CSS v4 (@tailwindcss/postcss)
-- Assistant UI 0.10.9
-- AI SDK 4.3.16 s Anthropic a OpenAI providery
-- Drizzle ORM 0.44.2 s PostgreSQL
-- Zustand 5.0.6 pro správu stavu
-- TypeScript 5
-- Gensx 0.4.3 pro pokročilé AI workflow
-- Mem0 1.0.6 pro správu paměti AI agentů
-- Lucide React 0.511.0 pro ikony
-- Class Variance Authority pro stylové varianty
-
-Následujte Next.js dokumentaci pro Data Fetching, Rendering a Routing.
-
-- Lucide React 0.511.0 pro ikony# Základní pravidla pro vývoj
-Jste expert na TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Assistant UI a Tailwind CSS.
-
-## Styl kódu a struktura
-- Pište stručný, technický TypeScript kód s přesnými příklady.
-- Používejte funkcionální a deklarativní programovací vzory; vyhýbejte se třídám.
-- Upřednostňujte iteraci a modularizaci před duplikováním kódu.
-- Používejte popisné názvy proměnných s pomocnými slovesy (např. isLoading, hasError).
-- Strukturujte soubory: exportovaná komponenta, podkomponenty, pomocné funkce, statický obsah, typy.
-
-## Konvence pojmenování
-- Používejte malá písmena s pomlčkami pro adresáře (např. components/auth-wizard).
-- Upřednostňujte pojmenované exporty pro komponenty.
-
-### Konvence pojmenování složek
-- **Základní složky**: kebab-case (např. `user-profile`, `chat-layout`, `auth-wizard`)
-- **Komponenty sections**: Použijte funkční skupiny s `-inset` příponou pro content wrappery:
-  - `sidebar/` - obsahuje `sidebar-provider.tsx`, `sidebar-inset/` 
-  - `chat-inset/` - obsahuje chat content komponenty
-  - `layout-inset/` - obsahuje layout wrappery
-- **Organizace komponent**:
-  - Hlavní komponenta: `komponenta.tsx` (např. `sidebar.tsx`)
-  - Podkomponenty: `komponenta/pod-komponenta/` (např. `sidebar/sidebar-inset/`)
-  - Index exporty: vždy `index.ts` s named exporty
-- **Typy složek**:
-  - `components/ui/` - základní UI primitiva
-  - `components/sections/` - kompozitní layout komponenty 
-  - `components/new/` - nové experimentální komponenty
-  - `lib/` - utility a služby
-  - `hooks/` - React hooks
-  - `types/` - TypeScript definice
-
-### Strukturální pravidla
-- Každá složka musí mít `index.ts` s exporty
-- Podobné komponenty grupujte do jedné složky
-- Používejte podsložky pro varianty (např. `sidebar/sidebar-inset/`)
-- Zachovejte konzistenci v celém projektu
-
-## Použití TypeScriptu
-- Používejte TypeScript pro veškerý kód; upřednostňujte interfaces před types.
-- Vyhýbejte se enums; místo toho používejte mapy.
-- Používejte funkcionální komponenty s TypeScript interfaces.
-
-## Syntaxe a formátování
-- Používejte klíčové slovo "function" pro čisté funkce.
-- Vyhýbejte se zbytečným složeným závorkám v podmínkách; používejte stručnou syntaxi pro jednoduché výrazy.
-- Používejte deklarativní JSX.
-
-## UI a stylování
-- Používejte Shadcn UI a Tailwind CSS v4 pro komponenty a stylování.
-- Používejte Assistant UI komponenty jako základ pro budování rozhraní. Následujte jejich kompoziční model a rozšiřujte je pomocí Radix UI a Shadcn UI primitiv podle potřeby.
-- Implementujte responzivní design s Tailwind CSS v4; používejte mobile-first přístup.
-- Používejte jemné liquid glass efekty pomocí Tailwind utility tříd: kombinujte backdrop-blur, bg-opacity a jemné gradientní překryvy.
-- Vyhýbejte se reflektivnímu osvětlení, namořeným okrajům nebo dynamickým světelným výpočtům; udržujte efekty výkonné a vizuálně čisté.
-- Design by měl následovat minimalistickou, glassmorfní estetiku, podobnou platformám jako Perplexity — průsvitné panely, rozmazané pozadí a vysoce kontrastní čitelný text.
-- Upřednostňujte bg-white/5, bg-gradient-to-t, backdrop-blur-sm před backdrop-blur-xl a vždy optimalizujte pro GPU rendering.
-
-## Optimalizace výkonu
-- Minimalizujte 'use client', 'useEffect' a 'setState'; upřednostňujte React Server Components (RSC).
-- Zabalte klientské komponenty do Suspense s fallback.
-- Používejte dynamické načítání pro nekritické komponenty.
-- Optimalizujte obrázky: používejte WebP formát, zahrnujte data o velikosti, implementujte lazy loading.
-
-## Klíčové konvence
-- Používejte 'nuqs' pro správu stavu URL parametrů.
-- Optimalizujte Web Vitals (LCP, CLS, FID).
-- Omezte 'use client':
-  - Upřednostňujte serverové komponenty a Next.js SSR.
-  - Používejte pouze pro přístup k Web API v malých komponentách.
-  - Vyhýbejte se pro načítání dat nebo správu stavu.
-
-## Technické specifikace pro aktuální projekt:
-- Next.js 15.3.0 s App Router
-- React 19.1.0
-- Tailwind CSS v4 (@tailwindcss/postcss)
-- Assistant UI 0.10.9
-- AI SDK 4.3.16 s Anthropic a OpenAI providery
-- Drizzle ORM 0.44.2 s PostgreSQL
-- Zustand 5.0.6 pro správu stavu
-- TypeScript 5
-- Gensx 0.4.3 pro pokročilé AI workflow
-- Mem0 1.0.6 pro správu paměti AI agentů
-- Lucide React 0.511.0 pro ikony
-- Class Variance Authority pro stylové varianty
-
-Následujte Next.js dokumentaci pro Data Fetching, Rendering a Routing.
-
-- Lucide React 0.511.0 pro ikony
+## 📖 Jak používat
+Všechna tři pravidla se aplikují automaticky (`alwaysApply: true`). Cursor bude následovat všechny definované konvence při generování a úpravě kódu.

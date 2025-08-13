@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Komponenty CSS soubory */
+@import "./styles/components/index.css";
+
 @theme {
   --sidebar-width: 16rem;
   --sidebar-width-mobile: 18rem;

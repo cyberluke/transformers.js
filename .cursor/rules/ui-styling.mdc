@@ -1,0 +1,148 @@
+---
+alwaysApply: true
+---
+
+# UI a stylování s Tailwind CSS v4.1
+
+## Základní principy UI designu
+- Používejte VÝHRADNĚ Shadcn UI a Tailwind CSS v4.1 pro komponenty a stylování.
+- **ZAKÁZÁNO**: Nepoužívejte Assistant UI komponenty - kompletně je nahraďte custom řešeními.
+- Stavějte vlastní kompoziční komponenty s Radix UI a Shadcn UI primitiv.
+- Design by měl následovat minimalistickou, glassmorfní estetiku, podobnou platformám jako Perplexity.
+
+## Tailwind CSS v4.1 - Specifické pokyny
+
+### Nová syntaxe a vlastnosti v4.1
+- **Kontejnery**: Používejte `@container` queries místo breakpoints tam, kde je to vhodné:
+  ```tsx
+  <div className="@container">
+    <div className="@sm:grid-cols-2 @lg:grid-cols-3">
+  ```
+
+- **Modernizované gradientní pozadí**:
+  ```tsx
+  // Správně v4.1
+  className="bg-gradient-to-br from-blue-50 via-white to-purple-50"
+  // Místo starší syntaxe
+  className="bg-gradient-to-br from-blue-50 via-white to-purple-50"
+  ```
+
+- **Nové backdrop efekty**:
+  ```tsx
+  // Optimalizované pro výkon
+  className="backdrop-blur-sm backdrop-saturate-150 backdrop-brightness-110"
+  ```
+
+- **Vylepšené shadow systémy**:
+  ```tsx
+  // Nové v4.1 - více jemné stíny
+  className="shadow-sm/50 shadow-neutral-200/25"
+  className="drop-shadow-sm drop-shadow-neutral-200/10"
+  ```
+
+### Responzivní design s mobile-first
+- Implementujte responzivní design s Tailwind CSS v4.1; používejte mobile-first přístup.
+- Používejte nové `@container` queries pro component-level responzivity:
+  ```tsx
+  // Container queries pro komponenty
+  <Card className="@container">
+    <div className="@xs:p-4 @sm:p-6 @md:p-8">
+  ```
+
+### Glassmorfní efekty a moderní design
+- Používejte jemné liquid glass efekty pomocí nových Tailwind v4.1 utility tříd.
+- Kombinujte backdrop-blur, bg-opacity a jemné gradientní překryvy.
+- Vyhýbejte se reflektivnímu osvětlení, namořeným okrajům nebo dynamickým světelným výpočtům.
+- Udržujte efekty výkonné a vizuálně čisté.
+
+### Optimalizované glassmorfní komponenty
+```tsx
+// Hlavní glassmorfní container
+className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl"
+
+// Vylepšené glassmorfní panely
+className="bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/20 shadow-lg/10"
+
+// Interaktivní elementy
+className="bg-white/10 hover:bg-white/20 transition-all duration-200 backdrop-blur-sm"
+```
+
+### Barevné schéma a kontrast
+- Průsvitné panely s vysokým kontrastem pro čitelnost textu.
+- Rozmazané pozadí s vysoce kontrastním čitelným textem.
+- Upřednostňujte `bg-white/5`, `bg-gradient-to-t`, `backdrop-blur-sm` před `backdrop-blur-xl`.
+- Vždy optimalizujte pro GPU rendering.
+
+### Animace a přechody v4.1
+```tsx
+// Nové animation utilities
+className="animate-in slide-in-from-bottom-4 duration-300"
+className="animate-out slide-out-to-top-4 duration-200"
+
+// Vylepšené transition timing
+className="transition-all duration-300 ease-out"
+className="transition-[background-color,border-color,color] duration-200"
+```
+
+### Dark mode optimalizace
+```tsx
+// Podporované v4.1 - automatická adaptace
+className="bg-neutral-50 dark:bg-neutral-900/50"
+className="text-neutral-900 dark:text-neutral-100"
+className="border-neutral-200 dark:border-neutral-800"
+```
+
+## Komponentní architektura UI
+- Vytvářejte kompozitní komponenty pomocí compound pattern.
+- Používejte className prop pro přizpůsobení stylů.
+- Implementujte proper forwarding refs pro všechny interaktivní elementy.
+- Využívejte cva (Class Variance Authority) pro varianty komponent.
+
+## Assistant UI - Úplný zákaz použití
+**KRITICKY DŮLEŽITÉ**: Assistant UI je ZAKÁZÁNO používat. Nahraďte všechny komponenty custom řešeními.
+
+### Zakázané importy a komponenty
+```tsx
+// ❌ NIKDY neimportujte z Assistant UI
+import { Thread, Message, Composer, useAssistant } from '@ai-sdk/ui-utils'
+import { useThread, useComposer } from '@assistant-ui/react'
+
+// ✅ SPRÁVNĚ - Vlastní komponenty s Shadcn UI
+import { MessageList } from '@/components/new/message-list'
+import { ThreadList } from '@/components/new/thread-list'
+import { Composer } from '@/components/sections/chat-inset/conversation/composer'
+```
+
+### Náhradní strategie pro UI komponenty
+```tsx
+// Místo Assistant UI Thread
+export function CustomChatThread() {
+  const { messages } = useChatStore()
+  
+  return (
+    <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
+      <MessageList messages={messages} />
+    </div>
+  )
+}
+
+// Místo Assistant UI Composer
+export function CustomComposer() {
+  const { sendMessage } = useChatStore()
+  
+  return (
+    <div className="bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md">
+      <Textarea 
+        className="bg-transparent border-white/20" 
+        onSubmit={sendMessage}
+      />
+    </div>
+  )
+}
+```
+
+## Optimalizace výkonu UI
+- Používejte CSS containment pro izolaci layout změn.
+- Minimalizujte reflow a repaint operace.
+- Přednostně používejte transform a opacity pro animace.
+- Implementujte proper virtualizaci pro dlouhé seznamy.

@@ -4,33 +4,41 @@ import * as React from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip/";
+import { 
+  useSidebarStore, 
+  SIDEBAR_WIDTH,
+  SIDEBAR_WIDTH_MOBILE,
+  SIDEBAR_WIDTH_ICON,
+  SIDEBAR_KEYBOARD_SHORTCUT
+} from "@/lib/stores/sidebar-store";
+// Styly jsou nyní v CSS jako @layer components
 
-const SIDEBAR_COOKIE_NAME = "sidebar_state";
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = "16rem";
-const SIDEBAR_WIDTH_MOBILE = "18rem";
-const SIDEBAR_WIDTH_ICON = "4rem";
-const SIDEBAR_KEYBOARD_SHORTCUT = "b";
-
-type SidebarContextProps = {
-  state: "expanded" | "collapsed";
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  openMobile: boolean;
-  setOpenMobile: (open: boolean) => void;
-  isMobile: boolean;
-  toggleSidebar: () => void;
-};
-
-const SidebarContext = React.createContext<SidebarContextProps | null>(null);
-
+// Hook pro kompatibilitu s původním API
 function useSidebar() {
-  const context = React.useContext(SidebarContext);
-  if (!context) {
-    throw new Error("useSidebar must be used within a SidebarProvider.");
-  }
-
-  return context;
+  const {
+    open,
+    state,
+    openMobile,
+    setOpen,
+    setOpenMobile,
+    toggleSidebar: toggleSidebarAction
+  } = useSidebarStore();
+  
+  const isMobile = useIsMobile();
+  
+  const toggleSidebar = React.useCallback(() => {
+    toggleSidebarAction(isMobile);
+  }, [isMobile, toggleSidebarAction]);
+  
+  return {
+    state,
+    open,
+    setOpen,
+    openMobile,
+    setOpenMobile,
+    isMobile,
+    toggleSidebar
+  };
 }
 
 function SidebarProvider({
@@ -47,33 +55,30 @@ function SidebarProvider({
   onOpenChange?: (open: boolean) => void;
 }) {
   const isMobile = useIsMobile();
-  const [openMobile, setOpenMobile] = React.useState(false);
+  const { setOpen, toggleSidebar: toggleSidebarAction } = useSidebarStore();
 
-  // This is the internal state of the sidebar.
-  // We use openProp and setOpenProp for control from outside the component.
-  const [_open, _setOpen] = React.useState(defaultOpen);
-  const open = openProp ?? _open;
-  const setOpen = React.useCallback(
-    (value: boolean | ((value: boolean) => boolean)) => {
-      const openState = typeof value === "function" ? value(open) : value;
-      if (setOpenProp) {
-        setOpenProp(openState);
-      } else {
-        _setOpen(openState);
-      }
+  // Initialize store with props if provided
+  React.useEffect(() => {
+    if (openProp !== undefined) {
+      setOpen(openProp);
+    } else if (defaultOpen !== undefined) {
+      setOpen(defaultOpen);
+    }
+  }, [openProp, defaultOpen, setOpen]);
 
-      // This sets the cookie to keep the sidebar state.
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
-    },
-    [setOpenProp, open]
-  );
+  // Handle external onOpenChange
+  const { open } = useSidebarStore();
+  React.useEffect(() => {
+    if (setOpenProp && openProp === undefined) {
+      setOpenProp(open);
+    }
+  }, [open, setOpenProp, openProp]);
 
-  // Helper to toggle the sidebar.
+  // Keyboard shortcut
   const toggleSidebar = React.useCallback(() => {
-    return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
-  }, [isMobile, setOpen, setOpenMobile]);
+    toggleSidebarAction(isMobile);
+  }, [isMobile, toggleSidebarAction]);
 
-  // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
@@ -86,65 +91,42 @@ function SidebarProvider({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [toggleSidebar]);
 
-  // We add a state so that we can do data-state="expanded" or "collapsed".
-  // This makes it easier to style the sidebar with Tailwind classes.
-  const state = open ? "expanded" : "collapsed";
-
-  const contextValue = React.useMemo<SidebarContextProps>(
-    () => ({
-      state,
-      open,
-      setOpen,
-      isMobile,
-      openMobile,
-      setOpenMobile,
-      toggleSidebar,
-    }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
-  );
-
   return (
-    <SidebarContext.Provider value={contextValue}>
-      <TooltipProvider delayDuration={0}>
-        <div
-          data-slot="sidebar-wrapper"
-          style={
-            {
-              "--sidebar-width": SIDEBAR_WIDTH,
-              "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
-              ...style,
-            } as React.CSSProperties
-          }
-          className={cn("group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full relative", className)}
-          {...props}
-        >
-          {/* Background image pro celý layout */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src="/assets/images/background-beach.jpg"
-              alt="Obrázek na pozadí z Unsplash"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/30" />
-          </div>
-          <div className="relative z-10 flex min-h-svh w-full">
-            {children}
-          </div>
+    <TooltipProvider delayDuration={0}>
+      <div
+        data-slot="sidebar-wrapper"
+        style={
+          {
+            "--sidebar-width": SIDEBAR_WIDTH,
+            "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
+            ...style,
+          } as React.CSSProperties
+        }
+        className={cn("group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full relative", className)}
+        {...props}
+      >
+        {/* Background image pro celý layout */}
+        <div className="sidebar-layout-bg">
+          <img
+            src="/assets/images/background-beach.jpg"
+            alt="Obrázek na pozadí z Unsplash"
+            className="sidebar-layout-img"
+          />
+          <div className="sidebar-layout-overlay" />
         </div>
-      </TooltipProvider>
-    </SidebarContext.Provider>
+        <div className="sidebar-layout-content">
+          {children}
+        </div>
+      </div>
+    </TooltipProvider>
   );
 }
 
 export {
   SidebarProvider,
   useSidebar,
-  SidebarContext,
-  type SidebarContextProps,
   SIDEBAR_WIDTH,
   SIDEBAR_WIDTH_MOBILE,
   SIDEBAR_WIDTH_ICON,
-  SIDEBAR_COOKIE_NAME,
-  SIDEBAR_COOKIE_MAX_AGE,
   SIDEBAR_KEYBOARD_SHORTCUT,
 }; 

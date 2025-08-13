@@ -1,0 +1,14 @@
+/**
+ * Centrální import pro všechny komponenty CSS soubory
+ * Podle Next.js a Tailwind CSS v4.1 best practices
+ */
+
+/* Sidebar komponenty */
+@import "./sidebar.css";
+
+/* 
+ * Další komponenty se přidají zde:
+ * @import "./chat.css";
+ * @import "./buttons.css";
+ * @import "./forms.css";
+ */
