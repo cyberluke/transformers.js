@@ -20,7 +20,7 @@ interface UseKeyBindingsOptions {
 
 export function useKeyBindings({ 
   bindings, 
-  target = document, 
+  target, 
   deps = [] 
 }: UseKeyBindingsOptions) {
   const handleKeyDown = useCallback((event: Event) => {
@@ -49,12 +49,17 @@ export function useKeyBindings({
   }, [bindings]);
 
   useEffect(() => {
-    if (!target) return;
+    // SSR safety - pouze v browseru
+    if (typeof window === 'undefined') return;
+    
+    // Pokud není target specifikován, použij document
+    const eventTarget = target || document;
+    if (!eventTarget) return;
 
-    target.addEventListener('keydown', handleKeyDown);
+    eventTarget.addEventListener('keydown', handleKeyDown);
     
     return () => {
-      target.removeEventListener('keydown', handleKeyDown);
+      eventTarget.removeEventListener('keydown', handleKeyDown);
     };
   }, [target, handleKeyDown, ...deps]);
 }
