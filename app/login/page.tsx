@@ -1,11 +1,11 @@
 'use client';
 
 import Sdk from 'casdoor-js-sdk';
-import { casdoorConfig } from '@/lib/casdoor-config';
+import { casdoorClientConfig } from '@/lib/casdoor-config';
 
 export default function Login() {
   const handleLogin = () => {
-    const CasdoorSDK = new Sdk(casdoorConfig);
+    const CasdoorSDK = new Sdk(casdoorClientConfig);
     CasdoorSDK.signin_redirect();
   };
 

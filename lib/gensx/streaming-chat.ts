@@ -21,6 +21,7 @@ export const StreamingChat = gensx.Workflow(
     memoriesPrompt,
     ragContext,
     writerRef,
+    allTokens,
   }: { 
     messages: AppMessage[],
     chatId: string, 
@@ -28,7 +29,8 @@ export const StreamingChat = gensx.Workflow(
     agent: AgentData,
     memoriesPrompt: string,
     ragContext?: string,
-    writerRef: WriterRef
+    writerRef: WriterRef,
+    allTokens: number,
   }) => {
     // https://s4.nanotrik.ai/attachments/2025-07-30/01K1EA90K28RZRKD6A19NNN8GE.pdf
 
@@ -87,7 +89,7 @@ export const StreamingChat = gensx.Workflow(
         return { ...toolCall, args: JSON.stringify(repairedArgs) };
       },
       onError: console.log,
-      onFinish: createFinishHandler(chatId, userId),
+      onFinish: createFinishHandler(chatId, userId, allTokens),
       tools: {
         generateChatTitle: generateChatTitleTool(writerRef, chatId, userId), // dodelat aby se nerunovalo pokud uz existuje
         searchWeb: searchWebTool(),

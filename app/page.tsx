@@ -70,6 +70,26 @@ export default function Page() {
         }
       };
     },
+    onError: (error) => {
+      console.error('Chat error:', error);
+      
+      // Parsování error response pro insufficient tokens
+      try {
+        const errorData = JSON.parse(error.message);
+        if (errorData.error === 'insufficient_tokens') {
+          // Zobrazení notifikace a přesměrování na subscription
+          alert(`❌ ${errorData.message}\n\n💡 Kliknutím na OK budete přesměrování na stránku předplatného.`);
+          window.location.href = '/subscription';
+          return;
+        }
+      } catch (parseError) {
+        // Pokud error není JSON, zpracuj jako obecnou chybu
+        console.error('Error parsing error response:', parseError);
+      }
+
+      // Obecné error handling
+      alert('❌ Došlo k chybě při odesílání zprávy. Zkuste to prosím znovu.');
+    },
   });
 
   // Sledování server response pro chat ID a title

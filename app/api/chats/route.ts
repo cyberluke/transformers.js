@@ -1,20 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserChatsWithPagination } from '@/lib/db/actions/chats';
-import { validateFingerprint } from '@/lib/server/fingerprint/auth';
+import { getUserIdFromAPI } from '@/lib/server/auth/api-auth';
 
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const fingerprint = searchParams.get('fingerprint');
     const cursor = searchParams.get('cursor') || undefined;
     const limit = parseInt(searchParams.get('limit') || '10');
 
-    // Validace fingerprint
-    const { userId, error } = await validateFingerprint(fingerprint);
-    if (error) return error;
+    // Validace session
+    const userIdResult = await getUserIdFromAPI(req);
+    if (typeof userIdResult !== 'string') {
+      return userIdResult; // Error response
+    }
 
     // Získání paginovaných chatů
-    const result = await getUserChatsWithPagination(userId!, cursor, limit);
+    const result = await getUserChatsWithPagination(userIdResult, cursor, limit);
 
     return NextResponse.json({
       success: true,

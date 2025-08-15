@@ -38,6 +38,7 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "ai": "4.3.16",
     "casdoor-js-sdk": "^0.16.0",
+    "casdoor-nodejs-sdk": "^1.28.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.44.2",

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Github, MessagesSquare, Menu, Plus } from "lucide-react";
+import { Crown, MessagesSquare, Menu, Plus } from "lucide-react";
 import Link from "next/link";
 import { 
   Sidebar, 
@@ -79,28 +79,26 @@ export function AppSidebarContent() {
           // Collapsed footer - pouze ikony
           <div className="flex flex-col items-center gap-3 transition-all duration-300 ease-in-out">
             <Link 
-              href="https://github.com/assistant-ui/assistant-ui" 
-              target="_blank"
-              className="sidebar-github hover:bg-white/20 transition-all duration-200"
-              aria-label="GitHub"
+              href="/subscription" 
+              className="p-2 rounded-lg bg-gradient-to-br from-amber-400/20 via-yellow-300/15 to-orange-400/20 backdrop-blur-sm border border-amber-300/30 hover:from-amber-400/30 hover:via-yellow-300/25 hover:to-orange-400/30 hover:border-amber-300/50 transition-all duration-300 shadow-lg shadow-amber-400/10"
+              aria-label="Předplatné"
             >
-              <Github className="size-4" />
+              <Crown className="size-4 text-amber-200" />
             </Link>
           </div>
         ) : (
-          // Expanded footer - GitHub link + profile
+          // Expanded footer - Subscription link + profile
           <div className="space-y-2 transition-all duration-300 ease-in-out">
             <Link 
-              href="https://github.com/assistant-ui/assistant-ui" 
-              target="_blank"
-              className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-all duration-200"
+              href="/subscription"
+              className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-br from-amber-400/15 via-yellow-300/10 to-orange-400/15 backdrop-blur-sm border border-amber-300/25 hover:from-amber-400/25 hover:via-yellow-300/20 hover:to-orange-400/25 hover:border-amber-300/40 transition-all duration-300 shadow-lg shadow-amber-400/5 group"
             >
-              <div className="sidebar-github">
-                <Github className="size-4" />
+              <div className="p-2 rounded-lg bg-gradient-to-br from-amber-400/20 to-orange-400/20 group-hover:from-amber-400/30 group-hover:to-orange-400/30 transition-all duration-300">
+                <Crown className="size-4 text-amber-200 group-hover:text-amber-100 transition-colors duration-300" />
               </div>
               <div className="flex flex-col transition-all duration-300 ease-in-out">
-                <span className="font-semibold text-white">GitHub</span>
-                <span className="text-white/70 text-sm">View Source</span>
+                <span className="font-semibold text-amber-100 group-hover:text-white transition-colors duration-300">Předplatné</span>
+                <span className="text-amber-200/70 text-sm group-hover:text-amber-100/80 transition-colors duration-300">Upgrade na Pro</span>
               </div>
             </Link>
           </div>

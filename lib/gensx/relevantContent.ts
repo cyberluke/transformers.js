@@ -56,6 +56,8 @@ export const RAGWorkflow = gensx.Workflow(
     userId: string, 
     assistantId?: string 
   }) => {
+    let allTokens = 0;
+
     // Získej poslední uživatelskou zprávu
     const lastUserMessage = messages
       .slice()
@@ -66,6 +68,7 @@ export const RAGWorkflow = gensx.Workflow(
       return {
         ragContext: "",
         success: false,
+        tokens: allTokens,
         message: "Žádná uživatelská zpráva k zpracování"
       };
     }
@@ -92,6 +95,8 @@ Vrať jen přepsaný dotaz, nic víc:
       console.log("Rewritten query:", rewrittenQuery);
       console.log("Usage RAG:", usage);
 
+      allTokens += usage.totalTokens;
+
       // Najdi relevantní obsah
       const contentResult = await FindRelevantContent({
         query: rewrittenQuery.trim(),
@@ -105,6 +110,7 @@ Vrať jen přepsaný dotaz, nic víc:
         return {
           ragContext: "",
           success: true,
+          tokens: allTokens,
           message: "Žádný relevantní obsah nebyl nalezen"
         };
       }
@@ -130,6 +136,7 @@ INSTRUKCE: Při odpovědi využij výše uvedené informace z dokumentů, pokud 
         success: true,
         message: `Nalezen relevantní obsah z ${contentResult.content.length} dokumentů`,
         rewrittenQuery: rewrittenQuery.trim(),
+        tokens: allTokens,
         // foundContent: contentResult.content
       };
 
@@ -138,6 +145,7 @@ INSTRUKCE: Při odpovědi využij výše uvedené informace z dokumentů, pokud 
       return {
         ragContext: "",
         success: false,
+        tokens: allTokens,
         error: error instanceof Error ? error.message : 'Neznámá chyba v RAG workflow'
       };
     }

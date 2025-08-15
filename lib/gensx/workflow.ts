@@ -9,6 +9,7 @@ import { HandleChatMessage } from "./message";
 import { SelectAgent } from "./agent";
 import { RAGWorkflow } from "./relevantContent";
 import { MemoriesResponse } from "../server/mem0/mem0-utils";
+import { getUserTokens } from "../db/actions/users";
 
 export const ChatWorkflow = gensx.Workflow(
   "ChatWorkflow",
@@ -25,6 +26,22 @@ export const ChatWorkflow = gensx.Workflow(
     agentId: string 
     chatId?: string,
   }) => {
+    let allTokens = 0;
+
+    console.log("ChatWorkflow", {
+      userMessage,
+      chatId,
+      userId,
+      agentId,
+    });
+
+    const userTokens = await getUserTokens(userId);
+    console.log("userTokens", userTokens);
+
+    if (userTokens < 1000) {
+      throw new Error("Insufficient tokens");
+    }
+
     const agent = SelectAgent({
       agentId,
     });
@@ -66,6 +83,7 @@ export const ChatWorkflow = gensx.Workflow(
       });
 
       ragContext = ragResult.ragContext;
+      allTokens += ragResult.tokens;
     }
 
     await HandleChatMessage({
@@ -85,6 +103,7 @@ export const ChatWorkflow = gensx.Workflow(
       memoriesPrompt: memories.prompt,
       ragContext,
       writerRef,
+      allTokens,
     });
 
     return createChatStreamResponse({

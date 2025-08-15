@@ -1,3 +1,4 @@
+import { removeUserTokens } from '@/lib/db/actions';
 import { createMessage } from '@/lib/db/actions/messages';
 import fs from 'fs';
 
@@ -51,11 +52,14 @@ export const saveAssistantMessage = async (chatId: string, userId: string, textC
 };
 
 // Hlavní onFinish handler
-export const createFinishHandler = (chatId: string, userId: string) => {
+export const createFinishHandler = (chatId: string, userId: string, allTokens: number) => {
   return (finishData: any) => {
     console.log("finishData");
 
     // fs.writeFileSync('finishData.json', JSON.stringify(finishData, null, 2));
+    const usage = finishData.usage.totalTokens;
+    const totalTokens = allTokens + usage;
+    removeUserTokens(userId, totalTokens);
 
     const { parts, textContent } = createMessageParts(finishData);
     

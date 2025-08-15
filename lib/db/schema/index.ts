@@ -8,4 +8,10 @@ export * from './embeddings';
 export * from './chats';
 
 // Exporty messages  
-export * from './messages'; 
+export * from './messages';
+
+// Exporty users
+export * from './users';
+
+// Exporty sessions
+export * from './sessions'; 
