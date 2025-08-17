@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageList } from "@/components/new/message-list";
+import { MessageList } from "@/components/ui/message";
 import { Composer } from "./composer";
 import { GlassmorphicContainer } from "@/components/ui/containers";
 

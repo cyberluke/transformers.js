@@ -2,7 +2,7 @@
 
 import { SparkleIcon } from "lucide-react";
 import { MarkdownRenderer } from '@/components/sections/chat-inset/conversation/markdown-renderer';
-import { ToolInvocation } from './tool-invocation';
+import { ToolInvocation } from '@/components/ui/tools';
 import { useThreads } from '@/hooks/useThreads';
 
 interface MessageListProps {
@@ -110,4 +110,4 @@ export function MessageList({ status }: MessageListProps) {
       )}
     </div>
   );
-} 
+}

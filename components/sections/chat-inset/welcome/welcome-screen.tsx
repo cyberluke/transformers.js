@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { ArrowRightIcon, ZapIcon, LightbulbIcon } from "lucide-react";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip/";
-import { AttachmentButton, AttachmentList } from "@/components/attachments";
+import { AttachmentButton, AttachmentList } from "@/components/ui/attachment";
 import { AgentSelector } from "./agent-selector";
 import { useKeyBindings, commonKeyBindings } from "@/hooks/useKeyBindings";
 

@@ -72,4 +72,5 @@ export function AttachmentItem({ attachment }: AttachmentItemProps) {
       </Button>
     </div>
   );
-} 
+}
+

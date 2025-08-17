@@ -8,4 +8,4 @@ export {
 export {
   TooltipIconButton,
   type TooltipIconButtonProps,
-} from './tooltip-icon-button'; 
+} from './tooltip-icon-button';

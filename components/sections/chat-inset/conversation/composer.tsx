@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowRightIcon } from "lucide-react";
-import { AttachmentButton, AttachmentList } from "@/components/attachments";
+import { AttachmentButton, AttachmentList } from "@/components/ui/attachment";
 import { GlassmorphicButton } from "@/components/ui/buttons";
 import { GlassmorphicContainer } from "@/components/ui/containers";
 import { useKeyBindings } from "@/hooks/useKeyBindings";

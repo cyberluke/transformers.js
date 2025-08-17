@@ -1,7 +1,7 @@
 'use client';
 
 import { SearchWebTool } from '@/lib/tools/search-web';
-import { GenericTool } from './tools';
+import { GenericTool } from '@/components/ui/tools/generic-tool';
 
 interface ToolInvocationProps {
   toolInvocation: any;
@@ -21,4 +21,4 @@ export function ToolInvocation({ toolInvocation, index }: ToolInvocationProps) {
     default:
       return <GenericTool toolInvocation={toolInvocation} index={index} />;
   }
-} 
+}

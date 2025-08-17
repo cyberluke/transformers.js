@@ -8,7 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './tooltip';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons';
 import { cn } from '@/lib/utils';
 
 export type TooltipIconButtonProps = ComponentPropsWithoutRef<typeof Button> & {
@@ -41,4 +41,4 @@ export const TooltipIconButton = forwardRef<
   );
 });
 
-TooltipIconButton.displayName = 'TooltipIconButton'; 
+TooltipIconButton.displayName = 'TooltipIconButton';

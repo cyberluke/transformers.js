@@ -117,3 +117,4 @@ export function SidebarToggle({ className, ...props }: React.ButtonHTMLAttribute
     </button>
   );
 }
+

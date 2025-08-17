@@ -211,4 +211,5 @@ export function FileUpload({ onResult, className }: FileUploadProps) {
       )}
     </div>
   );
-} 
+}
+

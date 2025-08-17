@@ -10,7 +10,7 @@ import {
 } from "./sidebar";
 import { useSidebarStore } from "@/lib/stores/sidebar-store";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { ThreadList } from "@/components/new/thread-list";
+import { ThreadList } from "@/components/ui/thread";
 import { Button } from "@/components/ui/button";
 
 export function AppSidebarContent() {
