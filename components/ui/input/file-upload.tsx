@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import { Button } from '@/components/ui/button';
+import { GlassmorphicButton } from '@/components/ui/buttons';
 import { cn } from '@/lib/utils';
 import { Upload, FileText, X, Loader2 } from 'lucide-react';
 
@@ -171,14 +171,14 @@ export function FileUpload({ onResult, className }: FileUploadProps) {
             <p className="text-sm text-destructive font-medium">
               {error}
             </p>
-            <Button
+            <GlassmorphicButton
               variant="ghost"
               size="sm"
               onClick={handleClear}
               className="h-6 w-6 p-0"
             >
               <X className="h-4 w-4" />
-            </Button>
+            </GlassmorphicButton>
           </div>
         </div>
       )}
@@ -198,14 +198,14 @@ export function FileUpload({ onResult, className }: FileUploadProps) {
                 </p>
               </div>
             </div>
-            <Button
-              variant="ghost"
+            <GlassmorphicButton
+              variant="secondary"
               size="sm"
               onClick={handleClear}
               className="h-6 w-6 p-0"
             >
               <X className="h-4 w-4" />
-            </Button>
+            </GlassmorphicButton>
           </div>
         </div>
       )}

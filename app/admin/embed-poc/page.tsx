@@ -2,8 +2,8 @@
 
 import { useState, useRef } from 'react';
 import { Upload, FileText, CheckCircle, XCircle, Loader2 } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/layout';
+import { GlassmorphicButton } from '@/components/ui/buttons';
 import { AgentSelector } from '@/components/sections/chat-inset/welcome';
 import { validateFile } from '@/types/attachments';
 
@@ -133,7 +133,7 @@ export default function EmbedPocPage() {
             
             <div className="border-2 border-dashed border-gray-200 rounded-lg p-8 text-center">
               <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <Button
+              <GlassmorphicButton
                 onClick={handleFileSelect}
                 disabled={!selectedAgent || uploading}
                 className="mb-2"
@@ -146,7 +146,7 @@ export default function EmbedPocPage() {
                 ) : (
                   'Vyberte soubory'
                 )}
-              </Button>
+              </GlassmorphicButton>
               <p className="text-sm text-muted-foreground">
                 PDF, DOC, DOCX, TXT a další podporované formáty
               </p>
@@ -172,9 +172,9 @@ export default function EmbedPocPage() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold">Výsledky nahrávání</h3>
-                <Button variant="outline" size="sm" onClick={clearResults}>
+                <GlassmorphicButton variant="secondary" size="sm" onClick={clearResults}>
                   Vymazat
-                </Button>
+                </GlassmorphicButton>
               </div>
 
               <div className="space-y-3">

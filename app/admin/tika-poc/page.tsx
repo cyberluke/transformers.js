@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { FileUpload } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+import { GlassmorphicButton } from '@/components/ui/buttons';
+import { Card } from '@/components/ui/layout';
+import { Separator } from '@/components/ui/layout';
 import { ArrowLeft, FileText, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -80,10 +80,10 @@ export default function TikaPocPage() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
             <Link href="/">
-              <Button variant="ghost" size="sm">
+              <GlassmorphicButton variant="ghost" size="sm">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Zpět na hlavní stránku
-              </Button>
+              </GlassmorphicButton>
             </Link>
             <Separator orientation="vertical" className="h-6" />
             <div>
@@ -131,10 +131,10 @@ export default function TikaPocPage() {
           <Card className="p-6 bg-white/50 dark:bg-black/20 backdrop-blur-sm border-white/20">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Extrahovaný text</h3>
-              <Button onClick={handleDownloadText} variant="outline" size="sm">
+              <GlassmorphicButton onClick={handleDownloadText} variant="secondary" size="sm">
                 <Download className="h-4 w-4 mr-2" />
                 Stáhnout jako TXT
-              </Button>
+              </GlassmorphicButton>
             </div>
             
             {/* File Info */}
@@ -195,29 +195,29 @@ export default function TikaPocPage() {
             {/* Page Navigation */}
             {result.pageCount > 1 && (
               <div className="flex items-center justify-between mb-4 p-3 bg-accent/20 rounded-lg">
-                <Button
-                  variant="outline"
+                <GlassmorphicButton
+                  variant="secondary"
                   size="sm"
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 0}
                 >
                   <ChevronLeft className="h-4 w-4 mr-1" />
                   Předchozí
-                </Button>
+                </GlassmorphicButton>
                 
                 <span className="text-sm font-medium">
                   Stránka {currentPage + 1} z {result.pageCount}
                 </span>
                 
-                <Button
-                  variant="outline"
+                <GlassmorphicButton
+                  variant="secondary"
                   size="sm"
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === result.pageCount - 1}
                 >
                   Další
                   <ChevronRight className="h-4 w-4 ml-1" />
-                </Button>
+                </GlassmorphicButton>
               </div>
             )}
 

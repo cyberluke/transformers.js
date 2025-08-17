@@ -69,7 +69,7 @@ export function AttachmentButton({ disabled = false, className }: AttachmentButt
             type="button"
             onClick={handleButtonClick}
             disabled={disabled || isUploading}
-            className={`rounded-max text-muted-foreground my-2.5 size-8 p-2 transition-opacity ease-in cursor-pointer hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed ${className || ''}`}
+            className={`h-fit transition-opacity ease-in cursor-pointer hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed ${className || ''}`}
             aria-label="Přidat přílohu"
           >
             {isUploading ? (

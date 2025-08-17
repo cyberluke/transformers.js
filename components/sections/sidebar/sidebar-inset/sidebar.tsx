@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Sheet, SheetContent } from "@/components/ui/layout";
 import { useSidebarStore } from "@/lib/stores/sidebar-store";
 import { useIsMobile } from "@/hooks/use-mobile";
 

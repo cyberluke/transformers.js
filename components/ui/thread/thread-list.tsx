@@ -1,11 +1,9 @@
 'use client';
 
 import { PlusIcon, MessageSquareIcon, TrashIcon, RefreshCwIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { GlassmorphicButton } from "@/components/ui/buttons";
 import { useThreads } from "@/hooks/useThreads";
 import { cn } from "@/lib/utils";
-import { Thread } from "@/lib/services/threadService";
-import { useState } from "react";
 
 export function ThreadList() {
   const { 
@@ -45,16 +43,17 @@ export function ThreadList() {
 
 
   return (
-    <div className="flex flex-col items-stretch gap-2 p-3">
+    <div className="flex flex-col items-stretch gap-2">
       {/* New Thread Button */}
-      <Button 
+      <GlassmorphicButton 
         onClick={handleNewThread}
-        className="flex items-center justify-start gap-2 rounded-xl px-3 py-4 text-start bg-black/30 backdrop-blur-lg border border-white/20 hover:bg-black/40 hover:border-white/30 transition-all duration-200 shadow-lg hover:shadow-xl text-white font-medium group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2"
-        variant="ghost"
+        className="flex items-center justify-start gap-2 rounded-xl px-3 py-4 text-start group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2"
+        variant="secondary"
+        size="lg"
       >
         <PlusIcon className="h-4 w-4 flex-shrink-0" />
         <span className="group-data-[collapsible=icon]:hidden">Nový chat</span>
-      </Button>
+      </GlassmorphicButton>
 
       {/* Thread List - skryté v collapsed módu */}
       <div className="space-y-2 group-data-[collapsible=icon]:hidden">
@@ -63,10 +62,10 @@ export function ThreadList() {
             key={thread.id}
             onClick={() => switchThread(thread.id)}
             className={cn(
-              "group relative flex items-center gap-3 rounded-xl px-3 py-3 cursor-pointer transition-all duration-200 border",
+              "group relative flex items-center gap-3 rounded-xl p-3 cursor-pointer transition-all duration-200 border backdrop-blur-lg",
               currentThreadId === thread.id 
-                ? "bg-gradient-to-r from-blue-500/80 to-blue-600/70 backdrop-blur-lg border-blue-400/60 shadow-lg shadow-blue-500/30 text-white" 
-                : "bg-black/20 backdrop-blur-lg border-white/15 text-white/90 hover:bg-black/30 hover:border-white/25 hover:text-white hover:shadow-lg"
+                ? "bg-white/10 border-emerald-400/50 shadow-lg shadow-emerald-500/20 text-white" 
+                : "bg-white/10 border-white/20 text-white/90 hover:bg-white/20 hover:border-white/30 hover:text-white hover:shadow-lg"
             )}
           >
             <MessageSquareIcon className="h-4 w-4 flex-shrink-0 opacity-80" />
@@ -79,40 +78,40 @@ export function ThreadList() {
 
             {/* Delete Button */}
             {threads.length > 1 && (
-              <Button
+              <GlassmorphicButton
                 variant="ghost"
-                size="icon"
+                size="icon-sm"
                 className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 hover:bg-red-500/30 hover:text-red-300 backdrop-blur-sm transition-all duration-200 rounded-lg border border-red-400/20"
                 onClick={(e) => handleDeleteThread(thread.id, e)}
               >
                 <TrashIcon className="h-3 w-3" />
-              </Button>
+              </GlassmorphicButton>
             )}
             
             {/* Selected indicator */}
             {currentThreadId === thread.id && (
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-blue-400 rounded-r-full" />
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-emerald-400 rounded-r-full" />
             )}
           </div>
         ))}
 
         {/* Load More Button */}
         {hasNextPage && (
-          <Button
+          <GlassmorphicButton
             onClick={handleLoadMore}
             disabled={isLoading}
-            className="flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-start bg-black/30 backdrop-blur-lg border border-white/20 hover:bg-black/40 hover:border-white/30 transition-all duration-200 shadow-lg hover:shadow-xl text-white font-medium disabled:opacity-50 group-data-[collapsible=icon]:px-2"
-            variant="ghost"
+            className="flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-start disabled:opacity-50 group-data-[collapsible=icon]:px-2"
+            variant="secondary"
           >
             <RefreshCwIcon className={cn("h-4 w-4 flex-shrink-0", isLoading && "animate-spin")} />
             <span className="group-data-[collapsible=icon]:hidden">{isLoading ? 'Načítání...' : 'Načíst více'}</span>
-          </Button>
+          </GlassmorphicButton>
         )}
       </div>
 
       {threads.length === 0 && (
-        <div className="text-sm text-white/80 px-3 py-8 text-center bg-black/20 backdrop-blur-lg rounded-xl border border-white/15 group-data-[collapsible=icon]:hidden">
-          Žádné chaty zatím
+        <div className="text-sm text-white/80 px-3 py-8 text-center bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 group-data-[collapsible=icon]:hidden">
+          Zatím žádné chaty
         </div>
       )}
     </div>

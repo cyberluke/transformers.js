@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { GlassmorphicButton } from '@/components/ui/buttons';
 import { Input } from '@/components/ui/input';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/layout';
 
 export default function SearXNGTestPage() {
   const [query, setQuery] = useState('integrate x^2 from 0 to 10');
@@ -124,22 +124,22 @@ export default function SearXNGTestPage() {
         </div>
 
         <div className="flex gap-4">
-          <Button 
+          <GlassmorphicButton 
             onClick={testSearXNG} 
             disabled={loading}
             className="flex-1"
           >
             {loading ? 'Načítání...' : 'Test GET Request'}
-          </Button>
+          </GlassmorphicButton>
           
-          <Button 
+          <GlassmorphicButton 
             onClick={testSearXNGPost} 
             disabled={loading}
-            variant="outline"
+            variant="secondary"
             className="flex-1"
           >
             {loading ? 'Načítání...' : 'Test POST Request'}
-          </Button>
+          </GlassmorphicButton>
         </div>
       </Card>
 

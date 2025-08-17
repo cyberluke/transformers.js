@@ -1,7 +1,7 @@
 'use client';
 
-import '@assistant-ui/react-markdown/styles/dot.css';
 import { FC, memo, useState } from 'react';
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { CheckIcon, CopyIcon } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -51,11 +51,11 @@ const CodeHeader: FC<{ language: string; code: string }> = ({ language, code }) 
 
 const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
   return (
-    <div className="aui-md">
+    <div>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-        h1: ({ className, ...props }) => (
+        h1: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>) => (
           <h1
             className={cn(
               'mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight last:mb-0 text-white',
@@ -64,7 +64,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        h2: ({ className, ...props }) => (
+        h2: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>) => (
           <h2
             className={cn(
               'mb-4 mt-8 scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0 last:mb-0 text-white',
@@ -73,7 +73,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        h3: ({ className, ...props }) => (
+        h3: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>) => (
           <h3
             className={cn(
               'mb-4 mt-6 scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0 last:mb-0 text-white',
@@ -82,7 +82,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        h4: ({ className, ...props }) => (
+        h4: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>) => (
           <h4
             className={cn(
               'mb-4 mt-6 scroll-m-20 text-xl font-semibold tracking-tight first:mt-0 last:mb-0 text-white',
@@ -91,7 +91,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        h5: ({ className, ...props }) => (
+        h5: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>) => (
           <h5
             className={cn(
               'my-4 text-lg font-semibold first:mt-0 last:mb-0 text-white',
@@ -100,19 +100,19 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        h6: ({ className, ...props }) => (
+        h6: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>) => (
           <h6
             className={cn('my-4 font-semibold first:mt-0 last:mb-0 text-white', className)}
             {...props}
           />
         ),
-        p: ({ className, ...props }) => (
+        p: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>) => (
           <p
             className={cn('mb-5 mt-5 leading-7 first:mt-0 last:mb-0 text-white/90', className)}
             {...props}
           />
         ),
-        a: ({ className, ...props }) => (
+        a: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) => (
           <a
             className={cn(
               'text-blue-300 font-medium underline underline-offset-4 hover:text-blue-200 transition-colors',
@@ -121,28 +121,28 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        blockquote: ({ className, ...props }) => (
+        blockquote: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>) => (
           <blockquote
             className={cn('border-l-2 border-white/30 pl-6 italic bg-white/5 backdrop-blur-sm rounded-r-lg py-2 my-4 text-white/90', className)}
             {...props}
           />
         ),
-        ul: ({ className, ...props }) => (
+        ul: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement>) => (
           <ul
             className={cn('my-5 ml-6 list-disc [&>li]:mt-2 text-white/90 [&>li]:text-white/90', className)}
             {...props}
           />
         ),
-        ol: ({ className, ...props }) => (
+        ol: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLOListElement>, HTMLOListElement>) => (
           <ol
             className={cn('my-5 ml-6 list-decimal [&>li]:mt-2 text-white/90 [&>li]:text-white/90', className)}
             {...props}
           />
         ),
-        hr: ({ className, ...props }) => (
+        hr: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement>) => (
           <hr className={cn('my-5 border-b border-white/20', className)} {...props} />
         ),
-        table: ({ className, ...props }) => (
+        table: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLTableElement>, HTMLTableElement>) => (
           <table
             className={cn(
               'my-5 w-full border-separate border-spacing-0 overflow-y-auto bg-white/5 backdrop-blur-sm rounded-lg border border-white/10',
@@ -151,7 +151,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        th: ({ className, ...props }) => (
+        th: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLTableCellElement>, HTMLTableCellElement>) => (
           <th
             className={cn(
               'bg-white/10 backdrop-blur-sm border-b border-white/10 px-4 py-2 text-left font-bold text-white first:rounded-tl-lg last:rounded-tr-lg [&[align=center]]:text-center [&[align=right]]:text-right',
@@ -160,7 +160,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        td: ({ className, ...props }) => (
+        td: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLTableCellElement>, HTMLTableCellElement>) => (
           <td
             className={cn(
               'border-b border-white/10 px-4 py-2 text-left text-white/90 [&[align=center]]:text-center [&[align=right]]:text-right',
@@ -169,7 +169,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        tr: ({ className, ...props }) => (
+        tr: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>) => (
           <tr
             className={cn(
               'm-0 border-b p-0 first:border-t [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg',
@@ -178,13 +178,13 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             {...props}
           />
         ),
-        sup: ({ className, ...props }) => (
+        sup: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>) => (
           <sup
             className={cn('[&>a]:text-xs [&>a]:no-underline', className)}
             {...props}
           />
         ),
-        pre: ({ className, children, ...props }) => {
+        pre: ({ className, children, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {
           const codeElement = children as any;
           const code = codeElement?.props?.children || '';
           const language = codeElement?.props?.className?.replace('language-', '') || 'text';
@@ -204,7 +204,7 @@ const MarkdownRendererImpl: FC<MarkdownRendererProps> = ({ content }) => {
             </div>
           );
         },
-        code: ({ className, ...props }) => {
+        code: ({ className, ...props }: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>) => {
           // Detect if it's inline code (no parent pre element)
           const isInline = !props.children?.toString().includes('\n');
           return (

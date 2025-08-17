@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { ArrowRightIcon, ZapIcon, LightbulbIcon } from "lucide-react";
+import { ArrowRightIcon, Rabbit, Snail } from "lucide-react";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip/";
 import { AttachmentButton, AttachmentList } from "@/components/ui/attachment";
 import { AgentSelector } from "./agent-selector";
@@ -102,10 +102,10 @@ export function WelcomeScreen({
                   className="relative flex items-center w-13 h-7 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm shadow-sm transition-colors duration-200 overflow-hidden cursor-pointer"
                 >
                   <span className="flex items-center justify-center w-1/2 h-full">
-                    <ZapIcon className={`size-4 transition-colors duration-200 ${!isDetailed ? "text-yellow-400" : "text-white/50"}`} />
+                    <Rabbit className={`size-4 transition-colors duration-200 ${!isDetailed ? "text-yellow-400" : "text-white/50"}`} />
                   </span>
                   <span className="flex items-center justify-center w-1/2 h-full">
-                    <LightbulbIcon className={`size-4 transition-colors duration-200 ${isDetailed ? "text-blue-400" : "text-white/50"}`} />
+                    <Snail className={`size-4 transition-colors duration-200 ${isDetailed ? "text-blue-400" : "text-white/50"}`} />
                   </span>
                   <span
                     className={`absolute top-1/2 left-[1px] w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 shadow-sm transition-transform duration-300 -translate-y-1/2
@@ -119,7 +119,7 @@ export function WelcomeScreen({
                 {isDetailed ? "Složitější odpověď" : "Rychlá jednoduchá odpověď"}
               </TooltipContent>
             </Tooltip>
-            <div className="mx-1.5 flex gap-2">
+            <div className="mx-1.5 flex gap-4 items-center">
               <AttachmentButton disabled={status !== 'ready'} />
               <button 
                 type="submit"

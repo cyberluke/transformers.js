@@ -3,7 +3,7 @@
 import { X, FileText, Image, File } from 'lucide-react';
 import type { Attachment } from '@/types/attachments';
 import { useAttachments } from '@/hooks/useAttachments';
-import { Button } from '@/components/ui/button';
+import { GlassmorphicButton } from '@/components/ui/buttons';
 
 interface AttachmentItemProps {
   attachment: Attachment;
@@ -61,7 +61,7 @@ export function AttachmentItem({ attachment }: AttachmentItemProps) {
       </div>
 
       {/* Remove Button */}
-      <Button
+      <GlassmorphicButton
         variant="ghost"
         size="sm"
         onClick={handleRemove}
@@ -69,7 +69,7 @@ export function AttachmentItem({ attachment }: AttachmentItemProps) {
         aria-label={`Odstranit ${attachment.name}`}
       >
         <X className="h-4 w-4" />
-      </Button>
+      </GlassmorphicButton>
     </div>
   );
 }

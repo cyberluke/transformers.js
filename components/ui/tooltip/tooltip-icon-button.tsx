@@ -5,13 +5,12 @@ import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from './tooltip';
-import { Button } from '@/components/ui/buttons';
+import { GlassmorphicButton } from '@/components/ui/buttons';
 import { cn } from '@/lib/utils';
 
-export type TooltipIconButtonProps = ComponentPropsWithoutRef<typeof Button> & {
+export type TooltipIconButtonProps = ComponentPropsWithoutRef<typeof GlassmorphicButton> & {
   tooltip: string;
   side?: 'top' | 'bottom' | 'left' | 'right';
 };
@@ -21,23 +20,21 @@ export const TooltipIconButton = forwardRef<
   TooltipIconButtonProps
 >(({ children, tooltip, side = 'bottom', className, ...rest }, ref) => {
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            {...rest}
-            className={cn('size-6 p-1', className)}
-            ref={ref}
-          >
-            {children}
-            <span className="sr-only">{tooltip}</span>
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side={side}>{tooltip}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <GlassmorphicButton
+          variant="ghost"
+          size="icon"
+          {...rest}
+          className={cn('size-6 p-1', className)}
+          ref={ref}
+        >
+          {children}
+          <span className="sr-only">{tooltip}</span>
+        </GlassmorphicButton>
+      </TooltipTrigger>
+      <TooltipContent side={side}>{tooltip}</TooltipContent>
+    </Tooltip>
   );
 });
 

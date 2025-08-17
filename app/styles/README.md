@@ -8,7 +8,7 @@ Organizace CSS stylů podle Next.js a Tailwind CSS v4.1 best practices.
 app/styles/
 ├── components/           # @layer components - UI komponenty
 │   ├── index.css        # Centrální import všech komponent
-│   ├── sidebar.css      # Sidebar komponenty
+│   ├── sidebar.css # Sidebar komponenty
 │   ├── chat.css         # Chat komponenty (budoucí)
 │   ├── buttons.css      # Button varianty (budoucí)
 │   └── forms.css        # Form styly (budoucí)
@@ -31,7 +31,7 @@ app/styles/
 ### Příklad komponenty
 
 ```css
-/* components/sidebar.css */
+/* components/simple-sidebar.css */
 @layer components {
   .sidebar-base {
     @apply bg-black/20 backdrop-blur-xl border-r border-white/10;

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+import { GlassmorphicButton } from '@/components/ui/buttons';
+import { Card } from '@/components/ui/layout';
+import { Separator } from '@/components/ui/layout';
 import { ArrowLeft, Bot, Copy, Download, ChevronLeft, ChevronRight, Upload, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { AgentData } from '@/types/agent';
@@ -198,10 +198,10 @@ export default function AgentPocPage() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
             <Link href="/">
-              <Button variant="ghost" size="sm">
+              <GlassmorphicButton variant="ghost" size="sm">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Zpět na hlavní stránku
-              </Button>
+              </GlassmorphicButton>
             </Link>
             <Separator orientation="vertical" className="h-6" />
             <div>
@@ -270,10 +270,10 @@ export default function AgentPocPage() {
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Extrahovaní agenti</h3>
               {result.agents.length > 0 && (
-                <Button onClick={handleDownloadAllAgents} variant="outline" size="sm">
+                <GlassmorphicButton onClick={handleDownloadAllAgents} variant="secondary" size="sm">
                   <Download className="h-4 w-4 mr-2" />
                   Stáhnout všechny
-                </Button>
+                </GlassmorphicButton>
               )}
             </div>
             
@@ -310,29 +310,29 @@ export default function AgentPocPage() {
             {/* Agent Navigation */}
             {result.agents.length > 1 && (
               <div className="flex items-center justify-between mb-4 p-3 bg-accent/20 rounded-lg">
-                <Button
-                  variant="outline"
+                <GlassmorphicButton
+                  variant="secondary"
                   size="sm"
                   onClick={() => handleAgentChange(currentAgent - 1)}
                   disabled={currentAgent === 0}
                 >
                   <ChevronLeft className="h-4 w-4 mr-1" />
                   Předchozí
-                </Button>
+                </GlassmorphicButton>
                 
                 <span className="text-sm font-medium">
                   Agent {currentAgent + 1} z {result.agents.length}
                 </span>
                 
-                <Button
-                  variant="outline"
+                <GlassmorphicButton
+                  variant="secondary"
                   size="sm"
                   onClick={() => handleAgentChange(currentAgent + 1)}
                   disabled={currentAgent === result.agents.length - 1}
                 >
                   Další
                   <ChevronRight className="h-4 w-4 ml-1" />
-                </Button>
+                </GlassmorphicButton>
               </div>
             )}
 
@@ -348,8 +348,8 @@ export default function AgentPocPage() {
                       ID: {result.agents[currentAgent].originalId}
                     </p>
                   </div>
-                  <Button
-                    variant="outline"
+                  <GlassmorphicButton
+                    variant="secondary"
                     size="sm"
                     onClick={() => handleCopyAgent(currentAgent)}
                     className="min-w-[100px]"
@@ -365,7 +365,7 @@ export default function AgentPocPage() {
                         Kopírovat
                       </>
                     )}
-                  </Button>
+                  </GlassmorphicButton>
                 </div>
                 
                 <div className="space-y-4 text-sm">

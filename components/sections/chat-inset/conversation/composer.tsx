@@ -60,7 +60,7 @@ export function Composer({ input, handleInputChange, handleFormSubmit, status }:
             style={{ wordBreak: "break-word", overflowWrap: "break-word" }}
           />
           <div className="flex w-full items-center justify-between pt-1 pb-0">
-            <div className="mx-1.5 flex gap-2 ml-auto">
+            <div className="mx-1.5 flex items-center gap-4 ml-auto">
               <AttachmentButton disabled={status !== 'ready'} />
               <GlassmorphicButton 
                 type="submit"

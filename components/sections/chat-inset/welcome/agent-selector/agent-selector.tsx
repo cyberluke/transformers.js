@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Bot, Check } from 'lucide-react';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/layout';
 import { AgentListItem, AgentsApiResponse } from '@/types/agents';
 
 interface AgentSelectorProps {

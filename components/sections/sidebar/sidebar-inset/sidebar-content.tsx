@@ -11,7 +11,7 @@ import {
 import { useSidebarStore } from "@/lib/stores/sidebar-store";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ThreadList } from "@/components/ui/thread";
-import { Button } from "@/components/ui/button";
+import { GlassmorphicButton } from "@/components/ui/buttons";
 
 export function AppSidebarContent() {
   const { isOpen } = useSidebarStore();
@@ -23,17 +23,16 @@ export function AppSidebarContent() {
       <SidebarHeader>
         {isCollapsed ? (
           // Collapsed header - pouze ikony
-          <div className="flex flex-col items-center gap-2 transition-all duration-300 ease-in-out">
+          <div className="transition-all duration-300 ease-in-out">
             <SidebarToggle 
               aria-label="Rozbalit sidebar"
-              className="p-2 rounded-lg hover:bg-white/20 transition-all duration-200"
             >
               <Menu className="size-4 text-white" />
             </SidebarToggle>
           </div>
         ) : (
           // Expanded header - loga + texty
-          <div className="flex items-center justify-between transition-all duration-300 ease-in-out">
+          <div className="h-full flex items-center justify-between transition-all duration-300 ease-in-out">
             <div className="flex items-center gap-3 transition-all duration-300 ease-in-out">
               <div 
                 className="sidebar-logo"
@@ -57,14 +56,14 @@ export function AppSidebarContent() {
         {isCollapsed ? (
           // Collapsed content - jen ikony pro vytvoření chatu
           <div className="flex flex-col items-center gap-3 transition-all duration-300 ease-in-out">
-            <Button
+            <GlassmorphicButton
               size="icon"
               variant="ghost"
               className="size-8 p-0 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200"
               aria-label="Nový chat"
             >
               <Plus className="size-4" />
-            </Button>
+            </GlassmorphicButton>
           </div>
         ) : (
           // Expanded content - thread list
@@ -113,7 +112,7 @@ export function SidebarOpenButton() {
   const { setOpenMobile } = useSidebarStore();
   
   return (
-    <Button 
+    <GlassmorphicButton 
       variant="ghost" 
       size="icon" 
       aria-label="Otevřít postranní panel" 
@@ -121,6 +120,6 @@ export function SidebarOpenButton() {
       onClick={() => setOpenMobile(true)}
     >
       <Menu className="size-6" />
-    </Button>
+    </GlassmorphicButton>
   );
 }

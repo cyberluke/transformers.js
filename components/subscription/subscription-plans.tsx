@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { GlassmorphicButton } from '@/components/ui/buttons';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/layout';
 import { Input } from '@/components/ui/input';
 import { Check, Star, ArrowLeft, CreditCard } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -294,13 +294,13 @@ export function SubscriptionPlans({ plans }: SubscriptionPlansProps) {
             </CardContent>
 
             <CardFooter>
-              <Button
+              <GlassmorphicButton
                 type="submit"
                 disabled={isProcessing}
                 className="w-full py-3 font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
               >
                 {isProcessing ? 'Zpracování...' : `Dokončit platbu - ${formatPrice(selectedPlan.price, selectedPlan.currency)}`}
-              </Button>
+              </GlassmorphicButton>
             </CardFooter>
           </form>
         </Card>
@@ -377,7 +377,7 @@ export function SubscriptionPlans({ plans }: SubscriptionPlansProps) {
             </CardContent>
             
             <CardFooter className="px-6 pb-6">
-              <Button 
+              <GlassmorphicButton 
                 className={cn(
                   "w-full py-3 font-semibold transition-all duration-200",
                   isPopular 
@@ -387,7 +387,7 @@ export function SubscriptionPlans({ plans }: SubscriptionPlansProps) {
                 onClick={() => handlePlanSelect(plan)}
               >
                 {plan.price === 0 ? 'Začít zdarma' : 'Vybrat plán'}
-              </Button>
+              </GlassmorphicButton>
             </CardFooter>
           </Card>
         );

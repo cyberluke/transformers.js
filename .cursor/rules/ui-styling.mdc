@@ -23,8 +23,6 @@ alwaysApply: true
   ```tsx
   // Správně v4.1
   className="bg-gradient-to-br from-blue-50 via-white to-purple-50"
-  // Místo starší syntaxe
-  className="bg-gradient-to-br from-blue-50 via-white to-purple-50"
   ```
 
 - **Nové backdrop efekty**:
@@ -73,6 +71,39 @@ className="bg-white/10 hover:bg-white/20 transition-all duration-200 backdrop-bl
 - Upřednostňujte `bg-white/5`, `bg-gradient-to-t`, `backdrop-blur-sm` před `backdrop-blur-xl`.
 - Vždy optimalizujte pro GPU rendering.
 
+### Emerald - primární akcent barva
+**KRITICKY DŮLEŽITÉ**: Používejte emerald zelenou jako primární akcent barvu v celé aplikaci.
+
+```tsx
+// ✅ SPRÁVNĚ - Emerald barvy pro UI elementy
+// Základní emerald varianty
+className="bg-emerald-500/20 text-emerald-300 border-emerald-400/50"
+
+// Aktivní stavy s emerald
+className="bg-gradient-to-r from-emerald-500/80 to-emerald-600/70 border-emerald-400/60 shadow-emerald-500/30"
+
+// Hover efekty s emerald
+className="hover:bg-emerald-500/30 hover:border-emerald-400/60"
+
+// Indikátory a akcenty
+className="bg-emerald-400" // pro selected indicators
+className="text-emerald-300" // pro aktivní text
+className="shadow-lg shadow-emerald-500/20" // pro jemné stíny
+```
+
+#### Kde používat emerald barvu:
+- **Aktivní stavy**: Selected items, active buttons, current thread
+- **Call-to-Action**: Primární tlačítka, submit buttony
+- **Indikátory**: Status indicators, progress bars
+- **Akcenty**: Icons v aktivním stavu, borders u selected elementů
+- **Pozitivní akce**: Vytvoření nového chatu, úspěšné operace
+
+#### Kombinace s ostatními barvami:
+- **Základní UI**: `bg-white/10`, `border-white/20` (neutrální)
+- **Emerald akcenty**: `bg-emerald-500/20`, `border-emerald-400/50` (aktivní)
+- **Chybové stavy**: `bg-red-500/20`, `border-red-400/50` (pouze pro errory)
+- **Sekundární**: `bg-blue-500/20`, `border-blue-400/50` (pouze pokud je potřeba)
+
 ### Animace a přechody v4.1
 ```tsx
 // Nové animation utilities
@@ -106,6 +137,7 @@ className="border-neutral-200 dark:border-neutral-800"
 // ❌ NIKDY neimportujte z Assistant UI
 import { Thread, Message, Composer, useAssistant } from '@ai-sdk/ui-utils'
 import { useThread, useComposer } from '@assistant-ui/react'
+
 
 // ✅ SPRÁVNĚ - Vlastní komponenty s Shadcn UI
 import { MessageList } from '@/components/new/message-list'
