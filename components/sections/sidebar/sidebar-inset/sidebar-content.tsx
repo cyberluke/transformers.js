@@ -12,6 +12,48 @@ import { useSidebarStore } from "@/lib/stores/sidebar-store";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ThreadList } from "@/components/ui/thread";
 import { GlassmorphicButton } from "@/components/ui/buttons";
+import { useThreads } from "@/hooks/useThreads";
+
+// Collapsed content komponenta
+function CollapsedContent() {
+  const { createThread, currentThread } = useThreads();
+
+  const handleNewThread = () => {
+    // Zkusí vytvořit nový thread (blokovaný pokud aktuální nemá serverChatId)
+    createThread();
+  };
+
+  // Vizuální indikace zda lze vytvořit nový thread
+  const canCreateNewThread = !currentThread || !!currentThread.serverChatId;
+
+  return (
+    <div className="flex flex-col items-center gap-3 transition-all duration-300 ease-in-out">
+      <GlassmorphicButton
+        onClick={handleNewThread}
+        size="icon"
+        variant="ghost"
+        className={`size-8 p-0 rounded-lg transition-all duration-200 ${
+          canCreateNewThread 
+            ? "bg-white/10 hover:bg-white/20 text-white" 
+            : "bg-white/5 text-white/50 cursor-not-allowed"
+        }`}
+        aria-label={canCreateNewThread ? "Nový chat" : "Nejdříve odešlete zprávu"}
+        disabled={!canCreateNewThread}
+      >
+        <Plus className="size-4" />
+      </GlassmorphicButton>
+    </div>
+  );
+}
+
+// Expanded content komponenta
+function ExpandedContent() {
+  return (
+    <div className="transition-all duration-300 ease-in-out">
+      <ThreadList />
+    </div>
+  );
+}
 
 export function AppSidebarContent() {
   const { isOpen } = useSidebarStore();
@@ -54,22 +96,11 @@ export function AppSidebarContent() {
       
       <SidebarContent>
         {isCollapsed ? (
-          // Collapsed content - jen ikony pro vytvoření chatu
-          <div className="flex flex-col items-center gap-3 transition-all duration-300 ease-in-out">
-            <GlassmorphicButton
-              size="icon"
-              variant="ghost"
-              className="size-8 p-0 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200"
-              aria-label="Nový chat"
-            >
-              <Plus className="size-4" />
-            </GlassmorphicButton>
-          </div>
+          // Collapsed content - jen ikona pro vytvoření chatu
+          <CollapsedContent />
         ) : (
           // Expanded content - thread list
-          <div className="transition-all duration-300 ease-in-out">
-            <ThreadList />
-          </div>
+          <ExpandedContent />
         )}
       </SidebarContent>
       

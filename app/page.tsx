@@ -14,7 +14,8 @@ export default function Page() {
   const { 
     currentThread, 
     currentThreadId, 
-    createThread, 
+    createThread,
+    forceCreateThread, 
     updateMessages,
     setServerChatIdForThread,
     setTitleForThread,
@@ -52,9 +53,9 @@ export default function Page() {
   // Initialize first thread if none exists
   useEffect(() => {
     if (!currentThreadId && threads.length === 0) {
-      createThread();
+      forceCreateThread();
     }
-  }, [currentThreadId, threads.length, createThread]);
+  }, [currentThreadId, threads.length, forceCreateThread]);
 
   const { messages, input, handleInputChange, handleSubmit, status, setMessages, data } = useChat({
     api: '/api/chat',

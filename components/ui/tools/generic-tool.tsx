@@ -62,3 +62,6 @@ export function GenericTool({ toolInvocation, index }: GenericToolProps) {
   );
 }
 
+
+
+

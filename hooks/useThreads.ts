@@ -96,6 +96,11 @@ export function useThreads() {
 
   // Create new thread
   const createThread = useCallback(async (request: CreateThreadRequest = {}) => {
+    if (currentThread && !currentThread.serverChatId) {
+      console.log('Cannot create new thread - current thread has no messages sent to server');
+      return currentThread.id;
+    }
+
     setLoading(true);
     clearError();
 
@@ -104,6 +109,26 @@ export function useThreads() {
       addThread(newThread);
       setCurrentThreadId(newThread.id);
       console.log('newThread', newThread);
+      return newThread.id;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to create thread';
+      setError(errorMessage);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  }, [currentThread, threadService, addThread, setCurrentThreadId, setLoading, clearError, setError]);
+
+  // Force create new thread (ignores serverChatId check)
+  const forceCreateThread = useCallback(async (request: CreateThreadRequest = {}) => {
+    setLoading(true);
+    clearError();
+
+    try {
+      const newThread = await threadService.createThread(request);
+      addThread(newThread);
+      setCurrentThreadId(newThread.id);
+      console.log('newThread (forced)', newThread);
       return newThread.id;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Failed to create thread';
@@ -217,6 +242,7 @@ export function useThreads() {
     // Actions
     loadThreads,
     createThread,
+    forceCreateThread,
     switchThread,
     deleteThread,
     addMessage,

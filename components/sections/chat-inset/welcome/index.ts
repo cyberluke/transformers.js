@@ -1,2 +1,3 @@
 export { WelcomeScreen } from "./welcome-screen";
-export { AgentSelector } from "./agent-selector"; 
+export { AgentSelector } from "./welcome-screen/agent-selector"; 
+export { WelcomeTitle, SpeedToggle, QueryForm } from './welcome-screen';
