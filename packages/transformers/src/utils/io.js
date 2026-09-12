@@ -36,7 +36,7 @@ export async function saveBlob(path, blob) {
     } else if (apis.IS_FS_AVAILABLE) {
         // Convert Blob to a Node.js Readable Stream
         const webStream = blob.stream();
-        const nodeStream = Readable.fromWeb(webStream);
+        const nodeStream = Readable.fromWeb(/** @type {any} */ (webStream));
 
         // Create the file write stream
         const fileStream = fs.createWriteStream(path);

@@ -19,7 +19,9 @@
     "default": {
       "types": "./types/transformers.d.ts",
       "default": "./dist/transformers.web.js"
-    }
+    },
+    "./package.json": "./package.json",
+    "./.tfjs-build-manifest.json": "./.tfjs-build-manifest.json"
   },
   "scripts": {
     "format": "prettier --write . --ignore-path ../../.prettierignore",
@@ -82,5 +84,6 @@
     "access": "public"
   },
   "jsdelivr": "./dist/transformers.min.js",
-  "unpkg": "./dist/transformers.min.js"
+  "unpkg": "./dist/transformers.min.js",
+  "gitHead": "a453c9824f0d0ea98dbbdbe22306798ab6f3a734"
 }

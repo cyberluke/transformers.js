@@ -25,7 +25,7 @@ export function getOnnxProviderModule() {
     if (!modulePromise) {
         globalThis[ONNX_HOST_SYMBOL] = host;
         modulePromise = import('@huggingface/transformers-onnx').then((module) => {
-            module.configureOnnxProviderHost(host);
+            module.configureOnnxProviderHost(/** @type {any} */ (host));
             TensorOpRegistry.register(module.OnnxTensorOpRegistry);
             return module;
         });
