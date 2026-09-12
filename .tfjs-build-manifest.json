@@ -1,0 +1,30 @@
+{
+  "sourceCommit": "ae052dfa2007383982964072629abc3bcf964000",
+  "sourceTreeSha256": "3844b485377c5d39970495e3e7e6a666b61410449b9b6f4274dc4747870a4cec",
+  "distSha256": "ddfe771b13115a99a83966df44caa8b2378a356a2792979f51d5ea6e11dfbfa6",
+  "runtimeArtifacts": {
+    "packages/transformers/dist/ort-wasm-simd-threaded.asyncify.mjs": "5959c6733039619c9af710d8e1bae8d6e84402787990637be987c2b1bd6c5fa9",
+    "packages/transformers/dist/ort-wasm-simd-threaded.mjs": "5f2cd914554830762579c372d0211614c1e3f40ab3f6c0cfcf0900343229071d",
+    "packages/transformers/dist/transformers.js": "df317d4f4f0e1213ae97480688c922f12c1166e77362e2199a77494ea5e68d70",
+    "packages/transformers/dist/transformers.min.js": "b94d9117bc82729154c12a36d35f4d202ca62bcec23e39e8bae8c54f3d73fd2e",
+    "packages/transformers/dist/transformers.node.cjs": "72ad5403fa2ced169d897844f1bcf7b881c0dbaef834332607f77965974134f3",
+    "packages/transformers/dist/transformers.node.min.cjs": "da763d5e80393f26411f6d4cc8ffe960e9dd9d884896c2671473ab31156aa025",
+    "packages/transformers/dist/transformers.node.min.mjs": "17e461be252593304d4e7e874f2439f7e21398673d3ad5b668c6806f04e40569",
+    "packages/transformers/dist/transformers.node.mjs": "182b6f5257d13148bec5184ec5b78bf72b214028ae866cafd9659a0beef72c7f",
+    "packages/transformers/dist/transformers.web.js": "ddfe771b13115a99a83966df44caa8b2378a356a2792979f51d5ea6e11dfbfa6",
+    "packages/transformers/dist/transformers.web.min.js": "d0ad200ab3cef4bb204ed5936ab6e5b1b103ce04c012282dc83e55e62f76586a",
+    "packages/transformers-onnxruntime/dist/ort-wasm-simd-threaded.asyncify.mjs": "5959c6733039619c9af710d8e1bae8d6e84402787990637be987c2b1bd6c5fa9",
+    "packages/transformers-onnxruntime/dist/ort-wasm-simd-threaded.mjs": "5f2cd914554830762579c372d0211614c1e3f40ab3f6c0cfcf0900343229071d",
+    "packages/transformers-onnxruntime/dist/testing.cjs": "064451dfb5ee227647c5bf1a8647bd8452874c62dc6f59a0e986aadf34bce559",
+    "packages/transformers-onnxruntime/dist/testing.mjs": "ce9fd02176eff1567d4c1b735c464f2f736da928306df91b98d23c25c72f6653",
+    "packages/transformers-onnxruntime/dist/transformers-onnxruntime.node.cjs": "2b1799808e6d0449e2a1a84fe525ca12abf4c5f149d58f339ba9cdff3f72c275",
+    "packages/transformers-onnxruntime/dist/transformers-onnxruntime.node.mjs": "764179ee234f579097f2b88b185317542001fe3fdd2e45dc2f8b61e28d11c26f",
+    "packages/transformers-onnxruntime/dist/transformers-onnxruntime.web.js": "628ae35710d9d6c779daa374f1a8dda6bf0190d55bba5785030f729beddbec21"
+  },
+  "runtimeArtifactSetSha256": "5948d182b46ac5ad02be23b7c647870d365e458f658ee4512515ef1268c71c1a",
+  "lockSha256": "a8935cd7b8c0ed9642b39b5b0b0a6b13b1f79d8469e23da5379db973bf3259cc",
+  "builtAt": "2026-09-12T02:49:00.665Z",
+  "lane": "tfjs-pluggable-onnx",
+  "version": "4.2.0",
+  "ort": "1.29.0"
+}

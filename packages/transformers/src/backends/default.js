@@ -22,7 +22,7 @@ const host = {
 };
 
 globalThis[ONNX_HOST_SYMBOL] = host;
-onnxProviderModule.configureOnnxProviderHost(host);
+onnxProviderModule.configureOnnxProviderHost(/** @type {any} */ (host));
 TensorOpRegistry.register(onnxProviderModule.OnnxTensorOpRegistry);
 
 const modulePromise = Promise.resolve(onnxProviderModule);

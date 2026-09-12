@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
 import { mkdtemp, mkdir, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -5,7 +6,7 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
-const root = new URL("..", import.meta.url).pathname;
+const root = fileURLToPath(new URL("..", import.meta.url));
 const temporaryDirectory = await mkdtemp(join(tmpdir(), "transformers-js-packages-"));
 const packDirectory = join(temporaryDirectory, "packages");
 const consumerDirectory = join(temporaryDirectory, "consumer");
