@@ -85,7 +85,7 @@ const schemaIds = new WeakMap<object, number>();
 const propertyKeyBytes = new WeakMap<object, ReadonlyArray<{ key: string; bytes: Uint8Array }> | null>();
 const finiteStringCache = new WeakMap<object, ReadonlyArray<{ value: string; bytes: Uint8Array }> | null>();
 let nextSchemaId = 0;
-const SIMPLE_ESCAPES: Record<number, string> = {
+const SIMPLE_ESCAPES: Record<number, string | undefined> = {
     0x22: '"',
     0x2f: '/',
     0x5c: '\\',
@@ -501,13 +501,16 @@ function integerPrefixViable(schema: Schema, text: string): boolean {
     if (text === '-') return lo <= Math.min(hi, 0);
     const match = /^(-?)(0|[1-9]\d*)(\.0{0,3})?(?:[eE]\+?(\d{0,3}))?$/.exec(text);
     if (match === null) return false;
+    // Optional groups are `undefined` when the group did not participate.
+    const fraction: string | undefined = match[3];
+    const exponent: string | undefined = match[4];
     // "1.e" can never complete (the fraction needs a digit before the exponent)
-    if (match[3] === '.' && match[4] !== undefined) return false;
+    if (fraction === '.' && exponent !== undefined) return false;
     const negative = match[1] === '-';
-    if (match[3] === undefined && match[4] === undefined) {
+    if (fraction === undefined && exponent === undefined) {
         return integerDigitsReachable(lo, hi, negative, match[2]);
     }
-    return integerScaleReachable(lo, hi, negative, match[2], match[4] ?? '');
+    return integerScaleReachable(lo, hi, negative, match[2], exponent ?? '');
 }
 
 function integerRestriction(schema: Schema): { lo: number; hi: number } | null {
@@ -1475,7 +1478,8 @@ function validTime(value: string): boolean {
     const minute = Number(match[2]);
     const second = Number(match[3]);
     if (hour > 23 || minute > 59 || second > 60 || (second === 60 && (hour !== 23 || minute !== 59))) return false;
-    return match[4] === undefined || (Number(match[4]) <= 23 && Number(match[5]) <= 59);
+    const offsetHour: string | undefined = match[4];
+    return offsetHour === undefined || (Number(offsetHour) <= 23 && Number(match[5]) <= 59);
 }
 
 function validHostname(value: string): boolean {
