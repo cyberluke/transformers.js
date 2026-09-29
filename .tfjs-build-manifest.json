@@ -1,0 +1,24 @@
+{
+  "sourceCommit": "836b9cb1b3542f217eab330f6fc62768bdf314f9",
+  "sourceTreeSha256": "b4c338bb2452e0e006c40dbd114487f89c849637d9b08af7427b6fb1372f8430",
+  "distSha256": "4a69cf849bdf73298fcb1954b5708c21a509b9974100b5611fc524edde406aed",
+  "runtimeArtifacts": {
+    "packages/transformers/dist/ort-wasm-simd-threaded.jsep.mjs": "c2f80e915e9df63289788a99d434d8c4e00e64e9c1f030f4b80b022458dd2c99",
+    "packages/transformers/dist/transformers.js": "59ba9144c549ca00327034e2c2c288624148da5f1d45700ccf056a666fa8ba76",
+    "packages/transformers/dist/transformers.min.js": "1475fd440e9932ab206682ee42cb18f6097403e9ee77ea62084c592d0f83597d",
+    "packages/transformers/dist/transformers.node.cjs": "de3a2fcee6f1641d7dbc4bbc0892e5cac3e01224b89b4af77d5b489b6922604b",
+    "packages/transformers/dist/transformers.node.min.cjs": "c878bf2001bf934ba205e97b7648ed7ef2251d883d02bce8653ef221e8c9c64b",
+    "packages/transformers/dist/transformers.node.min.mjs": "6bde8434d6a6224e260fcc9792e8e4604c42a1b32b0030fa782dce11ba1a9eb9",
+    "packages/transformers/dist/transformers.node.mjs": "56cbe9b3e3eace76819094b5d0c866fb82b2a41f093887872796b0fcd0633cae",
+    "packages/transformers/dist/transformers.web.js": "4a69cf849bdf73298fcb1954b5708c21a509b9974100b5611fc524edde406aed",
+    "packages/transformers/dist/transformers.web.min.js": "68be76b2f76f993c25161e73ca05b7179445ceab010e35f3dbf7437ed318ece6",
+    "packages/transformers-structured-output/dist/index.cjs": "c9c26e483ab591bf1f16c02189af12d0277d652b4eea4b4f26e3c30dae353277",
+    "packages/transformers-structured-output/dist/index.js": "aa37d9f90d3e09ac9cd196ef830b99cff56890a63313b833b8795aac3e415809"
+  },
+  "runtimeArtifactSetSha256": "5759c9f3d99fe1a571f3627b1bcf07e2acdac4f46466610e818a03206be64fd5",
+  "lockSha256": "bb4e01e0b972f83b4c81fb6e95f20a522ee021a8288984aa6285627043ab71a0",
+  "builtAt": "2026-09-29T21:28:36.602Z",
+  "lane": "tfjs-main-onnx",
+  "version": "4.3.0",
+  "ort": "1.31.0-dev.20260914-8d85527a0"
+}
