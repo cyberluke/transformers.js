@@ -64,7 +64,15 @@ const fallbackEnvironment: OnnxProviderEnvironment = {
     backends: { onnx: {} },
     logLevel: 30,
     useWasmCache: typeof caches !== 'undefined',
-    fetch: () => Promise.reject(new Error('OnnxInferenceProvider host does not provide a fetch implementation.')),
+    fetch: Object.assign(
+        () =>
+            Promise.reject(
+                new Error(
+                    'OnnxInferenceProvider host does not provide a fetch implementation.',
+                ),
+            ),
+        { preconnect: globalThis.fetch.preconnect },
+    ),
 };
 
 const environment = new Proxy(fallbackEnvironment, {
@@ -139,3 +147,5 @@ export function configureOnnxProviderHost(host: OnnxProviderHost): void {
 export function getOnnxProviderHost(): OnnxProviderHost {
     return configuredHost ?? fallbackHost;
 }
+
+
