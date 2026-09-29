@@ -64,7 +64,7 @@ const fallbackEnvironment: OnnxProviderEnvironment = {
     backends: { onnx: {} },
     logLevel: 30,
     useWasmCache: typeof caches !== 'undefined',
-    fetch: (...args) => globalThis.fetch(...args),
+    fetch: globalThis.fetch,
 };
 
 const environment = new Proxy(fallbackEnvironment, {
@@ -132,3 +132,4 @@ export function configureOnnxProviderHost(host: OnnxProviderHost): void {
 export function getOnnxProviderHost(): OnnxProviderHost {
     return configuredHost ?? fallbackHost;
 }
+

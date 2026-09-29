@@ -78,7 +78,7 @@ let fp16Supported: boolean | undefined;
 async function isWebGpuFp16Supported(): Promise<boolean> {
     if (fp16Supported === undefined) {
         try {
-            const adapter = await navigator.gpu.requestAdapter();
+            const adapter = await navigator.gpu!.requestAdapter();
             fp16Supported = !!adapter?.features.has('shader-f16');
         } catch {
             fp16Supported = false;
@@ -462,3 +462,4 @@ async function getModelDataFiles(
     }
     return [];
 }
+
