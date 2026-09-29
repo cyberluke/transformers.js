@@ -76,7 +76,7 @@ export class FileCache {
                             reject(err);
                             return;
                         }
-                        resolve();
+                        resolve(undefined);
                     });
                 });
 
@@ -87,7 +87,7 @@ export class FileCache {
             }
 
             await new Promise((resolve, reject) => {
-                fileStream.close((err) => (err ? reject(err) : resolve()));
+                fileStream.close((err) => (err ? reject(err) : resolve(undefined)));
             });
 
             // Atomically move the completed temp file to the final path so that

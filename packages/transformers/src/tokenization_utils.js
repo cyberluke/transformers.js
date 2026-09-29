@@ -261,7 +261,7 @@ export class PreTrainedTokenizer
      * @param {Object} tokenizerConfig The config of the tokenizer.
      */
     constructor(tokenizerJSON, tokenizerConfig) {
-        super();
+        super(tokenizerJSON, tokenizerConfig);
 
         this._tokenizerJSON = tokenizerJSON;
         this._tokenizerConfig = tokenizerConfig;
@@ -440,7 +440,10 @@ export class PreTrainedTokenizer
         // padding: 'max_length' doesn't require any additional calculation
         // but padding: true has to calculate max_length from the sequences
         if (padding === true) {
-            max_length = Math.min(max(encodedTokens.map((x) => x.input_ids.length))[0], max_length ?? Infinity);
+            max_length = Math.min(
+                Number(max(encodedTokens.map((x) => x.input_ids.length))[0]),
+                Number(max_length ?? Infinity),
+            );
         }
 
         // Ensure it is less than model max length

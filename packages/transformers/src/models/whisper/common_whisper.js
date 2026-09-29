@@ -104,8 +104,8 @@ const WHISPER_LANGUAGES = [
 export const WHISPER_LANGUAGE_MAPPING = new Map(WHISPER_LANGUAGES);
 // @ts-ignore
 const WHISPER_TO_LANGUAGE_CODE_MAPPING = new Map([
-    ...WHISPER_LANGUAGES.map(([k, v]) => [v, k]),
-    ...[
+    .../** @type {Array<[string, string]>} */ (WHISPER_LANGUAGES.map(([k, v]) => [v, k])),
+    .../** @type {Array<[string, string]>} */ ([
         ['burmese', 'my'],
         ['valencian', 'ca'],
         ['flemish', 'nl'],
@@ -117,7 +117,7 @@ const WHISPER_TO_LANGUAGE_CODE_MAPPING = new Map([
         ['moldovan', 'ro'],
         ['sinhalese', 'si'],
         ['castilian', 'es'],
-    ],
+    ]),
 ]);
 
 /**
