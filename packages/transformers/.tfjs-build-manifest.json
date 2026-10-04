@@ -1,6 +1,6 @@
 {
   "sourceCommit": "8c837ca7f8ccd4b823271a515391bbf192a25cc8",
-  "sourceTreeSha256": "fc373a968928eb578cea0ad443abecf0233a12935a158f5a3f49402bae996d7d",
+  "sourceTreeSha256": "708aeef1058ae4dac1c2450b12513b5e67e28dd20c3b69dfd295a27ec257aa87",
   "distSha256": "1a264403e5d6393695407a9234bb3340324b7c91fcd377d83ab7dc88f8c16a74",
   "runtimeArtifacts": {
     "packages/transformers/dist/ort-wasm-simd-threaded.jsep.mjs": "709853412fd1ffc34247af1e73569227b5b79629c5ca3f59cc39cf7e500e4947",
@@ -16,9 +16,9 @@
     "packages/transformers-structured-output/dist/index.js": "af7f4533435cedc6f168bb7591ed39df12aa52ad5f2ccc05220fe42358d3c0b7"
   },
   "runtimeArtifactSetSha256": "60534c7983df6108138c499beb0d67cc4ec920f97a96f56b61b25a990cca9560",
-  "lockSha256": "fd18ad5037af83a20a25d05b46a42d04144eeec8f8863163ef9cdd8904090a89",
-  "builtAt": "2026-09-12T02:48:54.497Z",
+  "lockSha256": "bb4e01e0b972f83b4c81fb6e95f20a522ee021a8288984aa6285627043ab71a0",
+  "builtAt": "2026-09-29T21:25:31.321Z",
   "lane": "tfjs-bumpdeps2-onnx",
   "version": "4.2.0",
-  "ort": "1.30.0-dev.20260910-f2c39fe2f"
+  "ort": "1.31.0-dev.20260914-8d85527a0"
 }
