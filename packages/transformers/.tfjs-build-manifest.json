@@ -1,6 +1,6 @@
 {
   "sourceCommit": "ae052dfa2007383982964072629abc3bcf964000",
-  "sourceTreeSha256": "3844b485377c5d39970495e3e7e6a666b61410449b9b6f4274dc4747870a4cec",
+  "sourceTreeSha256": "50b242d72203b51155b8f96f8eba4a097963d62c4a3b7439f324a546e51d804c",
   "distSha256": "ddfe771b13115a99a83966df44caa8b2378a356a2792979f51d5ea6e11dfbfa6",
   "runtimeArtifacts": {
     "packages/transformers/dist/ort-wasm-simd-threaded.asyncify.mjs": "5959c6733039619c9af710d8e1bae8d6e84402787990637be987c2b1bd6c5fa9",
@@ -23,8 +23,8 @@
   },
   "runtimeArtifactSetSha256": "5948d182b46ac5ad02be23b7c647870d365e458f658ee4512515ef1268c71c1a",
   "lockSha256": "a8935cd7b8c0ed9642b39b5b0b0a6b13b1f79d8469e23da5379db973bf3259cc",
-  "builtAt": "2026-09-12T02:49:00.665Z",
+  "builtAt": "2026-09-29T21:25:31.705Z",
   "lane": "tfjs-pluggable-onnx",
   "version": "4.2.0",
-  "ort": "1.29.0"
+  "ort": "1.31.0-dev.20260914-8d85527a0"
 }
