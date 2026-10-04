@@ -1,6 +1,6 @@
 {
   "sourceCommit": "a453c9824f0d0ea98dbbdbe22306798ab6f3a734",
-  "sourceTreeSha256": "95f204cdc326f3a115c9fb0db0002471f7bad50a4352328e146ac3dc36448003",
+  "sourceTreeSha256": "d69defa30862a53a63ad62c8472784764cdf265a351727a7aa3998c06feeeb3f",
   "distSha256": "35a9d26deb25192d926d4da553a335e5a7e7420d6e92b27382b8e7434d65b0e0",
   "runtimeArtifacts": {
     "packages/transformers/dist/transformers.js": "6308834f800c46a1b492e318db9b85174f1cf5056347c00e629ab02db33b95fb",
@@ -19,8 +19,8 @@
   },
   "runtimeArtifactSetSha256": "93aa23f66fd9aad62c85bbc34a090051aa9e8631357e8a1454e5e82582a6097b",
   "lockSha256": "03e410b228fffb35816dbc7747bfd9eb0f603be431e0846dbb4a4eefdda650ff",
-  "builtAt": "2026-09-12T02:49:06.324Z",
-  "lane": "hf-kernels-microbench + hf-kernels-supertonic",
+  "builtAt": "2026-09-29T21:25:32.015Z",
+  "lane": "tfjs-webgpu-kernels",
   "version": "4.2.0",
-  "ort": "1.26.0-dev.20260416-b7804b056c"
+  "ort": "1.31.0-dev.20260914-8d85527a0"
 }
